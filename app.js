@@ -1,6 +1,22 @@
-var express         = require('express')
-  , http            = require('http')
-  , path            = require('path');
+var express         	= require('express')
+  , http            	= require('http')
+  , reload 				= require('reload')
+  , path            	= require('path')
+  , passport 			= require('passport')
+  , FacebookStrategy 	= require('passport-facebook').Strategy;
+
+passport.use(new FacebookStrategy({
+    clientID: "253787698102458",
+    clientSecret: "b82d714a1f5591a76ec7d74fc09d2f49",
+    callbackURL: "http://www.example.com/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // User.findOrCreate(..., function(err, user) {
+    //   if (err) { return done(err); }
+    //   done(null, user);
+    // });
+  }
+));
 
 
 var app = express();
@@ -22,9 +38,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 /***** Dynamic Files *****/
 
 var server = http.createServer(app);
+
+reload(server, app, 1500);
 
 
 server.listen(app.get('port'), function (){

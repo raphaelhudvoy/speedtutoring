@@ -1,8 +1,10 @@
 var express         	= require('express')
   , http            	= require('http')
-  , reload 				= require('reload')
+  , reload 				    = require('reload')
   , path            	= require('path')
-  , passport 			= require('passport')
+  , passport 			    = require('passport')
+  , mongoose          = require('mongoose')
+  , userManager       = require('./server/routes/userManager.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy;
 
 passport.use(new FacebookStrategy({
@@ -17,6 +19,14 @@ passport.use(new FacebookStrategy({
     // });
   }
 ));
+
+mongoose.connect('mongodb://localhost/speed');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("Connected to MongoDB");
+});
 
 
 var app = express();
@@ -37,6 +47,11 @@ app.use(express.static(path.join(__dirname, 'speedTutoring')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+app.post('/api/v1/user/', function (req, res) {
+
+  userManager.createUser(db, req, res);
+});
 
 
 /***** Dynamic Files *****/

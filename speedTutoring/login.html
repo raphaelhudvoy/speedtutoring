@@ -16,11 +16,11 @@
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body>
+<body data-ng-app="speedTutoring">
 
-	<nav class="top-bar">
+	<nav class="top-bar" data-ng-controller="homeController">
 		<ul class="title-area">
-			<li class="name"> 
+			<li class="name" data-ng-click="vm.test()"> 
 				<h1><a href="#">Speed Tutoring</a></h1>
 			</li>
 		</ul>
@@ -52,6 +52,25 @@
   ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
   '.js><\/script>')
   </script>
+
+
+ <!-- Module -->
+
+  <script type="text/javascript" src="javascripts/modules/speedTutoringModules.js"></script>
+
+
+ <!-- Controllers -->
+
+  <script type="text/javascript" src="javascripts/controllers/homeController.js"></script>
+
+
+ <!-- Services -->
+
+  <script type="text/javascript" src="javascripts/services/userService.js"></script>
+
+
+ <!-- Filters -->
+
 
   <script src="javascripts/vendor/angular.js"></script>
   

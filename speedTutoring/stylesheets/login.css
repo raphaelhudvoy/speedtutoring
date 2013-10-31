@@ -1,8 +1,8 @@
 /* line 3, ../sass/login.scss */
 .login-form {
-  margin-top: 10em;
-  padding: 2em 1em 2em 1em;
-  border: 1px solid #b3b3b3;
+  margin-top: 1em;
+  padding: 2em 1em 1em 1em;
+  border: 4px solid #b3b3b3;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;

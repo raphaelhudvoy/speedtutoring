@@ -22,7 +22,7 @@ Tuto.factory('UserService', function ($http, $q) {
 
 		var url = "/api/v1/user/";
 
-		$$http('POST', url, user, function(status, response){
+		$http('POST', url, user, function(status, response){
 			// success
 
 

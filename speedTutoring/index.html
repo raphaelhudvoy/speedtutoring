@@ -10,41 +10,77 @@
 
   
   <link rel="stylesheet" href="stylesheets/app.css">
-  <link rel="stylesheet" href="stylesheets/login.css">
+  <link rel="stylesheet" href="stylesheets/home.css">
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body>
+<body data-ng-app="speedTutoring">
 
-	<nav class="top-bar">
-		<ul class="title-area">
-			<li class="name"> 
-				<h1><a href="#">Speed Tutoring</a></h1>
-			</li>
-		</ul>
-	</nav>
+	<div data-ng-controller="homeController">
+	
+		<nav class="top-bar">
+			<ul class="title-area">
+				<li class="name" data-ng-click="vm.test()"> 
+					<h1><a href="#">Speed Tutoring</a></h1>
+				</li>
+			</ul>
+			<section class="top-bar-section">
+				<ul class="left">
+					<li class="divider"></li>
+					<li>
+						<a href="#"> Raphael Hudon-Voyer</a>
+					</li>	
+				</ul>
+				<ul class="right">
+					<li>
+						<a href="#"> Become a Tutor </a>
+					</li>	
+				</ul>
+			</section>
+		</nav>
 
-	<div class="row">
-		<div class="small-6 large-centered columns"> 
-			<form class="login-form" method="post">
-				<div>
-					<input name="email" placeholder="Email" type="text" />
-				</div>
-				<div>
-					<input name="password" placeholder="Password" type="password" />
-				</div>
-				<div class="row">
-					<div class="large-3 large-offset-6 columns">
-						<a href="#" class="small button"> register </a>
+		<!-- ASK QUESTION -->
+		<div class="row" data-ng-hide="vm.displayTagsSearch">
+			<div class="small-centered large-8 large-centered columns"> 
+				<div class="qst-form">
+					<div class="large-10 small-8 columns qst-container">
+						<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.title"/>
 					</div>
-					<div class="large-3 columns">
-						<a href="#" class="small button"> login </a>
+					<div class="large-2 small-4 columns ask-button">
+						<div class="button prefix" ng-click="vm.addTags()">add tags</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
+
+		<!-- ADD TAGS -->
+		<div class="row" data-ng-show="vm.displayTagsSearch">
+			<div class="small-centered large-8 large-centered columns"> 
+				<div class="tag-form">
+					<div class="qst">
+						<h3 data-ng-click="vm.askQuestion()">{{ vm.question.title }}</h3>
+					</div>
+					<div>
+						<ul class="tags-list">
+							<li data-ng-repeat="tag in vm.question.tags track by tag.tagID">{{ tag.title }}</li>
+						</ul>
+					</div>
+					<div class="large-10 small-8 columns qst-container">
+						<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
+						<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
+							<div data-ng-click="vm.tags.add(tag)">{{ tag.title }}</div>
+						</div>
+					</div>
+					<div class="large-2 small-4 columns ask-button">
+						<div class="button prefix" ng-click="vm.ask()">ask</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 
   <script>
@@ -53,39 +89,43 @@
   '.js><\/script>')
   </script>
 
-  <script src="javascripts/vendor/angular.js"></script>
-  
-  <script src="javascripts/foundation/foundation.js"></script>
-	
+  	<script src="javascripts/vendor/angular.js"></script>
+  	<script src="javascripts/foundation/foundation.js"></script>
 	<script src="javascripts/foundation/foundation.abide.js"></script>
-	
 	<script src="javascripts/foundation/foundation.alerts.js"></script>
-	
 	<script src="javascripts/foundation/foundation.clearing.js"></script>
-	
 	<script src="javascripts/foundation/foundation.cookie.js"></script>
-	
 	<script src="javascripts/foundation/foundation.dropdown.js"></script>
-	
 	<script src="javascripts/foundation/foundation.forms.js"></script>
-	
 	<script src="javascripts/foundation/foundation.interchange.js"></script>
-	
 	<script src="javascripts/foundation/foundation.joyride.js"></script>
-	
 	<script src="javascripts/foundation/foundation.magellan.js"></script>
-	
 	<script src="javascripts/foundation/foundation.orbit.js"></script>
-	
 	<script src="javascripts/foundation/foundation.placeholder.js"></script>
-	
 	<script src="javascripts/foundation/foundation.reveal.js"></script>
-	
 	<script src="javascripts/foundation/foundation.section.js"></script>
-	
 	<script src="javascripts/foundation/foundation.tooltips.js"></script>
-	
 	<script src="javascripts/foundation/foundation.topbar.js"></script>
+
+ <!-- Module -->
+
+  <script type="text/javascript" src="javascripts/modules/speedTutoringModules.js"></script>
+
+
+ <!-- Controllers -->
+
+  <script type="text/javascript" src="javascripts/controllers/homeController.js"></script>
+
+
+ <!-- Services -->
+
+  <script type="text/javascript" src="javascripts/services/userService.js"></script>
+  <script type="text/javascript" src="javascripts/services/searchService.js"></script>
+
+
+ <!-- Filters -->
+
+
 	
   
   <script>

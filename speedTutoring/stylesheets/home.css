@@ -1,0 +1,74 @@
+/* line 3, ../sass/home.scss */
+.qst-form {
+  margin-top: 10em;
+  padding: 2em 1em 4em 1em;
+  border: 1px solid #b3b3b3;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* line 11, ../sass/home.scss */
+.qst-container {
+  padding: 0 0 0 0;
+}
+
+/* line 15, ../sass/home.scss */
+.ask-button {
+  padding: 0 0 0 0;
+}
+
+/* line 19, ../sass/home.scss */
+.tag-form {
+  margin-top: 10em;
+  padding: 1em 1em 4em 1em;
+  border: 1px solid #b3b3b3;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* line 27, ../sass/home.scss */
+ul.tags-list {
+  font-family: inherit;
+}
+/* line 31, ../sass/home.scss */
+ul.tags-list li {
+  display: inline;
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  margin-right: 0.5em;
+  border: 1px solid #b3b3b3;
+  background-color: #6a9394;
+  list-style-type: none;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 45, ../sass/home.scss */
+input.search-tags {
+  margin: 0 0 0 0;
+}
+
+/* line 49, ../sass/home.scss */
+.tags {
+  width: 100%;
+  padding: 0.5em 0 0.5em 0.5em;
+  border: 1px solid #b3b3b3;
+  border-top: none;
+  font-family: inherit;
+  color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+/* line 59, ../sass/home.scss */
+.tags:hover {
+  background-color: #fff2c7;
+}

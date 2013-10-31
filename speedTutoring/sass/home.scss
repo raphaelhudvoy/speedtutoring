@@ -1,0 +1,61 @@
+@import "compass/css3/";
+
+.qst-form {
+
+	margin-top: 10em;
+	padding: 2em 1em 4em 1em;
+	border : 1px solid #b3b3b3;
+	@include border-radius(2px);
+}
+
+.qst-container {
+	padding : 0 0 0 0;
+}
+
+.ask-button {
+	padding : 0 0 0 0;
+}
+
+.tag-form {
+
+	margin-top: 10em;
+	padding: 1em 1em 4em 1em;
+	border : 1px solid #b3b3b3;
+	@include border-radius(2px);
+}
+
+ul.tags-list {
+
+	font-family: inherit;
+
+	li {
+		display: inline;
+		padding : 0.25em 0.25em 0.25em 0.25em;
+		margin-right: 0.5em;
+		border : 1px solid #b3b3b3;
+		background-color : #6a9394;
+		list-style-type: none;
+		color : #fff;
+		@include border-radius(3px);
+
+	}
+
+}
+
+input.search-tags {
+	margin: 0 0 0 0;
+}
+
+.tags {
+	width 		: 100%;
+	padding 	: 0.5em 0 0.5em 0.5em;
+	border 		: 1px solid #b3b3b3;
+	border-top 	: none;
+	font-family: inherit;
+	color: rgba(0, 0, 0, 0.75);
+	cursor: pointer;
+}
+
+.tags:hover {
+	background-color: lighten(#ffda61, 20%);
+}

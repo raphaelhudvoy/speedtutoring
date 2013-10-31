@@ -40,20 +40,26 @@ Running the application:
 
 Product information/useful links:
 
+	APPLICATION
+		- Example app: http://www.ewal.net/2013/09/24/bitcoin-command-fun-with-angularjs/
+		- Why: http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and
+
 	NODE.JS
-		-
-		-
-		-
+		- API: http://nodejs.org/api/
+		- Beginner book: http://www.nodebeginner.org/
+		- 
 
 	MONGODB
-		-
-		-
-		-
+		- Introduction: http://www.mongodb.org/about/introduction/
+		- Schema design: http://www.mysqlperformanceblog.com/2013/08/01/schema-design-in-mongodb-vs-schema-design-in-mysql/
+		- Testing with mongodb : http://wes.skeweredrook.com/testing-with-mongodb-part-1/
+		- Relational vs Non-relational: http://www.neonrain.com/blog/mysql-vs-mongodb-relational-and-non-relational-databases
 
 	MONGOOSE
-		-
-		-
-		-
+		- API: http://mongoosejs.com/docs/api.html
+		- Guide : http://mongoosejs.com/docs/guide.html
+		- Connections: http://mongoosejs.com/docs/connections.html
+		- 
 
 	COMPASS
 		-
@@ -61,9 +67,14 @@ Product information/useful links:
 		-
 
 	ANGULARJS
-		-
-		-
-		-
+		- API: http://docs.angularjs.org/api/
+		- Guide: http://docs.angularjs.org/guide/
+		- Examples: http://angular-tips.com/blog/2013/08/why-does-angular-dot-js-rock/
+		- 
+
+	GIT
+		- Branching model : http://nvie.com/posts/a-successful-git-branching-model/
+		- Branching and merging: http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging
 
 	FOUNDATION
 		-

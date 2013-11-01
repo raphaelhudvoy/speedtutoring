@@ -48,35 +48,54 @@ img.logo {
   height: 100% !important;
   background: transparent;
 }
-/* line 59, ../sass/home.scss */
+/* line 61, ../sass/home.scss */
 .top-bar section ul li a {
   height: 100% !important;
+  background: none !important;
 }
-/* line 65, ../sass/home.scss */
+/* line 67, ../sass/home.scss */
+.top-bar section ul li.username {
+  background-color: #5f6fb3;
+}
+/* line 72, ../sass/home.scss */
 .top-bar section ul.right {
   background-color: #e05050;
 }
-/* line 68, ../sass/home.scss */
+/* line 75, ../sass/home.scss */
 .top-bar section ul.right li a {
   background: none;
 }
 
-/* line 78, ../sass/home.scss */
+/* line 85, ../sass/home.scss */
 .main {
   background-color: #fcfeff;
 }
 
-/* line 82, ../sass/home.scss */
+/* line 89, ../sass/home.scss */
 .button {
   background-color: #e05050;
 }
 
-/* line 86, ../sass/home.scss */
+/* line 93, ../sass/home.scss */
 .ask-button {
   padding: 0 0 0 0;
 }
 
-/* line 90, ../sass/home.scss */
+/* line 96, ../sass/home.scss */
+.form {
+  margin-top: 5em;
+  width: 27em;
+  padding: 1em 1em 1em 1em;
+  outline: 3px solid #89a5b5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+/* line 106, ../sass/home.scss */
 .tag-form {
   margin-top: 10em;
   padding: 1em 1em 4em 1em;
@@ -90,11 +109,11 @@ img.logo {
   background-color: #ffffff;
 }
 
-/* line 100, ../sass/home.scss */
+/* line 116, ../sass/home.scss */
 ul.tags-list {
   font-family: inherit;
 }
-/* line 104, ../sass/home.scss */
+/* line 120, ../sass/home.scss */
 ul.tags-list li {
   display: inline;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -110,12 +129,12 @@ ul.tags-list li {
   border-radius: 3px;
 }
 
-/* line 118, ../sass/home.scss */
+/* line 134, ../sass/home.scss */
 input.search-tags {
   margin: 0 0 0 0;
 }
 
-/* line 122, ../sass/home.scss */
+/* line 138, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -126,7 +145,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 132, ../sass/home.scss */
+/* line 148, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

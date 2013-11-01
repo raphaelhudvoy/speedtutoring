@@ -54,11 +54,18 @@ img.logo{
 			background: transparent;
 			height: 100% !important;
 			li{
+				
+				
 				height: 100% !important;
 				background: transparent;
 				a{
 					height: 100% !important;
+					background: none !important;
 				}
+			}
+			
+			li.username{
+				background-color: $primary-colo;
 			}
 		}
 		
@@ -86,6 +93,15 @@ img.logo{
 .ask-button {
 	padding : 0 0 0 0;
 }
+.form{
+	margin-top: 5em;
+	width: 27em;
+	padding: 1em 1em 1em 1em;
+	outline: $main-outline;
+	@include border-radius(3px);
+	background-color:  #ffffff;
+}
+
 
 .tag-form {
 

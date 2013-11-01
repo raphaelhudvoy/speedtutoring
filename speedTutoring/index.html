@@ -30,8 +30,8 @@
 					<li>
 						<img src="images/speedtutoringlogo.png" class="logo" data-ng-click="vm.test()" > </a>
 					</li>	
-					<li>
-						<a   data-ng-show="loggedInUser.username" href="#">{{loggedInUser.username}}</a>
+					<li class="username">
+						<a data-ng-show="loggedInUser.username" href="#">{{loggedInUser.username}}</a>
 					</li>	
 				</ul>
 				<ul class="right">
@@ -54,17 +54,15 @@
 		   	</div>
 		</div>
 
-		<div class="row" style="margin-top:150px;" data-ng-show="registerUser" >
+		<div class="form row"  data-ng-show="registerUser" >
 			
-			<div class="small-centered large-8 large-centered columns">
 				<form novalidate class="simple-form">
-					Username: <input type="text" ng-model="user.username"/><br/>
-			    	First Name: <input type="text" ng-model="user.firstName" /><br/>
-			    	Last Name: <input type="text" ng-model="user.lastName" /><br/>
-			        E-mail: <input type="text" ng-model="user.email" /><br />
+					<input type="text" placeholder = "Username" ng-model="user.username"/> <br/>
+			    	<input type="text" placeholder = "First Name" ng-model="user.firstName" /><br/>
+			    	<input type="text" placeholder = "Last Name" ng-model="user.lastName" /><br/>
+			        <input type="text" placeholder = "Email" ng-model="user.email" /><br />
 			        <button ng-click="vm.registerUser(user)">Register</button>
 			   	</form>
-		   	</div>
 		</div>
 
 		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">

@@ -4,9 +4,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
+	<link rel="shortcut icon" href="images/logosymbol.ico">
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Speed tutoring</title>
+  <title>speedtutoring</title>
 
   
   <link rel="stylesheet" href="stylesheets/app.css">
@@ -16,30 +17,27 @@
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body data-ng-app="speedTutoring">
+<body class="main" data-ng-app="speedTutoring">
 
 	<div data-ng-controller="homeController">
-	
-		<nav class="top-bar">
-			<ul class="title-area">
-				<li class="name" data-ng-click="vm.test()"> 
-					<h1><a href="#">Speed Tutoring</a></h1>
-				</li>
-			</ul>
-			<section class="top-bar-section">
-				<ul class="left">
-					<li class="divider"></li>
-					<li>
-						<a href="#"> Raphael Hudon-Voyer</a>
-					</li>	
-				</ul>
-				<ul class="right">
-					<li>
-						<a href="#"> Become a Tutor </a>
-					</li>	
-				</ul>
-			</section>
-		</nav>
+		<div class= "h-nav">
+			<nav class="top-bar">
+					<section class="top-bar-section">
+						<ul class="left">
+							<li>
+								<img src="images/logosymbol.png" class="logo" data-ng-click="vm.test()" > </a>
+							</li>	
+							<li>
+								<img src="images/speedtutoringlogo.png" class="logo" data-ng-click="vm.test()" > </a>
+							</li>	
+						</ul>
+						<ul class="right">
+						</ul>
+					</section>
+				
+			</nav>
+			</div>
+		
 
 		<!-- ASK QUESTION -->
 		<div class="row" data-ng-hide="vm.displayTagsSearch">

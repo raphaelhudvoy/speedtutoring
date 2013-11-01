@@ -4,18 +4,19 @@
 .h-nav {
 
 	nav {
-		border-bottom: 4px solid #89a5b5;
+		border-bottom: 3px solid #89a5b5;
 		background-color: #ffffff;
 	}
 }
 img.logo{
-	height: 41px;
+	height: 35px;
+	top: 10px;
 	background: transparent;
-	vertical-align: bottom;
-	display: table-cell;
+	position: relative;
+	
 }
 .main {
-	background-color: #f0f5f8;
+	background-color: #fcfeff;
 }
 
 .title {
@@ -32,7 +33,8 @@ img.logo{
 .top-bar-section ul {
 	background: transparent;
 	height: 100% !important;
-	left: 50px !important;
+	left: 150px !important;
+	position: relative;
 	display: block;
 	
 	li{
@@ -43,7 +45,7 @@ img.logo{
 
 	margin-top: 10em;
 	padding: 2em 1em 4em 1em;
-	border : 4px solid #89a5b5;
+	border : 3px solid #89a5b5;
 	background-color: #ffffff;
 	@include border-radius(6px);
 }
@@ -54,14 +56,19 @@ img.logo{
 
 .ask-button {
 	padding : 0 0 0 0;
+	div {
+	background-color: #89a5b5;
+	border-color: #89a5b5;
+	}
 }
 
 .tag-form {
-
+	background-color: #ffffff;
 	margin-top: 10em;
 	padding: 1em 1em 4em 1em;
 	border : 1px solid #b3b3b3;
 	@include border-radius(5px);
+	border : 3px solid #89a5b5;
 }
 
 ul.tags-list {

@@ -26,52 +26,57 @@ img.logo {
   position: relative;
 }
 
-/* line 42, ../sass/home.scss */
+/* line 44, ../sass/home.scss */
 .top-bar {
   height: 50px;
   outline: 3px solid #89a5b5;
   background-color: #ffffff;
 }
-/* line 47, ../sass/home.scss */
+/* line 49, ../sass/home.scss */
 .top-bar section {
-  margin-left: 15em;
-  margin-right: 10em;
+  margin-left: 20em;
+  margin-right: 15em;
   height: 100%;
 }
-/* line 51, ../sass/home.scss */
+/* line 53, ../sass/home.scss */
 .top-bar section ul {
   background: transparent;
   height: 100% !important;
 }
-/* line 54, ../sass/home.scss */
+/* line 56, ../sass/home.scss */
 .top-bar section ul li {
   height: 100% !important;
   background: transparent;
 }
-/* line 57, ../sass/home.scss */
+/* line 59, ../sass/home.scss */
 .top-bar section ul li a {
   height: 100% !important;
 }
-/* line 63, ../sass/home.scss */
+/* line 65, ../sass/home.scss */
 .top-bar section ul.right {
   background-color: #e05050;
 }
-/* line 66, ../sass/home.scss */
+/* line 68, ../sass/home.scss */
 .top-bar section ul.right li a {
   background: none;
 }
 
-/* line 76, ../sass/home.scss */
+/* line 78, ../sass/home.scss */
 .main {
   background-color: #fcfeff;
 }
 
 /* line 82, ../sass/home.scss */
+.button {
+  background-color: #e05050;
+}
+
+/* line 86, ../sass/home.scss */
 .ask-button {
   padding: 0 0 0 0;
 }
 
-/* line 86, ../sass/home.scss */
+/* line 90, ../sass/home.scss */
 .tag-form {
   margin-top: 10em;
   padding: 1em 1em 4em 1em;
@@ -85,11 +90,11 @@ img.logo {
   background-color: #ffffff;
 }
 
-/* line 96, ../sass/home.scss */
+/* line 100, ../sass/home.scss */
 ul.tags-list {
   font-family: inherit;
 }
-/* line 100, ../sass/home.scss */
+/* line 104, ../sass/home.scss */
 ul.tags-list li {
   display: inline;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -105,12 +110,12 @@ ul.tags-list li {
   border-radius: 3px;
 }
 
-/* line 114, ../sass/home.scss */
+/* line 118, ../sass/home.scss */
 input.search-tags {
   margin: 0 0 0 0;
 }
 
-/* line 118, ../sass/home.scss */
+/* line 122, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -121,7 +126,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 128, ../sass/home.scss */
+/* line 132, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

@@ -39,14 +39,16 @@ img.logo{
 	
 }
 
+
+
 .top-bar{
 	height: 50px ;
 	outline: 3px solid #89a5b5;
 	background-color: #ffffff;
 	
 	section{
-		margin-left: 15em;
-		margin-right: 10em;
+		margin-left: 20em;
+		margin-right: 15em;
 		height: 100%;
 		ul{
 			background: transparent;
@@ -74,10 +76,12 @@ img.logo{
 }
 
 .main{
-	background-color:  #fcfeff;
+	background-color: $main-bg-colo;
 }
 
-
+.button {
+	background-color: $secondary-colo;
+}
 
 .ask-button {
 	padding : 0 0 0 0;

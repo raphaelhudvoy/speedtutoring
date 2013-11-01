@@ -4,13 +4,14 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	function User (user) {
 		if (!user) {
-			user = {}
+			user = {};
 		}
 
-		this.firstName 	= user.firstName 	| "Pat";
-		this.lastName 	= user.lastName 	| "Dube";
-		this.password 	= user.password 	| "caca";
-		this.username 	= user.username 	| "pdube";
+		this.firstName 	= user.firstName 	|| "Pat";
+		this.lastName 	= user.lastName 	|| "Dube";
+		this.username 	= user.username 	|| "pdube";
+		this.email = user.email || "m@mcgill.ca";
+
 	}
 
 
@@ -22,17 +23,23 @@ Tuto.factory('UserService', function ($http, $q) {
 
 		var url = "/api/v1/user/";
 
-		$http('POST', url, user, function(status, response){
-			// success
-
-
-		}, function(status, response){
-			// error
-
+		$http.post(url, user).success(function(res){
+			console.log("POST COMPLETE");
 		});
 
-
 	};
+
+	Service.dumpUserDatabase = function(){
+		var deferred = $q.defer();
+
+		var url = "/api/v1/user/";
+
+		$http.get(url).success(function(response){
+			console.log("GET COMPLETE");
+			console.log(response);
+			return response;
+		});
+	}
 
 
 	return Service;

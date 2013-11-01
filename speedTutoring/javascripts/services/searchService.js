@@ -19,6 +19,8 @@ Tuto.factory('SearchService', function ($http, $q) {
 		var url = "/api/v1/search/tag/";
 
 		// $http('GET', url, function(status, response){
+
+		// 	console.log("GET SUCCESS");
 		// 	// success
 		// }, function(status, response){
 		// 	// error
@@ -26,12 +28,11 @@ Tuto.factory('SearchService', function ($http, $q) {
 
 		var tags = [ { tagID : 1, title: "Math"}
 					,{ tagID : 2, title: "English"}
-					,{ tagID : 3, title: "French"}
-					,{ tagID : 4, title: "Art"}
-					,{ tagID : 5, title: "Computer"}
-					,{ tagID : 6, title: "Internet"}
-					,{ tagID : 7, title: "Electricity"}
-					,{ tagID : 8, title: "Algebra"}]
+					,{ tagID : 3, title: "Art"}
+					,{ tagID : 4, title: "Computer"}
+					,{ tagID : 5, title: "Internet"}
+					,{ tagID : 6, title: "Electricity"}
+					,{ tagID : 7, title: "Algebra"}]
 
 		deferred.resolve(tags);
 

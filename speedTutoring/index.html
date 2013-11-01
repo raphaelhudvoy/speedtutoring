@@ -30,16 +30,48 @@
 				<ul class="left">
 					<li class="divider"></li>
 					<li>
-						<a href="#"> Raphael Hudon-Voyer</a>
+						<a data-ng-show="loggedInUser.username" href="#">{{loggedInUser.username}}</a>
 					</li>	
 				</ul>
 				<ul class="right">
 					<li>
-						<a href="#"> Become a Tutor </a>
+						<a href="#" data-ng-hide="loggedInUser.username" data-ng-click="registerUser=true"> Register</a>
 					</li>	
 				</ul>
 			</section>
 		</nav>
+
+
+		<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a Tutor</button>
+
+		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
+			
+			<div class="small-centered large-8 large-centered columns">
+				<select data-ng-model="vm.tutor.tag" ng-options="tag.title for tag in vm.allTags">
+				</select>
+				<button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
+		   	</div>
+		</div>
+
+		<div class="row" style="margin-top:150px;" data-ng-show="registerUser" >
+			
+			<div class="small-centered large-8 large-centered columns">
+				<form novalidate class="simple-form">
+					Username: <input type="text" ng-model="user.username"/><br/>
+			    	First Name: <input type="text" ng-model="user.firstName" /><br/>
+			    	Last Name: <input type="text" ng-model="user.lastName" /><br/>
+			        E-mail: <input type="text" ng-model="user.email" /><br />
+			        <button ng-click="vm.registerUser(user)">Register</button>
+			   	</form>
+		   	</div>
+		</div>
+
+		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
+
+			<span>Asked a question! Trying to find a Tutor</span>
+			<img src="images/loading.gif" alt="LOADING">
+			<a href="#" class="close">&times;</a>
+		</div>
 
 		<!-- ASK QUESTION -->
 		<div class="row" data-ng-hide="vm.displayTagsSearch">
@@ -49,7 +81,7 @@
 						<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.title"/>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.addTags()">add tags</div>
+						<button class="button prefix" ng-click="vm.addTags()" data-ng-disabled="!loggedInUser.username">add tags</button>
 					</div>
 				</div>
 			</div>
@@ -74,13 +106,14 @@
 						</div>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.ask()">ask</div>
+						<div class="button prefix" ng-click="vm.askQuestion(vm.question)">ask</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
+		{{db}}
+		<button data-ng-click="vm.dumpUserDatabase()">DUMP USER DB</button>
+		<button data-ng-click="vm.dumpQuestionDatabase()">DUMP QUESTION DB</button>
 	</div>
 
   <script>
@@ -121,13 +154,11 @@
 
   <script type="text/javascript" src="javascripts/services/userService.js"></script>
   <script type="text/javascript" src="javascripts/services/searchService.js"></script>
-
+  <script type="text/javascript" src="javascripts/services/questionService.js"></script>
+  <script type="text/javascript" src="javascripts/services/tutorService.js"></script>
 
  <!-- Filters -->
 
-
-	
-  
   <script>
     $(document).foundation();
   </script>

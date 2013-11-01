@@ -5,6 +5,8 @@ var express         	= require('express')
   , passport 			    = require('passport')
   , mongoose          = require('mongoose')
   , userManager       = require('./server/routes/userManager.js')
+  , questionManager   = require('./server/routes/questionManager.js')
+  , tutorManager   = require('./server/routes/tutorManager.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy;
 
 passport.use(new FacebookStrategy({
@@ -28,6 +30,33 @@ db.once('open', function callback () {
   console.log("Connected to MongoDB");
 });
 
+/*
+ * SCHEMAS
+ */
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+  username:  String,
+  firstName: String,
+  lastName:   String,
+  email : String, 
+});
+
+var User = mongoose.model('User', userSchema);
+
+var questionSchema = new Schema({
+  title:  String,
+  tags: [String] 
+});
+
+var Question = mongoose.model('Question', questionSchema);
+
+var tutorSchema = new Schema({
+  userId:  String,
+  tags: [String] 
+});
+
+var Tutor = mongoose.model('Tutor', tutorSchema);
 
 var app = express();
 
@@ -50,9 +79,29 @@ if ('development' == app.get('env')) {
 
 app.post('/api/v1/user/', function (req, res) {
 
-  userManager.createUser(db, req, res);
+  userManager.createUser(User, req, res);
 });
 
+app.get('/api/v1/user/', function (req, res) {
+
+  userManager.dumpUserDatabase(User, req, res);
+});
+
+
+app.post('/api/v1/question/', function (req, res) {
+
+  questionManager.askQuestion(Question, req, res);
+});
+
+app.get('/api/v1/question/', function (req, res) {
+
+  questionManager.dumpQuestionDatabase(Question, req, res);
+});
+
+
+app.post('/api/v1/tutor/', function (req, res) {
+  tutorManager.registerTutor(Tutor, req, res);
+});
 
 /***** Dynamic Files *****/
 

@@ -1,16 +1,83 @@
 @import "compass/css3/";
 
+
+// Main Color Variables:
+$primary-colo: #5f6fb3; //paster blue
+$secondary-colo: #e05050; // pastel red
+$outline-colo: #293238; //mid-gray
+$text-dark-colo: #232323; // dark-gray
+$text-light-colo: #fcfeff; // egg shell white
+$main-bg-colo: #fcfeff; // egg shell white
+$window-bg-colo: #ffffff; // white
+
+
+//outline variables
+$main-outline: 3px solid #89a5b5;
+
+
+
 .qst-form {
 
 	margin-top: 10em;
 	padding: 2em 1em 4em 1em;
 	border : 1px solid #b3b3b3;
+	outline: $main-outline;
+	background-color:  $window-bg-colo;
 	@include border-radius(2px);
 }
 
 .qst-container {
 	padding : 0 0 0 0;
 }
+
+img.logo{
+	height: 35px;
+	top: 14px;
+	background: transparent;
+	float: left;
+	position: relative;
+	
+}
+
+.top-bar{
+	height: 50px ;
+	outline: 3px solid #89a5b5;
+	background-color: #ffffff;
+	
+	section{
+		margin-left: 15em;
+		margin-right: 10em;
+		height: 100%;
+		ul{
+			background: transparent;
+			height: 100% !important;
+			li{
+				height: 100% !important;
+				background: transparent;
+				a{
+					height: 100% !important;
+				}
+			}
+		}
+		
+		ul.right{
+			background-color: $secondary-colo;
+			li{
+				a{
+					background: none;
+				}
+			}
+		}
+	}
+	
+	
+}
+
+.main{
+	background-color:  #fcfeff;
+}
+
+
 
 .ask-button {
 	padding : 0 0 0 0;
@@ -21,7 +88,9 @@
 	margin-top: 10em;
 	padding: 1em 1em 4em 1em;
 	border : 1px solid #b3b3b3;
+	outline: $main-outline;
 	@include border-radius(2px);
+	background-color:  #ffffff;
 }
 
 ul.tags-list {

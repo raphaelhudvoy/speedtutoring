@@ -12,7 +12,12 @@ Setting up development environment:
 
 		Sass - http://sass-lang.com/install
 
-		Compass - http://compass-style.org/install/
+		Compass:
+		
+		1. Download and install ruby: https://www.ruby-lang.org/en/downloads/ (MAKE SURE TO CHECK the box "add to PATH variables" when installing)
+		2. Install necessary gems for sass from command prompt 
+			- install compass gem by executing: 		$ gem install compass
+			- install zurb-foundation gem by executing: 	$ gem install zurb-foundation
 
 		Optional:
 
@@ -37,6 +42,13 @@ Running the application:
 			2. (In new terminal) $ node-inspector &
 
 	4. Application is now running. To test, open browser and navigate to "localhost:4000"
+
+
+Sass Auto-Compilation (Optional) :
+If you wish to modify the scss files and compile them to css files
+1. From root of project, where the "config.rb" file is located, execute: $ compass watch 
+2. Leave the terminal open, it will now poll for changes for all local scss files and compile them automatically
+
 
 Product information/useful links:
 

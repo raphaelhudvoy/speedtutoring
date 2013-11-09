@@ -1,23 +1,25 @@
-/* line 19, ../sass/home.scss */
+/* line 36, ../sass/home.scss */
 .qst-form {
-  margin-top: 10em;
-  padding: 2em 1em 4em 1em;
-  border: 1px solid #b3b3b3;
-  outline: 3px solid #293238;
-  background-color: white;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
+  margin-top: 8em;
+  width: auto;
+  height: 4em;
+  padding: 1em 1em 1em 1em;
+  outline: 3px solid #6d91ab;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px 3px #6d91ab;
 }
 
-/* line 29, ../sass/home.scss */
+/* line 47, ../sass/home.scss */
 .qst-container {
   padding: 0 0 0 0;
 }
 
-/* line 33, ../sass/home.scss */
+/* line 51, ../sass/home.scss */
 img.logo {
   height: 35px;
   top: 14px;
@@ -26,81 +28,84 @@ img.logo {
   position: relative;
 }
 
-/* line 44, ../sass/home.scss */
+/* line 62, ../sass/home.scss */
 .top-bar {
-  height: 50px;
-  outline: 3px solid #89a5b5;
+  height: 57px;
+  outline: 3px solid #6d91ab;
   background-color: #ffffff;
+  box-shadow: 5px 5px 10px #6d91ab;
 }
-/* line 49, ../sass/home.scss */
+/* line 68, ../sass/home.scss */
 .top-bar section {
   margin-left: 20em;
   margin-right: 15em;
   height: 100%;
 }
-/* line 53, ../sass/home.scss */
+/* line 72, ../sass/home.scss */
 .top-bar section ul {
   background: transparent;
   height: 100% !important;
 }
-/* line 56, ../sass/home.scss */
+/* line 75, ../sass/home.scss */
 .top-bar section ul li {
   height: 100% !important;
   background: transparent;
 }
-/* line 61, ../sass/home.scss */
+/* line 80, ../sass/home.scss */
 .top-bar section ul li a {
   height: 100% !important;
   background: none !important;
 }
-/* line 67, ../sass/home.scss */
+/* line 86, ../sass/home.scss */
 .top-bar section ul li.username {
-  background-color: #5f6fb3;
+  background-color: #338fd5;
 }
-/* line 72, ../sass/home.scss */
+/* line 91, ../sass/home.scss */
 .top-bar section ul.right {
-  background-color: #e05050;
+  background-color: #4578a0;
 }
-/* line 75, ../sass/home.scss */
+/* line 94, ../sass/home.scss */
 .top-bar section ul.right li a {
   background: none;
 }
 
-/* line 85, ../sass/home.scss */
+/* line 104, ../sass/home.scss */
 .main {
   background-color: #fcfeff;
 }
 
-/* line 89, ../sass/home.scss */
+/* line 108, ../sass/home.scss */
 .button {
-  background-color: #e05050;
+  background-color: #4578a0;
 }
 
-/* line 93, ../sass/home.scss */
+/* line 112, ../sass/home.scss */
 .ask-button {
   padding: 0 0 0 0;
 }
 
-/* line 96, ../sass/home.scss */
+/* line 115, ../sass/home.scss */
 .form {
   margin-top: 5em;
-  width: 27em;
+  width: auto;
+  height: auto;
   padding: 1em 1em 1em 1em;
-  outline: 3px solid #293238;
+  outline: 3px solid #6d91ab;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
   background-color: #ffffff;
+  box-shadow: 0px 0px 10px 3px #6d91ab;
 }
 
-/* line 106, ../sass/home.scss */
+/* line 127, ../sass/home.scss */
 .tag-form {
   margin-top: 10em;
   padding: 1em 1em 4em 1em;
   border: 1px solid #b3b3b3;
-  outline: 3px solid #293238;
+  outline: 3px solid #6d91ab;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -109,11 +114,11 @@ img.logo {
   background-color: #ffffff;
 }
 
-/* line 116, ../sass/home.scss */
+/* line 137, ../sass/home.scss */
 ul.tags-list {
   font-family: inherit;
 }
-/* line 120, ../sass/home.scss */
+/* line 141, ../sass/home.scss */
 ul.tags-list li {
   display: inline;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -129,12 +134,12 @@ ul.tags-list li {
   border-radius: 3px;
 }
 
-/* line 134, ../sass/home.scss */
+/* line 155, ../sass/home.scss */
 input.search-tags {
   margin: 0 0 0 0;
 }
 
-/* line 138, ../sass/home.scss */
+/* line 159, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -145,7 +150,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 148, ../sass/home.scss */
+/* line 169, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

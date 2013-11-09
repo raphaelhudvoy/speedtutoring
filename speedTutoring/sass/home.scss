@@ -1,29 +1,47 @@
 @import "compass/css3/";
 
 
-// Main Color Variables:
-$primary-colo: #5f6fb3; //paster blue
-$secondary-colo: #e05050; // pastel red
-$outline-colo: #293238; //mid-gray
+// Color Palette:
+$primary-colo-1: #338FD5; //blue
+$primary-colo-2: #4578A0;
+$primary-colo-3: #11568B;
+$primary-colo-light: #65B0EA;
+$primary-colo-lighter: #88C0EA;
+$complem-colo-1: #FFA630; //blue
+$complem-colo-2: #BF8D4B;
+$complem-colo-3: #A6650F;
+$complem-colo-light: #FFBC63;
+$complem-colo-lighter: #FFCE8D;
+$complem-colo-1: #4578A0; //orange
+$complem-colo-2: #4578A0;
+$complem-colo-3: #4578A0;
+
+
+$outline-colo: #6D91AB; //
 $text-dark-colo: #232323; // dark-gray
 $text-light-colo: #fcfeff; // egg shell white
 $main-bg-colo: #fcfeff; // egg shell white
 $window-bg-colo: #ffffff; // white
+$shadow-colo: $outline-colo;
 
 
 //outline variables
 $main-outline: 3px solid $outline-colo;
 
+//box-shadow variables
+$topbar-bshad: 5px 5px 10px $outline-colo;
+$form-bshad: 0px 0px 10px 3px $outline-colo;
 
 
 .qst-form {
-
-	margin-top: 10em;
-	padding: 2em 1em 4em 1em;
-	border : 1px solid #b3b3b3;
+	margin-top: 8em;
+	width: auto;
+	height: 4em;
+	padding: 1em 1em 1em 1em;
 	outline: $main-outline;
-	background-color:  $window-bg-colo;
-	@include border-radius(2px);
+	@include border-radius(3px);
+	background-color:  #ffffff;
+	box-shadow: $form-bshad;
 }
 
 .qst-container {
@@ -42,9 +60,10 @@ img.logo{
 
 
 .top-bar{
-	height: 50px ;
-	outline: 3px solid #89a5b5;
+	height: 57px ;
+	outline: $main-outline;
 	background-color: #ffffff;
+	box-shadow: $topbar-bshad;
 	
 	section{
 		margin-left: 20em;
@@ -65,12 +84,12 @@ img.logo{
 			}
 			
 			li.username{
-				background-color: $primary-colo;
+				background-color: $primary-colo-1;
 			}
 		}
 		
 		ul.right{
-			background-color: $secondary-colo;
+			background-color: $complem-colo-1;
 			li{
 				a{
 					background: none;
@@ -87,7 +106,7 @@ img.logo{
 }
 
 .button {
-	background-color: $secondary-colo;
+	background-color: $complem-colo-1;
 }
 
 .ask-button {
@@ -95,11 +114,13 @@ img.logo{
 }
 .form{
 	margin-top: 5em;
-	width: 27em;
+	width: auto;
+	height: auto;
 	padding: 1em 1em 1em 1em;
 	outline: $main-outline;
 	@include border-radius(3px);
 	background-color:  #ffffff;
+	box-shadow: $form-bshad;
 }
 
 

@@ -25,7 +25,7 @@
 			<section class="top-bar-section">
 				<ul class="left">
 					<li>
-						<img src="images/logosymbol.png" class="logo" data-ng-click="vm.test()" > </a>
+						<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.test()" > </a>
 					</li>	
 					<li>
 						<img src="images/speedtutoringlogo.png" class="logo" data-ng-click="vm.test()" > </a>
@@ -72,8 +72,25 @@
 			<a href="#" class="close">&times;</a>
 		</div>
 
+
 		<!-- ASK QUESTION -->
-		<div class="row" data-ng-hide="vm.displayTagsSearch">
+		<div class="row" >
+			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns"> 
+				<div ng-switch-when="1" class="qst-form" ng-click="vm.askStep=2">
+					Chose a subject 
+				</div>
+				<div ng-switch-when="2" class="qst-form" ng-click="vm.askStep=3">
+					Chose a topic
+				</div>
+				<div ng-switch-when="3" class="qst-form" ng-click="vm.askStep=1">
+					Ask a question
+				</div>
+				<div ng-switch-default> </div>
+			</div>
+		</div>
+
+		<!-- ASK QUESTION -->
+		<div class="row" data-ng-show="loggedInUser.firstName" >
 			<div class="small-centered large-8 large-centered columns"> 
 				<div class="qst-form">
 					<div class="large-10 small-8 columns qst-container">

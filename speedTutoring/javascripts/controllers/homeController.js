@@ -33,6 +33,10 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.displayTagsSearch = false;
 	vm.askedQuestion = false;
+	vm.choseSubject = false;
+	vm.choseTopic = false;
+
+	vm.askStep = 1;
 	vm.chooseTags = false;
 	vm.isTutor = false;
 

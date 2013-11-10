@@ -50,11 +50,16 @@ $form-bshad: 0px 0px 10px 3px $outline-colo;
 
 img.logo{
 	height: 35px;
-	top: 14px;
+	top: 12px;
 	background: transparent;
 	float: left;
 	position: relative;
 	
+}
+
+img.logo-icon {
+  @extend img.logo;
+  top: 14px;
 }
 
 
@@ -84,6 +89,7 @@ img.logo{
 			}
 			
 			li.username{
+				margin-left: 13px;
 				background-color: $primary-colo-1;
 			}
 		}

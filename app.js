@@ -7,18 +7,18 @@ var express         	= require('express')
   , userManager       = require('./server/routes/userManager.js')
   , questionManager   = require('./server/routes/questionManager.js')
   , tutorManager   = require('./server/routes/tutorManager.js')
-  , FacebookStrategy 	= require('passport-facebook').Strategy;
+  , FacebookStrategy 	= require('passport-facebook').Strategy
+    , LocalStrategy   = require('passport-local').Strategy;
+
 //User serialization
 passport.serializeUser(function (user, done) {
   done(null, user.user_ID);
 });
 
 passport.deserializeUser(function (id, done) {
-  loginSystem.findUserById(mysql.cursuumDbPool, id, function (err, user) {
-    done(err, { user_ID : user.user_ID,
-                    username: user.username,
-                    first_name: user.first_name,
-                    last_name: user.last_name });
+  loginSystem.findUserById( id, function (err, user) {
+    done(err, { userId      : user.userId,
+                username    : user.username});
   });
 });
 
@@ -40,7 +40,6 @@ passport.use(new LocalStrategy({
 
           //succes
           // return done(null, user);
-      })
     });
   }
 ));
@@ -64,10 +63,11 @@ db.once('open', function callback () {
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  username:  String,
-  firstName: String,
-  lastName:   String,
-  email  : String, 
+  username  : String,
+  password  : String,
+  firstName : String,
+  lastName  : String,
+  email     : String, 
 });
 
 var User = mongoose.model('User', userSchema);
@@ -129,6 +129,19 @@ app.get('/api/v1/question/', function (req, res) {
 
 app.post('/api/v1/tutor/', function (req, res) {
   tutorManager.registerTutor(Tutor, req, res);
+});
+
+app.post('/api/v1/login/', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            return res.redirect('/login.html')
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    })(req, res, next);
 });
 
 /***** Dynamic Files *****/

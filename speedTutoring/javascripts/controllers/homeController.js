@@ -1,6 +1,6 @@
 Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'SearchService', function ($scope, UserService, TutorService, QuestionService,  SearchService) {
 
-	$scope.loggedInUser = {username:""};
+	$scope.loggedInUser = {username:"Raphael"};
 
 	var vm = {};
 	$scope.vm = vm;

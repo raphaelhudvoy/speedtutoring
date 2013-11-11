@@ -8,19 +8,47 @@ var express         	= require('express')
   , questionManager   = require('./server/routes/questionManager.js')
   , tutorManager   = require('./server/routes/tutorManager.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy;
+//User serialization
+passport.serializeUser(function (user, done) {
+  done(null, user.user_ID);
+});
 
-passport.use(new FacebookStrategy({
-    clientID: "253787698102458",
-    clientSecret: "b82d714a1f5591a76ec7d74fc09d2f49",
-    callbackURL: "http://www.example.com/auth/facebook/callback"
+passport.deserializeUser(function (id, done) {
+  loginSystem.findUserById(mysql.cursuumDbPool, id, function (err, user) {
+    done(err, { user_ID : user.user_ID,
+                    username: user.username,
+                    first_name: user.first_name,
+                    last_name: user.last_name });
+  });
+});
+
+//Passport-local strategy
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
   },
-  function(accessToken, refreshToken, profile, done) {
-    // User.findOrCreate(..., function(err, user) {
-    //   if (err) { return done(err); }
-    //   done(null, user);
-    // });
+
+  function(username, password, done) {
+
+    //asynchronous verificatoin, for effect...
+    process.nextTick(function () {
+
+          //Invalid username
+          //return done(null, false, { message: 'Unknown user ' + username});
+
+          // validate password
+
+          //succes
+          // return done(null, user);
+      })
+    });
   }
 ));
+
+function ensureAuthenticated (req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login.html')
+}
 
 mongoose.connect('mongodb://localhost/speed');
 
@@ -39,7 +67,7 @@ var userSchema = new Schema({
   username:  String,
   firstName: String,
   lastName:   String,
-  email : String, 
+  email  : String, 
 });
 
 var User = mongoose.model('User', userSchema);

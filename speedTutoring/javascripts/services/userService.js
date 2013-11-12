@@ -2,37 +2,83 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	var Service = {};
 
-	function User (user) {
+	function NewRegisterUser (user) {
 		if (!user) {
-			user = {}
+			user = {};
 		}
 
-		this.firstName 	= user.firstName 	| "Pat";
-		this.lastName 	= user.lastName 	| "Dube";
-		this.password 	= user.password 	| "caca";
-		this.username 	= user.username 	| "pdube";
+		this.type 		= "registerUser"; // Do not modify
+
+		this.firstName 	= user.firstName 	|| "";
+		this.lastName 	= user.lastName 	|| "";
+		this.username 	= user.username 	|| "";
+		this.password  	= user.password		|| ""
+		this.email 		= user.email 		|| "";
+
 	}
 
-
-	Service.registerUser = function (user) {
-
-		user = new User(user);
+	NewRegisterUser.prototype.submit = function () {
 
 		var deferred = $q.defer();
 
 		var url = "/api/v1/user/";
 
-		$http('POST', url, user, function(status, response){
-			// success
-
-
-		}, function(status, response){
-			// error
-
+		$http.post(url, this).success(function (results){
+			$q.resolve(results);
+		}).error(function (results) {
+			$q.reject(results);
 		});
 
+		return deferred.promise;
 
-	};
+	}
+
+	function LoginUser (user) {
+		if (!user) {
+			user = {}
+		}
+
+		this.type = "loginUser"; // Do not modify
+
+		this.username = user.username || "";
+		this.password = user.password || "";
+
+	}
+
+	LoginUser.prototype.submit = function () {
+		var deferred = $q.defer();
+
+		var url =  "/api/v1/login/";
+
+		$http.post(url, this).success(function (results) {
+			$q.resolve();
+		}).error(function (results) {
+			$q.reject(results);
+		});
+
+		return deferred.promise;
+	}
+
+
+	Service.dumpUserDatabase = function(){
+		var deferred = $q.defer();
+
+		var url = "/api/v1/user/";
+
+		$http.get(url).success(function(response){
+			console.log("GET COMPLETE");
+			console.log(response);
+			return response;
+		});
+	}
+
+	Service.getLoginUser = function () {
+		return new LoginUser();
+	}
+
+	Service.getNewRegisterUser = function () {
+		return new NewRegisterUser();
+	}
 
 
 	return Service;

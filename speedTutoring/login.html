@@ -4,47 +4,71 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
+<link rel="shortcut icon" href="images/logosymbol.ico">
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Speed tutoring</title>
+  <title>SpeedTutoring: Learn the quick way</title>
 
   
   <link rel="stylesheet" href="stylesheets/app.css">
-  <link rel="stylesheet" href="stylesheets/login.css">
+  <link rel="stylesheet" href="stylesheets/home.css">
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body data-ng-app="speedTutoring">
+<body class="main" data-ng-app="speedTutoring">
 
-	<nav class="top-bar" data-ng-controller="homeController">
-		<ul class="title-area">
-			<li class="name" data-ng-click="vm.test()"> 
-				<h1><a href="#">Speed Tutoring</a></h1>
-			</li>
-		</ul>
-	</nav>
+	<div data-ng-controller="loginController">
+	
+		<nav class="top-bar">
+			<section class="top-bar-section">
+				<ul class="left">
+					<li>
+						<img src="images/logosymbol.png" class="logo-icon" > </a>
+					</li>	
+					<li>
+						<img src="images/speedtutoringlogo.png" class="logo" > </a>
+					</li>	
+				</ul>
+				<ul class="right">
+					<li>
+						<a href="#" data-ng-click="vm.registerUser()"> Create Account</a>
+					</li>	
+				</ul>
+			</section>
+		</nav>
 
-	<div class="row">
-		<div class="small-6 large-centered columns"> 
-			<form class="login-form" method="post">
-				<div>
-					<input name="email" placeholder="Email" type="text" />
-				</div>
-				<div>
-					<input name="password" placeholder="Password" type="password" />
-				</div>
-				<div class="row">
-					<div class="large-3 large-offset-6 columns">
-						<a href="#" class="small button"> register </a>
+
+
+		<div class="row" data-ng-switch="vm.user.type">
+			<div data-ng-switch-when="registerUser" class=" form large-4 large-centered small-4 small-centered columns">
+				<form novalidate class="simple-form">
+					<input type="text" placeholder = "Username" ng-model="user.username"/> <br/>
+					<input type="password" placeholder = "Password" ng-model="user.password"/> <br/>
+					<input type="password" placeholder = "Confirm Password" /> <br/>
+			    	<input type="text" placeholder = "First Name" ng-model="user.firstName" /><br/>
+			    	<input type="text" placeholder = "Last Name" ng-model="user.lastName" /><br/>
+			        <input type="text" placeholder = "Email" ng-model="user.email" /><br />
+			        <button class="button" data-ng-click="vm.user.submit()">Register</button>
+			        <button class=" right button" data-ng-click="vm.cancelRegistration()">Cancel</button>
+			   	</form>
+			</div>
+
+			<div data-ng-switch-default class=" form large-4 large-centered small-4 small-centered columns">
+				<form novalidate class="simple-form">
+					<div class="{{vm.user.username.error}}">
+						<input type="text" placeholder = "Username" ng-model="user.username.value"/> 
+						<small>Invalid</small>
 					</div>
-					<div class="large-3 columns">
-						<a href="#" class="small button"> login </a>
+					<div class="{{vm.user.password.error}}">
+				    	<input type="password" placeholder = "password" ng-model="user.password.value" />
 					</div>
-				</div>
-			</form>
+					<button class="button">Login</button>
+			   	</form>
+			</div>
 		</div>
+
 	</div>
 
   <script>
@@ -53,6 +77,23 @@
   '.js><\/script>')
   </script>
 
+  	<script src="javascripts/vendor/angular.js"></script>
+  	<script src="javascripts/foundation/foundation.js"></script>
+	<script src="javascripts/foundation/foundation.abide.js"></script>
+	<script src="javascripts/foundation/foundation.alerts.js"></script>
+	<script src="javascripts/foundation/foundation.clearing.js"></script>
+	<script src="javascripts/foundation/foundation.cookie.js"></script>
+	<script src="javascripts/foundation/foundation.dropdown.js"></script>
+	<script src="javascripts/foundation/foundation.forms.js"></script>
+	<script src="javascripts/foundation/foundation.interchange.js"></script>
+	<script src="javascripts/foundation/foundation.joyride.js"></script>
+	<script src="javascripts/foundation/foundation.magellan.js"></script>
+	<script src="javascripts/foundation/foundation.orbit.js"></script>
+	<script src="javascripts/foundation/foundation.placeholder.js"></script>
+	<script src="javascripts/foundation/foundation.reveal.js"></script>
+	<script src="javascripts/foundation/foundation.section.js"></script>
+	<script src="javascripts/foundation/foundation.tooltips.js"></script>
+	<script src="javascripts/foundation/foundation.topbar.js"></script>
 
  <!-- Module -->
 
@@ -61,52 +102,18 @@
 
  <!-- Controllers -->
 
-  <script type="text/javascript" src="javascripts/controllers/homeController.js"></script>
+  <script type="text/javascript" src="javascripts/controllers/loginController.js"></script>
 
 
  <!-- Services -->
 
   <script type="text/javascript" src="javascripts/services/userService.js"></script>
-
+  <script type="text/javascript" src="javascripts/services/searchService.js"></script>
+  <script type="text/javascript" src="javascripts/services/questionService.js"></script>
+  <script type="text/javascript" src="javascripts/services/tutorService.js"></script>
 
  <!-- Filters -->
 
-
-  <script src="javascripts/vendor/angular.js"></script>
-  
-  <script src="javascripts/foundation/foundation.js"></script>
-	
-	<script src="javascripts/foundation/foundation.abide.js"></script>
-	
-	<script src="javascripts/foundation/foundation.alerts.js"></script>
-	
-	<script src="javascripts/foundation/foundation.clearing.js"></script>
-	
-	<script src="javascripts/foundation/foundation.cookie.js"></script>
-	
-	<script src="javascripts/foundation/foundation.dropdown.js"></script>
-	
-	<script src="javascripts/foundation/foundation.forms.js"></script>
-	
-	<script src="javascripts/foundation/foundation.interchange.js"></script>
-	
-	<script src="javascripts/foundation/foundation.joyride.js"></script>
-	
-	<script src="javascripts/foundation/foundation.magellan.js"></script>
-	
-	<script src="javascripts/foundation/foundation.orbit.js"></script>
-	
-	<script src="javascripts/foundation/foundation.placeholder.js"></script>
-	
-	<script src="javascripts/foundation/foundation.reveal.js"></script>
-	
-	<script src="javascripts/foundation/foundation.section.js"></script>
-	
-	<script src="javascripts/foundation/foundation.tooltips.js"></script>
-	
-	<script src="javascripts/foundation/foundation.topbar.js"></script>
-	
-  
   <script>
     $(document).foundation();
   </script>

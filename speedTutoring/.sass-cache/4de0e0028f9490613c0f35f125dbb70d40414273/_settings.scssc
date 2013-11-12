@@ -1,7 +1,7 @@
 3.2.12 (Media Mark)
-da4bd72216462373c818841591f7ed41185372da
+50e35164e6f02e6ea71c26f91d6c1386d66fb9b0
 o:Sass::Tree::RootNode
-:@template"jè//
+:@template"ëè//
 // Foundation Variables
 //
 
@@ -66,9 +66,9 @@ $em-base: 16px !default;
 
 $default-float: left;
 
-// $body-bg: #fff;
-// $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+ $body-bg: #fff;
+ $body-font-color: #222;
+$body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -82,8 +82,8 @@ $default-float: left;
 
 // Colors
 
-// $primary-color: #2ba6cb;
-// $secondary-color: #e9e9e9;
+ $primary-color: #49ab9e;
+ $secondary-color: #cae5e2;
 // $alert-color: #c60f13;
 // $success-color: #5da423;
 
@@ -175,7 +175,7 @@ $default-float: left;
 
 // Control header font styles
 
-// $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+ $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $header-font-weight: bold;
 // $header-font-style: normal;
 // $header-font-color: #222;
@@ -1258,12 +1258,14 @@ $default-float: left;
 
 // Background color for the top bar
 
-$topbar-bg-color: #6a9394;  
+$topbar-bg-color: #ffffff;  
 // $topbar-bg: $topbar-bg-color;
+$topbar-border-width: 5px;
+$topbar-border-color: #617682;
 
 // Height and margin
 
-// $topbar-height: 45px;
+ $topbar-height: 55px;
 // $topbar-margin-bottom: 0;
 
 // Control Input height for top bar
@@ -1306,14 +1308,14 @@ $topbar-bg-color: #6a9394;
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: em-calc(13);
 // $topbar-menu-link-weight: bold;
-// $topbar-menu-link-color: #fff;
+ $topbar-menu-link-color: #fff;
 // $topbar-menu-icon-color: #fff;
 // $topbar-menu-link-color-toggled: #888;
 // $topbar-menu-icon-color-toggled: #888;
 
 // Transitions and breakpoint styles
 
-// $topbar-transition-speed: 300ms;
+ $topbar-transition-speed: 500ms;
 // $topbar-breakpoint: 940 !default; // Change to 9999px for always mobile layout
 // $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})";
 
@@ -1326,7 +1328,7 @@ $topbar-bg-color: #6a9394;
 
 // $topbar-sticky-class: ".sticky";
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
-:@has_childrenT:@options{ :@children[}o:Sass::Tree::CommentNode
+:@has_childrenT:@options{ :@children[âo:Sass::Tree::CommentNode
 :
 @type:silent:@value["%/*
  * Foundation Variables
@@ -1407,13 +1409,15 @@ spaceo;
 ;;;["U/* Change whether or not you include browser prefixes
  * $experimental: true; */;@;	[ ;i@o;
 
-;;;[" /* Various global styles */;@;	[ ;iCo;;"default-float;@;	[ ;iE;0;o:Sass::Script::String	;:identifier;"	left;@;iEo;
+;;;[" /* Various global styles */;@;	[ ;iCo;;"default-float;@;	[ ;iE;0;o:Sass::Script::String	;:identifier;"	left;@;iEo;;"body-bg;@;	[ ;iG;0;o:Sass::Script::Color	;0;@:@attrs{	:rediˇ:
+alphai:
+greeniˇ:	blueiˇ;iGo;;"body-font-color;@;	[ ;iH;0;o;1	;0;@;2{	;3i';4i;5i';6i';iHo;;"body-font-family;@;	[ ;iI;0;o;'	;[
+o;/	;:string;"Helvetica Neue;@;iIo;/	;;7;"Helvetica;@;iIo;/	;;0;"Helvetica;@;iIo;/	;;0;"
+Arial;@;iIo;/	;;0;"sans-serif;@;iI;@;iI;(:
+commao;
 
-;;;["æ/* $body-bg: #fff;
- * $body-font-color: #222;
- * $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
- * $body-font-weight: normal;
- * $body-font-style: normal; */;@;	[ ;iGo;
+;;;["B/* $body-font-weight: normal;
+ * $body-font-style: normal; */;@;	[ ;iJo;
 
 ;;;["/* Font-smoothing */;@;	[ ;iMo;
 
@@ -1423,12 +1427,10 @@ spaceo;
 
 ;;;[" /* $text-direction: ltr; */;@;	[ ;iSo;
 
-;;;["/* Colors */;@;	[ ;iUo;
+;;;["/* Colors */;@;	[ ;iUo;;"primary-color;@;	[ ;iW;0;o;1	;0;@;2{	;3iN;4i;5i´;6iû;iWo;;"secondary-color;@;	[ ;iX;0;o;1	;0;@;2{	;3i ;4i;5iÂ;6i‚;iXo;
 
-;;;["w/* $primary-color: #2ba6cb;
- * $secondary-color: #e9e9e9;
- * $alert-color: #c60f13;
- * $success-color: #5da423; */;@;	[ ;iWo;
+;;;["=/* $alert-color: #c60f13;
+ * $success-color: #5da423; */;@;	[ ;iYo;
 
 ;;;["G/* Make sure border radius matches unless we want it different. */;@;	[ ;i\o;
 
@@ -1516,16 +1518,17 @@ spaceo;
  * Typography Variables
  * */;@;	[ ;i©o;
 
-;;;["%/* Control header font styles */;@;	[ ;i≠o;
+;;;["%/* Control header font styles */;@;	[ ;i≠o;;"header-font-family;@;	[ ;iØ;0;o;'	;[
+o;/	;;7;"Helvetica Neue;@;iØo;/	;;7;"Helvetica;@;iØo;/	;;0;"Helvetica;@;iØo;/	;;0;"
+Arial;@;iØo;/	;;0;"sans-serif;@;iØ;@;iØ;(;8o;
 
-;;;[":/* $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
- * $header-font-weight: bold;
+;;;["Â/* $header-font-weight: bold;
  * $header-font-style: normal;
  * $header-font-color: #222;
  * $header-line-height: 1.4;
  * $header-top-margin: .2em;
  * $header-bottom-margin: .5em;
- * $header-text-rendering: optimizeLegibility; */;@;	[ ;iØo;
+ * $header-text-rendering: optimizeLegibility; */;@;	[ ;i∞o;
 
 ;;;["$/* Control header font sizes */;@;	[ ;i∏o;
 
@@ -2600,36 +2603,34 @@ spaceo;
  * Top Bar Variables
  * */;@;	[ ;i‰o;
 
-;;;["+/* Background color for the top bar */;@;	[ ;iËo;;"topbar-bg-color;@;	[ ;iÍ;0;o:Sass::Script::Color	;0;@:@attrs{	:redio:
-alphai:
-greeniì:	blueiî;iÍo;
+;;;["+/* Background color for the top bar */;@;	[ ;iËo;;"topbar-bg-color;@;	[ ;iÍ;0;o;1	;0;@;2{	;3iˇ;4i;5iˇ;6iˇ;iÍo;
 
-;;;["(/* $topbar-bg: $topbar-bg-color; */;@;	[ ;iÎo;
+;;;["(/* $topbar-bg: $topbar-bg-color; */;@;	[ ;iÎo;;"topbar-border-width;@;	[ ;iÏ;0;o;;[ ;i
+;@;["px;"5px;iÏo;;"topbar-border-color;@;	[ ;iÌ;0;o;1	;0;@;2{	;3if;4i;5i{;6iÇ;iÌo;
 
-;;;["/* Height and margin */;@;	[ ;iÌo;
+;;;["/* Height and margin */;@;	[ ;iÔo;;"topbar-height;@;	[ ;iÒ;0;o;;[ ;i<;@;["px;"	55px;iÒo;
 
-;;;["=/* $topbar-height: 45px;
- * $topbar-margin-bottom: 0; */;@;	[ ;iÔo;
+;;;["$/* $topbar-margin-bottom: 0; */;@;	[ ;iÚo;
 
-;;;["+/* Control Input height for top bar */;@;	[ ;iÚo;
+;;;["+/* Control Input height for top bar */;@;	[ ;iÙo;
 
-;;;["(/* $topbar-input-height: 2.45em; */;@;	[ ;iÙo;
+;;;["(/* $topbar-input-height: 2.45em; */;@;	[ ;iˆo;
 
-;;;[">/* Controlling the styles for the title in the top bar */;@;	[ ;iˆo;
+;;;[">/* Controlling the styles for the title in the top bar */;@;	[ ;i¯o;
 
 ;;;["O/* $topbar-title-weight: bold;
- * $topbar-title-font-size: em-calc(17); */;@;	[ ;i¯o;
+ * $topbar-title-font-size: em-calc(17); */;@;	[ ;i˙o;
 
-;;;["./* Style the top bar dropdown elements */;@;	[ ;i˚o;
+;;;["./* Style the top bar dropdown elements */;@;	[ ;i˝o;
 
 ;;;["˙/* $topbar-dropdown-bg: #222;
  * $topbar-dropdown-link-color: #fff;
  * // $topbar-dropdown-link-bg: lighten($topbar-bg-color, 5%);
  * $topbar-dropdown-toggle-size: 5px;
  * $topbar-dropdown-toggle-color: #fff;
- * $topbar-dropdown-toggle-alpha: 0.5; */;@;	[ ;i˝o;
+ * $topbar-dropdown-toggle-alpha: 0.5; */;@;	[ ;iˇo;
 
-;;;[";/* Set the link colors and styles for top-level nav */;@;	[ ;io;
+;;;[";/* Set the link colors and styles for top-level nav */;@;	[ ;io;
 
 ;;;["U/* $topbar-link-color: #fff;
  * $topbar-link-color-hover: #fff;
@@ -2638,36 +2639,36 @@ greeniì:	blueiî;iÍo;
  * $topbar-link-font-size: em-calc(13);
  * $topbar-link-hover-lightness: -30%; // Darken by 30%
  * $topbar-link-bg-hover: darken($topbar-bg-color, 3%);
- * $topbar-link-bg-active: darken($topbar-bg-color, 3%); */;@;	[ ;io;
+ * $topbar-link-bg-active: darken($topbar-bg-color, 3%); */;@;	[ ;io;
 
 ;;;["˙/* $topbar-dropdown-label-color: #555;
  * $topbar-dropdown-label-text-transform: uppercase;
  * $topbar-dropdown-label-font-weight: bold;
  * $topbar-dropdown-label-font-size: em-calc(10);
- * $topbar-dropdown-label-bg: lighten($topbar-bg-color, 5%); */;@;	[ ;io;
+ * $topbar-dropdown-label-bg: lighten($topbar-bg-color, 5%); */;@;	[ ;io;
 
-;;;["/* Top menu icon styles */;@;	[ ;io;
+;;;["/* Top menu icon styles */;@;	[ ;io;
 
-;;;["/* $topbar-menu-link-transform: uppercase;
+;;;["}/* $topbar-menu-link-transform: uppercase;
  * $topbar-menu-link-font-size: em-calc(13);
- * $topbar-menu-link-weight: bold;
- * $topbar-menu-link-color: #fff;
- * $topbar-menu-icon-color: #fff;
+ * $topbar-menu-link-weight: bold; */;@;	[ ;io;;"topbar-menu-link-color;@;	[ ;i;0;o;1	;0;@;2{	;3iˇ;4i;5iˇ;6iˇ;io;
+
+;;;["}/* $topbar-menu-icon-color: #fff;
  * $topbar-menu-link-color-toggled: #888;
- * $topbar-menu-icon-color-toggled: #888; */;@;	[ ;io;
+ * $topbar-menu-icon-color-toggled: #888; */;@;	[ ;io;
 
-;;;[",/* Transitions and breakpoint styles */;@;	[ ;io;
+;;;[",/* Transitions and breakpoint styles */;@;	[ ;i!o;;"topbar-transition-speed;@;	[ ;i#;0;o;;[ ;iÙ;@;["ms;"
+500ms;i#o;
 
-;;;["∆/* $topbar-transition-speed: 300ms;
- * $topbar-breakpoint: 940 !default; // Change to 9999px for always mobile layout
- * $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})"; */;@;	[ ;i!o;
+;;;["¢/* $topbar-breakpoint: 940 !default; // Change to 9999px for always mobile layout
+ * $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})"; */;@;	[ ;i$o;
 
-;;;["/* Divider Styles */;@;	[ ;i%o;
+;;;["/* Divider Styles */;@;	[ ;i'o;
 
 ;;;["ó/* $topbar-divider-border-bottom: solid 1px lighten($topbar-bg-color, 10%);
- *  $topbar-divider-border-top: solid 1px darken($topbar-bg-color, 10%); */;@;	[ ;i'o;
+ *  $topbar-divider-border-top: solid 1px darken($topbar-bg-color, 10%); */;@;	[ ;i)o;
 
-;;;["/* Sticky Class */;@;	[ ;i*o;
+;;;["/* Sticky Class */;@;	[ ;i,o;
 
 ;;;["/* $topbar-sticky-class: ".sticky";
- * $topbar-arrows: true; //Set false to remove the triangle icon from the menu item */;@;	[ ;i,;i
+ * $topbar-arrows: true; //Set false to remove the triangle icon from the menu item */;@;	[ ;i.;i

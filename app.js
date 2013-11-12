@@ -5,20 +5,49 @@ var express         	= require('express')
   , passport 			    = require('passport')
   , mongoose          = require('mongoose')
   , userManager       = require('./server/routes/userManager.js')
-  , FacebookStrategy 	= require('passport-facebook').Strategy;
+  , questionManager   = require('./server/routes/questionManager.js')
+  , tutorManager   = require('./server/routes/tutorManager.js')
+  , FacebookStrategy 	= require('passport-facebook').Strategy
+    , LocalStrategy   = require('passport-local').Strategy;
 
-passport.use(new FacebookStrategy({
-    clientID: "253787698102458",
-    clientSecret: "b82d714a1f5591a76ec7d74fc09d2f49",
-    callbackURL: "http://www.example.com/auth/facebook/callback"
+//User serialization
+passport.serializeUser(function (user, done) {
+  done(null, user.user_ID);
+});
+
+passport.deserializeUser(function (id, done) {
+  loginSystem.findUserById( id, function (err, user) {
+    done(err, { userId      : user.userId,
+                username    : user.username});
+  });
+});
+
+//Passport-local strategy
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
   },
-  function(accessToken, refreshToken, profile, done) {
-    // User.findOrCreate(..., function(err, user) {
-    //   if (err) { return done(err); }
-    //   done(null, user);
-    // });
+
+  function(username, password, done) {
+
+    //asynchronous verificatoin, for effect...
+    process.nextTick(function () {
+
+          //Invalid username
+          //return done(null, false, { message: 'Unknown user ' + username});
+
+          // validate password
+
+          //succes
+          // return done(null, user);
+    });
   }
 ));
+
+function ensureAuthenticated (req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login.html')
+}
 
 mongoose.connect('mongodb://localhost/speed');
 
@@ -28,6 +57,34 @@ db.once('open', function callback () {
   console.log("Connected to MongoDB");
 });
 
+/*
+ * SCHEMAS
+ */
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+  username  : String,
+  password  : String,
+  firstName : String,
+  lastName  : String,
+  email     : String, 
+});
+
+var User = mongoose.model('User', userSchema);
+
+var questionSchema = new Schema({
+  title:  String,
+  tags: [String] 
+});
+
+var Question = mongoose.model('Question', questionSchema);
+
+var tutorSchema = new Schema({
+  userId:  String,
+  tags: [String] 
+});
+
+var Tutor = mongoose.model('Tutor', tutorSchema);
 
 var app = express();
 
@@ -50,9 +107,42 @@ if ('development' == app.get('env')) {
 
 app.post('/api/v1/user/', function (req, res) {
 
-  userManager.createUser(db, req, res);
+  userManager.createUser(User, req, res);
 });
 
+app.get('/api/v1/user/', function (req, res) {
+
+  userManager.dumpUserDatabase(User, req, res);
+});
+
+
+app.post('/api/v1/question/', function (req, res) {
+
+  questionManager.askQuestion(Question, req, res);
+});
+
+app.get('/api/v1/question/', function (req, res) {
+
+  questionManager.dumpQuestionDatabase(Question, req, res);
+});
+
+
+app.post('/api/v1/tutor/', function (req, res) {
+  tutorManager.registerTutor(Tutor, req, res);
+});
+
+app.post('/api/v1/login/', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            return res.redirect('/login.html')
+        }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+});
 
 /***** Dynamic Files *****/
 

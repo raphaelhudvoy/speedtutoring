@@ -1,5 +1,6 @@
 @import "compass/css3/";
 
+<<<<<<< HEAD
 
 .h-nav {
 
@@ -48,10 +49,121 @@ img.logo{
 	border : 3px solid #89a5b5;
 	background-color: #ffffff;
 	@include border-radius(6px);
+=======
+
+// Color Palette:
+$primary-colo-1: #338FD5; //blue
+$primary-colo-2: #4578A0;
+$primary-colo-3: #11568B;
+$primary-colo-light: #65B0EA;
+$primary-colo-lighter: #88C0EA;
+$complem-colo-1: #FFA630; //blue
+$complem-colo-2: #BF8D4B;
+$complem-colo-3: #A6650F;
+$complem-colo-light: #FFBC63;
+$complem-colo-lighter: #FFCE8D;
+$complem-colo-1: #4578A0; //orange
+$complem-colo-2: #4578A0;
+$complem-colo-3: #4578A0;
+
+
+$outline-colo: #6D91AB; //
+$text-dark-colo: #232323; // dark-gray
+$text-light-colo: #fcfeff; // egg shell white
+$main-bg-colo: #fcfeff; // egg shell white
+$window-bg-colo: #ffffff; // white
+$shadow-colo: $outline-colo;
+
+
+//outline variables
+$main-outline: 3px solid $outline-colo;
+
+//box-shadow variables
+$topbar-bshad: 5px 5px 10px $outline-colo;
+$form-bshad: 0px 0px 10px 3px $outline-colo;
+
+
+.qst-form {
+	margin-top: 8em;
+	width: auto;
+	height: 4em;
+	padding: 1em 1em 1em 1em;
+	outline: $main-outline;
+	@include border-radius(3px);
+	background-color:  #ffffff;
+	box-shadow: $form-bshad;
+>>>>>>> development
 }
 
 .qst-container {
 	padding : 0 0 0 0;
+}
+
+img.logo{
+	height: 35px;
+	top: 12px;
+	background: transparent;
+	float: left;
+	position: relative;
+	
+}
+
+img.logo-icon {
+  @extend img.logo;
+  top: 14px;
+}
+
+
+
+.top-bar{
+	height: 57px ;
+	outline: $main-outline;
+	background-color: #ffffff;
+	box-shadow: $topbar-bshad;
+	
+	section{
+		margin-left: 20em;
+		margin-right: 15em;
+		height: 100%;
+		ul{
+			background: transparent;
+			height: 100% !important;
+			li{
+				
+				
+				height: 100% !important;
+				background: transparent;
+				a{
+					height: 100% !important;
+					background: none !important;
+				}
+			}
+			
+			li.username{
+				margin-left: 13px;
+				background-color: $primary-colo-1;
+			}
+		}
+		
+		ul.right{
+			background-color: $complem-colo-1;
+			li{
+				a{
+					background: none;
+				}
+			}
+		}
+	}
+	
+	
+}
+
+.main{
+	background-color: $main-bg-colo;
+}
+
+.button {
+	background-color: $complem-colo-1;
 }
 
 .ask-button {
@@ -61,14 +173,29 @@ img.logo{
 	border-color: #89a5b5;
 	}
 }
+.form{
+	margin-top: 5em;
+	padding: 1em 1em 1em 1em;
+	outline: $main-outline;
+	@include border-radius(3px);
+	background-color:  #ffffff;
+	box-shadow: $form-bshad;
+}
+
 
 .tag-form {
 	background-color: #ffffff;
 	margin-top: 10em;
 	padding: 1em 1em 4em 1em;
 	border : 1px solid #b3b3b3;
+<<<<<<< HEAD
 	@include border-radius(5px);
 	border : 3px solid #89a5b5;
+=======
+	outline: $main-outline;
+	@include border-radius(2px);
+	background-color:  #ffffff;
+>>>>>>> development
 }
 
 ul.tags-list {

@@ -1,9 +1,17 @@
 {
-  "name": "hello-world",
-  "description": "hello world test app",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "3.x"
-  }
+    "dependencies": {
+        "express": "3.x",
+        "passport-facebook": "1.0.x",
+        "passport-local": "*",
+        "mongoose": "3.6.x",
+        "passport": "0.1.x",
+        "reload": "0.1.x"
+    },
+    "description": "Speed tutoring",
+    "engines": { "node": "0.10.x" },
+    "name": "speed-tutoring",
+    "private": true,
+    "scripts": { "start": "app.js" },
+    "subdomain": "speed-tutoring",
+    "version": "0.0.1-1"
 }

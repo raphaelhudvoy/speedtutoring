@@ -4,10 +4,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
+<<<<<<< HEAD
 	<link rel="shortcut icon" href="images/logosymbol.ico">
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>speedtutoring</title>
+=======
+<link rel="shortcut icon" href="images/logosymbol.ico">
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>SpeedTutoring: Learn the quick way</title>
+>>>>>>> development
 
   
   <link rel="stylesheet" href="stylesheets/app.css">
@@ -20,6 +27,7 @@
 <body class="main" data-ng-app="speedTutoring">
 
 	<div data-ng-controller="homeController">
+<<<<<<< HEAD
 		<div class= "h-nav">
 			<nav class="top-bar">
 					<section class="top-bar-section">
@@ -38,16 +46,86 @@
 			</nav>
 			</div>
 		
+=======
+	
+		<nav class="top-bar">
+			<section class="top-bar-section">
+				<ul class="left">
+					<li>
+						<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.test()" > </a>
+					</li>	
+					<li>
+						<img src="images/speedtutoringlogo.png" class="logo" data-ng-click="vm.test()" > </a>
+					</li>	
+					<li class="username">
+						<a data-ng-show="loggedInUser.username" href="#">{{loggedInUser.username}}</a>
+					</li>	
+				</ul>
+				<ul class="right">
+					<li>
+						<a href="#" data-ng-hide="loggedInUser.username" data-ng-click="registerUser=true"> Create Account</a>
+					</li>	
+				</ul>
+			</section>
+		</nav>
+>>>>>>> development
+
+
+		<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button>
+
+		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
+			
+			<div class="small-centered large-8 large-centered columns">
+				<select data-ng-model="vm.tutor.tag" ng-options="tag.title for tag in vm.allTags">
+				</select>
+				<button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
+		   	</div>
+		</div>
+
+		<div class="form row"  data-ng-show="registerUser" >
+			
+				<form novalidate class="simple-form">
+					<input type="text" placeholder = "Username" ng-model="user.username"/> <br/>
+			    	<input type="text" placeholder = "First Name" ng-model="user.firstName" /><br/>
+			    	<input type="text" placeholder = "Last Name" ng-model="user.lastName" /><br/>
+			        <input type="text" placeholder = "Email" ng-model="user.email" /><br />
+			        <button ng-click="vm.registerUser(user)">Register</button>
+			   	</form>
+		</div>
+
+		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
+
+			<span>Asked a question! Trying to find a Tutor</span>
+			<img src="images/loading.gif" alt="LOADING">
+			<a href="#" class="close">&times;</a>
+		</div>
+
 
 		<!-- ASK QUESTION -->
-		<div class="row" data-ng-hide="vm.displayTagsSearch">
+		<div class="row" >
+			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns"> 
+				<div ng-switch-when="1" class="qst-form" ng-click="vm.askStep=2">
+					Chose a subject 
+				</div>
+				<div ng-switch-when="2" class="qst-form" ng-click="vm.askStep=3">
+					Chose a topic
+				</div>
+				<div ng-switch-when="3" class="qst-form" ng-click="vm.askStep=1">
+					Ask a question
+				</div>
+				<div ng-switch-default> </div>
+			</div>
+		</div>
+
+		<!-- ASK QUESTION -->
+		<div class="row" data-ng-show="loggedInUser.firstName" >
 			<div class="small-centered large-8 large-centered columns"> 
 				<div class="qst-form">
 					<div class="large-10 small-8 columns qst-container">
 						<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.title"/>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.addTags()">add tags</div>
+						<button class="button prefix" ng-click="vm.addTags()" data-ng-disabled="!loggedInUser.username">add tags</button>
 					</div>
 				</div>
 			</div>
@@ -72,13 +150,15 @@
 						</div>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.ask()">ask</div>
+						<div class="button prefix" ng-click="vm.askQuestion(vm.question)">ask</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
+		<!--
+		{{db}}
+		<button data-ng-click="vm.dumpUserDatabase()">DUMP USER DB</button>
+		<button data-ng-click="vm.dumpQuestionDatabase()">DUMP QUESTION DB</button> -->
 	</div>
 
   <script>
@@ -119,13 +199,11 @@
 
   <script type="text/javascript" src="javascripts/services/userService.js"></script>
   <script type="text/javascript" src="javascripts/services/searchService.js"></script>
-
+  <script type="text/javascript" src="javascripts/services/questionService.js"></script>
+  <script type="text/javascript" src="javascripts/services/tutorService.js"></script>
 
  <!-- Filters -->
 
-
-	
-  
   <script>
     $(document).foundation();
   </script>

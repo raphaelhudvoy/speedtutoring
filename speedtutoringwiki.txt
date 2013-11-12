@@ -12,7 +12,12 @@ Setting up development environment:
 
 		Sass - http://sass-lang.com/install
 
-		Compass - http://compass-style.org/install/
+		Compass:
+		
+		1. Download and install ruby: https://www.ruby-lang.org/en/downloads/ (MAKE SURE TO CHECK the box "add to PATH variables" when installing)
+		2. Install necessary gems for sass from command prompt 
+			- install compass gem by executing: 		$ gem install compass
+			- install zurb-foundation gem by executing: 	$ gem install zurb-foundation
 
 		Optional:
 
@@ -38,22 +43,35 @@ Running the application:
 
 	4. Application is now running. To test, open browser and navigate to "localhost:4000"
 
+
+Sass Auto-Compilation (Optional) :
+If you wish to modify the scss files and compile them to css files
+1. From root of project, where the "config.rb" file is located, execute: $ compass watch 
+2. Leave the terminal open, it will now poll for changes for all local scss files and compile them automatically
+
+
 Product information/useful links:
 
+	APPLICATION
+		- Example app: http://www.ewal.net/2013/09/24/bitcoin-command-fun-with-angularjs/
+		- Why: http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and
+
 	NODE.JS
-		-
-		-
-		-
+		- API: http://nodejs.org/api/
+		- Beginner book: http://www.nodebeginner.org/
+		- 
 
 	MONGODB
-		-
-		-
-		-
+		- Introduction: http://www.mongodb.org/about/introduction/
+		- Schema design: http://www.mysqlperformanceblog.com/2013/08/01/schema-design-in-mongodb-vs-schema-design-in-mysql/
+		- Testing with mongodb : http://wes.skeweredrook.com/testing-with-mongodb-part-1/
+		- Relational vs Non-relational: http://www.neonrain.com/blog/mysql-vs-mongodb-relational-and-non-relational-databases
 
 	MONGOOSE
-		-
-		-
-		-
+		- API: http://mongoosejs.com/docs/api.html
+		- Guide : http://mongoosejs.com/docs/guide.html
+		- Connections: http://mongoosejs.com/docs/connections.html
+		- 
 
 	COMPASS
 		-
@@ -61,9 +79,14 @@ Product information/useful links:
 		-
 
 	ANGULARJS
-		-
-		-
-		-
+		- API: http://docs.angularjs.org/api/
+		- Guide: http://docs.angularjs.org/guide/
+		- Examples: http://angular-tips.com/blog/2013/08/why-does-angular-dot-js-rock/
+		- 
+
+	GIT
+		- Branching model : http://nvie.com/posts/a-successful-git-branching-model/
+		- Branching and merging: http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging
 
 	FOUNDATION
 		-

@@ -50,18 +50,10 @@ Tuto.factory('UserService', function ($http, $q) {
 
 		var url =  "/api/v1/login/";
 
-<<<<<<< HEAD
-
 		$http.post(url, this).success(function (results) {
 			deferred.resolve();
 		}).error(function (results) {
 			deferred.reject(results);
-=======
-		$http.post(url, this).success(function (results) {
-			$q.resolve();
-		}).error(function (results) {
-			$q.reject(results);
->>>>>>> 3a156ea8e52c3e2daa5d175d0e57228874528fef
 		});
 
 		return deferred.promise;

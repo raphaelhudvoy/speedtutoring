@@ -49,7 +49,7 @@ function ensureAuthenticated (req, res, next) {
     res.redirect('/login.html')
 }
 
-mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
+mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

@@ -16,28 +16,49 @@
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body data-ng-app="speedTutoring">
+<body class="main" data-ng-app="speedTutoring">
 
-	<nav class="top-bar" data-ng-controller="homeController">
-		<ul class="title-area">
-			<li class="name" data-ng-click="vm.test()"> 
-				<h1><a href="#">Speed Tutoring</a></h1>
-			</li>
-		</ul>
-	</nav>
+	<div data-ng-controller="loginController">
+	
+		<nav class="top-bar">
+			<section class="top-bar-section">
+				<ul class="left">
+					<li>
+						<img src="images/logosymbol.png" class="logo-icon" > </a>
+					</li>	
+					<li>
+						<img src="images/speedtutoringlogo.png" class="logo" > </a>
+					</li>	
+				</ul>
+				<ul class="right">
+					<li>
+						<a href="#" data-ng-click="vm.registerUser()"> Create Account</a>
+					</li>	
+				</ul>
+			</section>
+		</nav>
 
-	<div class="row">
-		<div class="small-6 large-centered columns"> 
-			<form class="login-form" method="post">
-				<div>
-					<input name="email" placeholder="Email" type="text" />
-				</div>
-				<div>
-					<input name="password" placeholder="Password" type="password" />
-				</div>
-				<div class="row">
-					<div class="large-3 large-offset-6 columns">
-						<a href="#" class="small button"> register </a>
+
+
+		<div class="row" data-ng-switch="vm.user.type">
+			<div data-ng-switch-when="registerUser" class=" form large-4 large-centered small-4 small-centered columns">
+				<form novalidate class="simple-form">
+					<input type="text" placeholder = "Username" ng-model="vm.user.username"/> <br/>
+					<input type="password" placeholder = "Password" ng-model="vm.user.password"/> <br/>
+					<input type="password" placeholder = "Confirm Password" /> <br/>
+			    	<input type="text" placeholder = "First Name" ng-model="vm.user.firstName" /><br/>
+			    	<input type="text" placeholder = "Last Name" ng-model="vm.user.lastName" /><br/>
+			        <input type="text" placeholder = "Email" ng-model="vm.user.email" /><br />
+			        <button class="button" data-ng-click="vm.user.submit()">Register</button>
+			        <button class=" right button" data-ng-click="vm.cancelRegistration()">Cancel</button>
+			   	</form>
+			</div>
+
+			<div data-ng-switch-default class=" form large-4 large-centered small-4 small-centered columns">
+				<form novalidate class="simple-form">
+					<div class="{{vm.user.username.error}}">
+						<input type="text" placeholder = "Username" ng-model="user.username.value"/> 
+						<small>Invalid</small>
 					</div>
 					<div class="large-3 columns">
 						<a href="#" class="small button"> login </a>

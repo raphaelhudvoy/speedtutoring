@@ -1,19 +1,35 @@
+var mongoose = require('mongoose');
 
+var userSchema = new mongoose.Schema({
+	username:{
+		type:String,
+		unique: true
+	}
+  ,
+  firstName: {type:String},
+  lastName:   {type:String},
+  email : {type:String},
+  password : {type:String}
+});
 
-exports.createUser = function (User, req, res) {
+var User = mongoose.model('User', userSchema);
 
+exports.createUser = function (req, res) {
 	var user = new User(req.body);
+
+	var promise = new mongoose.Promise;
 
 	user.save(function (err) {
 	  if (err){
-	  	//fuuuuuu
+	  	promise.resolve(err);
+	  }else{
+	  	promise.resolve(null, user);
 	  }
-	  // saved!
 	});
-	return res.json({test:user});
+	return promise;
 };
 
-exports.dumpUserDatabase = function (User, req, res) {
+exports.dumpUserDatabase = function (req, res) {
 
 	User.find({}, function (err, users) {
 

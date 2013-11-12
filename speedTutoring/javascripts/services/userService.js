@@ -7,10 +7,29 @@ Tuto.factory('UserService', function ($http, $q) {
 			user = {};
 		}
 
-		this.firstName 	= user.firstName 	|| "Pat";
-		this.lastName 	= user.lastName 	|| "Dube";
-		this.username 	= user.username 	|| "pdube";
-		this.email = user.email || "m@mcgill.ca";
+		this.type 		= "registerUser"; // Do not modify
+
+		this.firstName 	= user.firstName 	|| "";
+		this.lastName 	= user.lastName 	|| "";
+		this.username 	= user.username 	|| "";
+		this.password  	= user.password		|| ""
+		this.email 		= user.email 		|| "";
+
+	}
+
+	NewRegisterUser.prototype.submit = function () {
+
+		var deferred = $q.defer();
+
+		var url = "/api/v1/user/";
+
+		$http.post(url, this).success(function (results){
+			deferred.resolve(results);
+		}).error(function (results) {
+			deferred.reject(results);
+		});
+
+		return deferred.promise;
 
 	}
 
@@ -23,8 +42,11 @@ Tuto.factory('UserService', function ($http, $q) {
 
 		var url = "/api/v1/user/";
 
-		$http.post(url, user).success(function(res){
-			console.log("POST COMPLETE");
+
+		$http.post(url, this).success(function (results) {
+			deferred.resolve();
+		}).error(function (results) {
+			deferred.reject(results);
 		});
 
 	};

@@ -62,15 +62,6 @@ db.once('open', function callback () {
  */
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
-  username  : String,
-  password  : String,
-  firstName : String,
-  lastName  : String,
-  email     : String, 
-});
-
-var User = mongoose.model('User', userSchema);
 
 var questionSchema = new Schema({
   title:  String,
@@ -107,12 +98,21 @@ if ('development' == app.get('env')) {
 
 app.post('/api/v1/user/', function (req, res) {
 
-  userManager.createUser(User, req, res);
+  var p = userManager.createUser(req, res);
+
+  p.then(function(docs){
+      res.send(200, docs);
+    }, function (err){
+      res.send(500,err);
+    }
+
+  );
+
 });
 
 app.get('/api/v1/user/', function (req, res) {
 
-  userManager.dumpUserDatabase(User, req, res);
+  userManager.dumpUserDatabase(req, res);
 });
 
 

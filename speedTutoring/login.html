@@ -44,6 +44,12 @@
 		<div class="row" data-ng-switch="vm.user.type">
 			<div data-ng-switch-when="registerUser" class=" form large-4 large-centered small-4 small-centered columns">
 				<form novalidate class="simple-form">
+					<input type="text" placeholder = "Username" ng-model="vm.user.username"/> <br/>
+					<input type="password" placeholder = "Password" ng-model="vm.user.password"/> <br/>
+					<input type="password" placeholder = "Confirm Password" /> <br/>
+			    	<input type="text" placeholder = "First Name" ng-model="vm.user.firstName" /><br/>
+			    	<input type="text" placeholder = "Last Name" ng-model="vm.user.lastName" /><br/>
+			        <input type="text" placeholder = "Email" ng-model="vm.user.email" /><br />
 					<input type="text" placeholder = "Username" ng-model="user.username"/> <br/>
 					<input type="password" placeholder = "Password" ng-model="user.password"/> <br/>
 					<input type="password" placeholder = "Confirm Password" /> <br/>

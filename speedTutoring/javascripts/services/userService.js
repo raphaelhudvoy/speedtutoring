@@ -33,6 +33,8 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	}
 
+	
+
 	function LoginUser (user) {
 		if (!user) {
 			user = {}

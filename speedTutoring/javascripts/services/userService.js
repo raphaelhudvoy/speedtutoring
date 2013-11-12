@@ -2,7 +2,7 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	var Service = {};
 
-	function User (user) {
+	function NewRegisterUser (user) {
 		if (!user) {
 			user = {};
 		}
@@ -33,23 +33,40 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	}
 
+	function LoginUser (user) {
+		if (!user) {
+			user = {}
+		}
 
-	Service.registerUser = function (user) {
+		this.type = "loginUser"; // Do not modify
 
-		user = new User(user);
+		this.username = user.username || "";
+		this.password = user.password || "";
 
+	}
+
+	LoginUser.prototype.submit = function () {
 		var deferred = $q.defer();
 
-		var url = "/api/v1/user/";
+		var url =  "/api/v1/login/";
 
+<<<<<<< HEAD
 
 		$http.post(url, this).success(function (results) {
 			deferred.resolve();
 		}).error(function (results) {
 			deferred.reject(results);
+=======
+		$http.post(url, this).success(function (results) {
+			$q.resolve();
+		}).error(function (results) {
+			$q.reject(results);
+>>>>>>> 3a156ea8e52c3e2daa5d175d0e57228874528fef
 		});
 
-	};
+		return deferred.promise;
+	}
+
 
 	Service.dumpUserDatabase = function(){
 		var deferred = $q.defer();
@@ -61,6 +78,14 @@ Tuto.factory('UserService', function ($http, $q) {
 			console.log(response);
 			return response;
 		});
+	}
+
+	Service.getLoginUser = function () {
+		return new LoginUser();
+	}
+
+	Service.getNewRegisterUser = function () {
+		return new NewRegisterUser();
 	}
 
 

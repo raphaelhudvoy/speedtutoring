@@ -1,5 +1,55 @@
 @import "compass/css3/";
 
+<<<<<<< HEAD
+
+.h-nav {
+
+	nav {
+		border-bottom: 3px solid #89a5b5;
+		background-color: #ffffff;
+	}
+}
+img.logo{
+	height: 35px;
+	top: 10px;
+	background: transparent;
+	position: relative;
+	
+}
+.main {
+	background-color: #fcfeff;
+}
+
+.title {
+	font-size: 20px;
+	color: #89a5b5;
+}
+
+// topbar settings:
+
+.top-bar-section {
+	height: 100%;
+	width: auto;
+}
+.top-bar-section ul {
+	background: transparent;
+	height: 100% !important;
+	left: 150px !important;
+	position: relative;
+	display: block;
+	
+	li{
+		height: 100%;
+	}
+}
+.qst-form {
+
+	margin-top: 10em;
+	padding: 2em 1em 4em 1em;
+	border : 3px solid #89a5b5;
+	background-color: #ffffff;
+	@include border-radius(6px);
+=======
 
 // Color Palette:
 $primary-colo-1: #338FD5; //blue
@@ -42,6 +92,7 @@ $form-bshad: 0px 0px 10px 3px $outline-colo;
 	@include border-radius(3px);
 	background-color:  #ffffff;
 	box-shadow: $form-bshad;
+>>>>>>> development
 }
 
 .qst-container {
@@ -117,6 +168,10 @@ img.logo-icon {
 
 .ask-button {
 	padding : 0 0 0 0;
+	div {
+	background-color: #89a5b5;
+	border-color: #89a5b5;
+	}
 }
 .form{
 	margin-top: 5em;
@@ -129,13 +184,18 @@ img.logo-icon {
 
 
 .tag-form {
-
+	background-color: #ffffff;
 	margin-top: 10em;
 	padding: 1em 1em 4em 1em;
 	border : 1px solid #b3b3b3;
+<<<<<<< HEAD
+	@include border-radius(5px);
+	border : 3px solid #89a5b5;
+=======
 	outline: $main-outline;
 	@include border-radius(2px);
 	background-color:  #ffffff;
+>>>>>>> development
 }
 
 ul.tags-list {
@@ -166,7 +226,7 @@ input.search-tags {
 	border 		: 1px solid #b3b3b3;
 	border-top 	: none;
 	font-family: inherit;
-	color: rgba(0, 0, 0, 0.75);
+	color: #89a5b5 ;
 	cursor: pointer;
 }
 

@@ -12,9 +12,10 @@
 
 /* line 10, ../sass/login.scss */
 .fb-button {
-  height: 24px;
+  height: 27px;
   width: 200px;
   margin-top: 2em;
   background-image: url("/images/FB_Small_and_Long_200x24.png");
+  background-repeat: no-repeat;
   cursor: pointer;
 }

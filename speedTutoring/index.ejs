@@ -12,6 +12,7 @@
   
   <link rel="stylesheet" href="stylesheets/app.css">
   <link rel="stylesheet" href="stylesheets/home.css">
+  <link rel="stylesheet" href="stylesheets/login.css">
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
@@ -55,20 +56,23 @@
 			   	</form>
 			</div>
 
-			<div data-ng-switch-default class=" form large-4 large-centered small-4 small-centered columns">
-				<form novalidate class="simple-form">
-					<div class="{{vm.user.username.error}}">
-						<input type="text" placeholder = "Username" ng-model="user.username.value"/> 
-						<small>Invalid</small>
-					</div>
-					<div class="{{vm.user.password.error}}">
-				    	<input type="password" placeholder = "password" ng-model="user.password.value" />
-					</div>
-					<button class="button"><a href="/auth/facebook">Login with fb</a></button>
-			   	</form>
+			<div data-ng-switch-default>
+				<div class=" form large-4 large-centered small-4 small-centered columns">
+					<form novalidate class="simple-form">
+						<div>
+							<input type="text" placeholder = "Username" ng-model="user.username.value"/> 
+						</div>
+						<div>
+					    	<input type="password" placeholder = "password" ng-model="user.password.value" />
+						</div>
+						<button class="button">Login</button>
+				   	</form>
+				</div>
+					<a href="/auth/facebook">
+						<div class="fb-button large-centered small-centered columns "></div>
+					</a>
 			</div>
 		</div>
-
 	</div>
 
   <script>
@@ -76,6 +80,8 @@
   ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
   '.js><\/script>')
   </script>
+
+  <!-- Facebook button -->
 
   	<script src="javascripts/vendor/angular.js"></script>
   	<script src="javascripts/foundation/foundation.js"></script>

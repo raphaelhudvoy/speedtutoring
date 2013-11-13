@@ -6,3 +6,12 @@
 	border : 1px solid #b3b3b3;
 	@include border-radius(2px);
 }
+
+.fb-button {
+	height : 24px;
+	width : 200px;
+	margin-top : 2em;
+	background-image:url('/images/FB_Small_and_Long_200x24.png');
+	cursor : pointer;
+}
+

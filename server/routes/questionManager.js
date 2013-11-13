@@ -1,26 +1,37 @@
+var mongoose = require('mongoose');
 
+var questionSchema = new mongoose.Schema({
+  question:  String,
+  tags: [mongoose.ObjectId]
+});
 
-exports.askQuestion = function (Question, req, res) {
+var Question = mongoose.model('Question', questionSchema);
 
-	var question = new Question(req.body);
+exports.askQuestion = function (q, res) {
+
+	var question = new Question(q);
+
+	var promise = new mongoose.Promise;
 
 	question.save(function (err) {
-	  if (err){
-	  	//fuuuuuu
-	  }
-	  // saved!
+	  	  if (err){
+		  	promise.resolve(err);
+		  }else{
+		  	promise.resolve(null, question);
+		  }
 	});
-	return res.json({test:question});
+
+	return promise;
 };
 
-exports.dumpQuestionDatabase = function (Question, req, res) {
+exports.dumpQuestionDatabase = function (req, res) {
 
-	Question.find({}, function (err, users) {
+	Question.find({}, function (err, questions) {
 
-         var userMap = {};
-         users.forEach(function(question) {
-              userMap[question._id] = question;
+         var questionMap = {};
+         questions.forEach(function(question) {
+              questionMap[question._id] = question;
          });
-         res.send(userMap);
+         res.send(questionMap);
    });
 };

@@ -7,7 +7,7 @@ Tuto.factory('QuestionService', function ($http, $q) {
 			question = {};
 		}
 
-		this.title 	= question.title 	|| "?";
+		this.question 	= question.question 	|| "?";
 		this.tags 	= question.tags 	|| [];
 
 	}

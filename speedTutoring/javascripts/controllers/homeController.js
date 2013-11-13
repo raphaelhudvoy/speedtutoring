@@ -58,6 +58,8 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.askQuestion = function (question) {
 		
+		question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
+
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 
@@ -110,5 +112,8 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 		QuestionService.dumpQuestionDatabase();
 	}
 
+	vm.test = function(){
+
+	}
 
 }]);

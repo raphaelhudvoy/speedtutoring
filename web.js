@@ -9,8 +9,9 @@ var express         	= require('express')
   , questionManager   = require('./server/routes/questionManager.js')
   , tutorManager      = require('./server/routes/tutorManager.js')
   , routes            = require('./server/routes')
+  , tagManager = require('./server/routes/tagManager.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy
-  , LocalStrategy     = require('passport-local').Strategy;
+  , LocalStrategy   = require('passport-local').Strategy;
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
@@ -44,6 +45,7 @@ function ensureAuthenticated (req, res, next) {
 
 // mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
 //mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
+
 mongoose.connect('mongodb://localhost/speed');
 
 var db = mongoose.connection;
@@ -56,14 +58,6 @@ db.once('open', function callback () {
  * SCHEMAS
  */
 var Schema = mongoose.Schema;
-
-
-var questionSchema = new Schema({
-  title:  String,
-  tags: [String] 
-});
-
-var Question = mongoose.model('Question', questionSchema);
 
 var tutorSchema = new Schema({
   userId:  String,
@@ -145,12 +139,25 @@ app.get('/api/v1/user/', function (req, res) {
 
 app.post('/api/v1/question/', function (req, res) {
 
-  questionManager.askQuestion(Question, req, res);
+  var pTags = tagManager.createIfNotExistFromQuestion(req, res);
+
+  pTags.then(function(question){
+    var p = questionManager.askQuestion(question,res);
+
+    p.then(function(docs){
+      res.send(200, docs);
+    }, function(err2){
+      res.send(500,err);
+    });
+  }, function(err){
+    res.send(500, err);
+  });
+
 });
 
 app.get('/api/v1/question/', function (req, res) {
 
-  questionManager.dumpQuestionDatabase(Question, req, res);
+  questionManager.dumpQuestionDatabase(req, res);
 });
 
 

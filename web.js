@@ -40,13 +40,13 @@ function ensureAuthenticated (req, res, next) {
     res.redirect('/')
 }
 
-//mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
+mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 
 // mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
 //mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
 
-mongoose.connect('mongodb://localhost/speed');
+//mongoose.connect('mongodb://localhost/speed');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

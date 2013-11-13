@@ -31,12 +31,12 @@
 						<img src="images/speedtutoringlogo.png" class="logo" data-ng-click="vm.test()" > </a>
 					</li>	
 					<li class="username">
-						<a data-ng-show="loggedInUser.username" href="#">{{loggedInUser.username}}</a>
+						<a data-ng-show="loggedInUser.username" href="#"><%=user %></a>
 					</li>	
 				</ul>
 				<ul class="right">
 					<li>
-						<a href="#" data-ng-hide="loggedInUser.username" data-ng-click="registerUser=true"> Create Account</a>
+						<a href="/logout"> Logout</a>
 					</li>	
 				</ul>
 			</section>

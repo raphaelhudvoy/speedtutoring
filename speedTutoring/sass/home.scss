@@ -120,6 +120,7 @@ img.logo-icon {
 }
 .form{
 	margin-top: 5em;
+	margin-bottom : 0em;
 	padding: 1em 1em 1em 1em;
 	outline: $main-outline;
 	@include border-radius(3px);

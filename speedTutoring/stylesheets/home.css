@@ -93,6 +93,7 @@ img.logo-icon {
 /* line 121, ../sass/home.scss */
 .form {
   margin-top: 5em;
+  margin-bottom: 0em;
   padding: 1em 1em 1em 1em;
   outline: 3px solid #6d91ab;
   -webkit-border-radius: 3px;
@@ -104,7 +105,7 @@ img.logo-icon {
   box-shadow: 0px 0px 10px 3px #6d91ab;
 }
 
-/* line 131, ../sass/home.scss */
+/* line 132, ../sass/home.scss */
 .tag-form {
   margin-top: 10em;
   padding: 1em 1em 4em 1em;
@@ -118,11 +119,11 @@ img.logo-icon {
   background-color: #ffffff;
 }
 
-/* line 141, ../sass/home.scss */
+/* line 142, ../sass/home.scss */
 ul.tags-list {
   font-family: inherit;
 }
-/* line 145, ../sass/home.scss */
+/* line 146, ../sass/home.scss */
 ul.tags-list li {
   display: inline;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -138,12 +139,12 @@ ul.tags-list li {
   border-radius: 3px;
 }
 
-/* line 159, ../sass/home.scss */
+/* line 160, ../sass/home.scss */
 input.search-tags {
   margin: 0 0 0 0;
 }
 
-/* line 163, ../sass/home.scss */
+/* line 164, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -154,7 +155,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 173, ../sass/home.scss */
+/* line 174, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

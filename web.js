@@ -14,24 +14,24 @@ var express         	= require('express')
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  console.log('serializeUser: ' + user._id);
+  done(null, user._id);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(id, done) {
+  userManager.findById(id, done);
 });
 
 // config
 passport.use(new FacebookStrategy({
-    clientID: config.fb.clientID,
-    clientSecret: config.fb.clientSecret,
-    callbackURL: config.fb.callbackURL
-  },
-  function(accessToken, refreshToken, profile, done) {
-   process.nextTick(function () {
-     return done(null, profile);
-   });
-  }
+  clientID: config.fb.clientID,
+  clientSecret: config.fb.clientSecret,
+  callbackURL: config.fb.callbackURL,
+},
+function(accessToken, refreshToken, profile, done) {
+
+  userManager.logUser(profile, done);
+}
 ));
 
 function ensureAuthenticated (req, res, next) {

@@ -5,7 +5,8 @@
         "passport-local": "*",
         "mongoose": "3.6.x",
         "passport": "0.1.x",
-        "reload": "0.1.x"
+        "reload": "0.1.x",
+        "ejs"   : "0.8.4"
     },
     "description": "Speed tutoring",
     "engines": { "node": "0.10.x" },

@@ -4,54 +4,44 @@ var express         	= require('express')
   , path            	= require('path')
   , passport 			    = require('passport')
   , mongoose          = require('mongoose')
+  , config            = require('./ouath.js')
   , userManager       = require('./server/routes/userManager.js')
   , questionManager   = require('./server/routes/questionManager.js')
-  , tutorManager   = require('./server/routes/tutorManager.js')
+  , tutorManager      = require('./server/routes/tutorManager.js')
+  , routes            = require('./server/routes')
   , FacebookStrategy 	= require('passport-facebook').Strategy
-    , LocalStrategy   = require('passport-local').Strategy;
+  , LocalStrategy     = require('passport-local').Strategy;
 
-//User serialization
-passport.serializeUser(function (user, done) {
-  done(null, user.user_ID);
+// serialize and deserialize
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
 
-passport.deserializeUser(function (id, done) {
-  loginSystem.findUserById( id, function (err, user) {
-    done(err, { userId      : user.userId,
-                username    : user.username});
-  });
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
 });
 
-//Passport-local strategy
-passport.use(new LocalStrategy({
-        usernameField: 'username',
-        passwordField: 'password'
+// config
+passport.use(new FacebookStrategy({
+    clientID: config.fb.clientID,
+    clientSecret: config.fb.clientSecret,
+    callbackURL: config.fb.callbackURL
   },
-
-  function(username, password, done) {
-
-    //asynchronous verificatoin, for effect...
-    process.nextTick(function () {
-
-          //Invalid username
-          //return done(null, false, { message: 'Unknown user ' + username});
-
-          // validate password
-
-          //succes
-          // return done(null, user);
-    });
+  function(accessToken, refreshToken, profile, done) {
+   process.nextTick(function () {
+     return done(null, profile);
+   });
   }
 ));
 
 function ensureAuthenticated (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login.html')
+    res.redirect('/')
 }
 
 // mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
-
-mongoose.connect('mongodb://localhost/speed');
+mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
+//mongoose.connect('mongodb://localhost/speed');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -90,6 +80,11 @@ app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+
+app.use(express.session({ secret: 'my_precious' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'speedTutoring')));
 
@@ -97,6 +92,33 @@ app.use(express.static(path.join(__dirname, 'speedTutoring')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+// routes
+app.get('/', routes.index);
+app.get('/ping', routes.ping);
+app.get('/home', ensureAuthenticated, function(req, res){
+  res.render('home', { user: req.user });
+});
+
+app.get('/', function(req, res){
+  res.render('login', { user: req.user });
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook'),
+  function(req, res){ });
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/home');
+  }
+);
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
 
 app.post('/api/v1/user/', function (req, res) {
 

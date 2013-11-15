@@ -2,7 +2,8 @@
 .qst-form {
   margin-top: 8em;
   width: auto;
-  height: 4em;
+  height: auto;
+  min-height: 4em;
   padding: 1em 1em 1em 1em;
   outline: 3px solid #6d91ab;
   -webkit-border-radius: 3px;

@@ -1,4 +1,4 @@
-Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'SearchService', function ($scope, UserService, TutorService, QuestionService,  SearchService) {
+Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', function ($scope, UserService, TutorService, QuestionService,  TagService) {
 
 	$scope.loggedInUser = {username:""};
 
@@ -42,18 +42,18 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.tutor={};
 
+	vm.checkEnter = function(event){
+		if(event.keyCode == 13){
+			vm.askStep=2;
+		}
+	}
+
 	vm.registerTutor = function(tutor){
 		vm.chooseTags = false;
 		vm.isTutor = true;
 		tutor.userId = $scope.loggedInUser.username;
 		TutorService.registerTutor(tutor);
 
-	}
-
-	vm.addTags = function () {
-		if (vm.question.title != "") {
-			vm.displayTagsSearch = true;
-		}
 	}
 
 	vm.askQuestion = function (question) {
@@ -78,7 +78,7 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 			vm.searchTags.results.length = 0;
 
 		} else {
-			SearchService.searchForTags(vm.searchTags.input).then(function (results) {
+			TagService.getAllTags().then(function (results) {
 
 				vm.searchTags.results.length = 0;
 

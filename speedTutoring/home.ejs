@@ -47,7 +47,7 @@
 		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
 			
 			<div class="small-centered large-8 large-centered columns">
-				<select data-ng-model="vm.tutor.tag" ng-options="tag.title for tag in vm.allTags">
+				<select data-ng-model="vm.tutor.tag" ng-options="tag.tag for tag in vm.allTags">
 				</select>
 				<button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
 		   	</div>
@@ -74,58 +74,47 @@
 
 		<!-- ASK QUESTION -->
 		<div class="row" >
-			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns"> 
-				<div ng-switch-when="1" class="qst-form" ng-click="vm.askStep=2">
-					Chose a subject 
+			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns">
+				<div ng-switch-when="1" class="qst-form">
+					<!-- ASK QUESTION -->
+					<div data-ng-show="vm.askStep==1" >	
+						<div class="large-10 small-8 columns">
+							<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.question" ng-keyup="vm.checkEnter($event)"/>
+						</div>
+						<div class="large-2 small-4 columns ask-button">
+							<button class="button prefix" ng-click="vm.askStep=2"  data-ng-disabled="!vm.question.question">Add tags</button>
+						</div>
+					</div>
+				</div> 
+				<div ng-switch-when="2" class="qst-form">
+					<!-- ADD TAGS -->
+					<div class="row">
+						<div>
+							<div style="text-align: center;font-size: large; ">
+								{{ vm.question.question }}
+							</div>
+						</div>
+						<div>
+							<ul class="tags-list">
+								<li data-ng-repeat="tag in vm.question.tags track by tag._id">{{ tag.tag }}</li>
+							</ul>
+						</div>
+						<div class="large-10 small-8 columns">
+							<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
+							<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
+								<div data-ng-click="vm.tags.add(tag)">{{ tag.tag }}</div>
+							</div>
+						</div>
+						<div class="large-2 small-4 columns ask-button">
+							<div class="button prefix" ng-click="vm.askQuestion(vm.question); vm.askStep=1 ">ask</div>
+						</div>
+					</div>
 				</div>
-				<div ng-switch-when="2" class="qst-form" ng-click="vm.askStep=3">
-					Chose a topic
-				</div>
-				<div ng-switch-when="3" class="qst-form" ng-click="vm.askStep=1">
-					Ask a question
-				</div>
+
 				<div ng-switch-default> </div>
 			</div>
 		</div>
-
-		<!-- ASK QUESTION -->
-		<div class="row" data-ng-show="loggedInUser.firstName" >
-			<div class="small-centered large-8 large-centered columns"> 
-				<div class="qst-form">
-					<div class="large-10 small-8 columns qst-container">
-						<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.title"/>
-					</div>
-					<div class="large-2 small-4 columns ask-button">
-						<button class="button prefix" ng-click="vm.addTags()" data-ng-disabled="!loggedInUser.username">add tags</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- ADD TAGS -->
-		<div class="row" data-ng-show="vm.displayTagsSearch">
-			<div class="small-centered large-8 large-centered columns"> 
-				<div class="tag-form">
-					<div class="qst">
-						<h3 data-ng-click="vm.askQuestion()">{{ vm.question.title }}</h3>
-					</div>
-					<div>
-						<ul class="tags-list">
-							<li data-ng-repeat="tag in vm.question.tags track by tag.tagID">{{ tag.title }}</li>
-						</ul>
-					</div>
-					<div class="large-10 small-8 columns qst-container">
-						<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
-						<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
-							<div data-ng-click="vm.tags.add(tag)">{{ tag.title }}</div>
-						</div>
-					</div>
-					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.askQuestion(vm.question)">ask</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<!--
 		{{db}}
 		<button data-ng-click="vm.dumpUserDatabase()">DUMP USER DB</button>
@@ -169,7 +158,7 @@
  <!-- Services -->
 
   <script type="text/javascript" src="javascripts/services/userService.js"></script>
-  <script type="text/javascript" src="javascripts/services/searchService.js"></script>
+  <script type="text/javascript" src="javascripts/services/tagService.js"></script>
   <script type="text/javascript" src="javascripts/services/questionService.js"></script>
   <script type="text/javascript" src="javascripts/services/tutorService.js"></script>
 

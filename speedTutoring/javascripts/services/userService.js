@@ -68,8 +68,7 @@ Tuto.factory('UserService', function ($http, $q) {
 		var url = "/api/v1/user/";
 
 		$http.get(url).success(function(response){
-			console.log("GET COMPLETE");
-			console.log(response);
+			//console.log(response);
 			return response;
 		});
 	}

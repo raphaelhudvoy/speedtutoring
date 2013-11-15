@@ -33,8 +33,8 @@ Tuto.factory('QuestionService', function ($http, $q) {
 		var url = "/api/v1/question/";
 
 		$http.get(url).success(function(response){
-			console.log("QUESTION GET COMPLETE");
-			console.log(response);
+			//console.log("QUESTION GET COMPLETE");
+			//console.log(response);
 			return response;
 		});
 	}

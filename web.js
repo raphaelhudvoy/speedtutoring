@@ -8,10 +8,10 @@ var express         	= require('express')
   , userManager       = require('./server/routes/userManager.js')
   , questionManager   = require('./server/routes/questionManager.js')
   , tutorManager      = require('./server/routes/tutorManager.js')
+  , tagManager        = require('./server/routes/tagManager.js')
   , routes            = require('./server/routes')
-  , tagManager = require('./server/routes/tagManager.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy
-  , LocalStrategy   = require('passport-local').Strategy;
+  , LocalStrategy     = require('passport-local').Strategy;
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
@@ -158,6 +158,17 @@ app.post('/api/v1/question/', function (req, res) {
 app.get('/api/v1/question/', function (req, res) {
 
   questionManager.dumpQuestionDatabase(req, res);
+});
+
+app.get('/api/v1/tag/', function ( req ,res ) {
+  var allTags = tagManager.getAllTags();
+
+  allTags.then(function(tags){
+    res.send(200, tags);
+  }, function(err){
+    res.send(500, err);
+  });
+
 });
 
 

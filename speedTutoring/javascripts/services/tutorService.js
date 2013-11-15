@@ -21,7 +21,7 @@ Tuto.factory('TutorService', function ($http, $q) {
 		var url = "/api/v1/tutor/";
 
 		$http.post(url, tutor).success(function(res){
-			console.log("TUTOR POST COMPLETE");
+			// console.log("TUTOR POST COMPLETE");
 		});
 
 	};

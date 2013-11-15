@@ -7,6 +7,21 @@ var tagSchema = new mongoose.Schema({
 
 var Tag = mongoose.model('Tag', tagSchema);
 
+exports.getAllTags = function(req, res){
+
+    var promise = new mongoose.Promise;
+
+    Tag.find({}, function(err, tags){
+        if(err){
+            promise.resolve(err);
+        }else{
+            promise.resolve(null, tags);
+        }
+    });
+
+    return promise;
+}
+
 exports.createIfNotExistFromQuestion = function(req,res){
 
 	var question = req.body;
@@ -23,7 +38,6 @@ exports.createIfNotExistFromQuestion = function(req,res){
 
     		newTag.save(function(err){
     			if(err){
-    				console.log(err);
     				callback(err);
     			}else{
     				callback(null, {id:newTag.id});
@@ -35,11 +49,13 @@ exports.createIfNotExistFromQuestion = function(req,res){
 	question.tags.forEach(function(tag) {
     	processTag(tag, function(err,newTag){
     		if(err){
-    			console.log(err);
+    			//console.log(err);
+                //tag already existed
     		}else{
     			tags.push(newTag);
     		}	
     		counter++;
+            console.log(counter);
     		if(counter == ntag){
     			question.tags = tags;
     			promise.resolve(null, question);

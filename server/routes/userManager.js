@@ -17,9 +17,8 @@ var User = mongoose.model('User', userSchema);
 
 exports.findById = function (id, done) {
 	User.findById(id, function(err, user){
-		console.log(user)
 		if(!err) done(null, user);
-		else done(err, null)
+		else done(err, null);
 	})
 }
 

@@ -31,8 +31,8 @@ exports.createIfNotExistFromQuestion = function(req,res){
 	var promise = new mongoose.Promise;
 
 	function processTag (tag, callback){
-    	if(tag.id){
-    		callback(null,{id:tag.id});
+    	if(tag._id){
+    		callback(null,{_id:tag._id});
     	}else{
     		var newTag = new Tag(tag);
 
@@ -40,7 +40,7 @@ exports.createIfNotExistFromQuestion = function(req,res){
     			if(err){
     				callback(err);
     			}else{
-    				callback(null, {id:newTag.id});
+    				callback(null, {_id:newTag._id});
     			}
     		});
     	}
@@ -55,7 +55,6 @@ exports.createIfNotExistFromQuestion = function(req,res){
     			tags.push(newTag);
     		}	
     		counter++;
-            console.log(counter);
     		if(counter == ntag){
     			question.tags = tags;
     			promise.resolve(null, question);

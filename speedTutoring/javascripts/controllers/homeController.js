@@ -58,7 +58,8 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.askQuestion = function (question) {
 		
-		question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
+		if(!question)
+			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
@@ -69,6 +70,9 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 			title 	: "",
 			tags	: []
 		};
+
+		vm.searchTags.input = "";
+		vm.searchTags.results = [];
 	}
 
 	vm.searchForTags = function () {

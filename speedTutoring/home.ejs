@@ -30,7 +30,7 @@
 						<img src="images/speedtutoringlogo.png" class="logo" > </a>
 					</li>	
 					<li class="username">
-						<a data-ng-show="loggedInUser.username" href="#"><%=user %></a>
+						<a href="#"><%=user.firstName %></a>
 					</li>	
 				</ul>
 				<ul class="right">
@@ -40,29 +40,18 @@
 				</ul>
 			</section>
 		</nav>
+<!-- 
 
+		<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button> -->
 
-		<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button>
-
-		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
+<!-- 		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
 			
 			<div class="small-centered large-8 large-centered columns">
 				<select data-ng-model="vm.tutor.tag" ng-options="tag.tag for tag in vm.allTags">
 				</select>
 				<button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
 		   	</div>
-		</div>
-
-		<div class="form row"  data-ng-show="registerUser" >
-			
-				<form novalidate class="simple-form">
-					<input type="text" placeholder = "Username" ng-model="user.username"/> <br/>
-			    	<input type="text" placeholder = "First Name" ng-model="user.firstName" /><br/>
-			    	<input type="text" placeholder = "Last Name" ng-model="user.lastName" /><br/>
-			        <input type="text" placeholder = "Email" ng-model="user.email" /><br />
-			        <button ng-click="vm.registerUser(user)">Register</button>
-			   	</form>
-		</div>
+		</div> -->
 
 		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
 

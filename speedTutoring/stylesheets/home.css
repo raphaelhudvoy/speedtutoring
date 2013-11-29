@@ -2,8 +2,7 @@
 .qst-form {
   margin-top: 8em;
   width: auto;
-  height: auto;
-  min-height: 4em;
+  height: 4em;
   padding: 1em 1em 1em 1em;
   outline: 3px solid #6d91ab;
   -webkit-border-radius: 3px;
@@ -146,6 +145,16 @@ input.search-tags {
 }
 
 /* line 164, ../sass/home.scss */
+.questions {
+  float: left;
+  width: 100%;
+  height: auto;
+  clear: both;
+  border: 1px solid #b3b3b3;
+  padding: 25px 0 10px 0;
+}
+
+/* line 173, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -156,7 +165,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 174, ../sass/home.scss */
+/* line 183, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

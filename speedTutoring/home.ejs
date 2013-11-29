@@ -69,13 +69,17 @@
 
 		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
 			<span>Asked a question! Trying to find a Tutor</span>
-			<a href="#" class="close">&times;</a>
+			<a href="#" class="close">&times;</a> 
 		</div>
 
 
 		<div class = "row" data-ng-show="vm.toggleViewQuestions">
 			<div class="small-centered large-8 large-centered columns">
-				<span data-ng-repeat="question in loggedInUser.questions" style="float:left;width:auto;height:auto;clear:both;padding:25px 0 10px 0;"><h4>Question:</h4><br>{{question}}</span>
+				<h4>Questions:</h4>
+				<div data-ng-repeat="question in loggedInUser.questions" class="row questions">
+						<span class="large-8 small-8">{{question.question}}</span>
+						<button class="large-4 small-4" data-ng-click="vm.askAgain(question._id)">Ask Again</button>
+				</div>
 			</div>
 		</div>
 

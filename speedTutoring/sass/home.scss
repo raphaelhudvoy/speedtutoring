@@ -143,7 +143,7 @@ ul.tags-list {
 
 	font-family: inherit;
 
-	li {
+	li { 
 		display: inline;
 		padding : 0.25em 0.25em 0.25em 0.25em;
 		margin-right: 0.5em;
@@ -159,6 +159,15 @@ ul.tags-list {
 
 input.search-tags {
 	margin: 0 0 0 0;
+}
+
+.questions {
+	float:left;
+	width:100%;
+	height:auto;
+	clear:both;
+	border: 1px solid #b3b3b3;
+	padding:25px 0 10px 0;
 }
 
 .tags {

@@ -44,6 +44,10 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.tutor={tags:[]};
 
+	vm.setAvailabilityOn = function () {
+		WebSocketFactory.setAvailabilityOn();
+	}
+
 	vm.checkEnter = function(event){
 		if(event.keyCode == 13){
 			vm.askStep=2;

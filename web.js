@@ -202,9 +202,9 @@ app.post('/api/v1/question/', function (req, res) {
           var numberOfMatchedTags = 0;
 
           pInfo.then(function (tutorTags) {
-            tutorTags.forEach(function (tutorTag) {
-              questionTags.forEach(function (qstTags) {
-                if (tutorTags._id == qstTags._id) {
+            tutorTags.forEach(function (tutorTagId) {
+              questionTags.forEach(function (qstTagId) {
+                if (tutorTagId == qstTagId) {
                   numberOfMatchedTags++;
                 }
               });
@@ -223,6 +223,7 @@ app.post('/api/v1/question/', function (req, res) {
         }
 
         if (tutorCounter == numberOfTutor) {
+          console.log("matched Tutor id", matchedTutor);
           res.send(200, matchedTutor);
         }
       });

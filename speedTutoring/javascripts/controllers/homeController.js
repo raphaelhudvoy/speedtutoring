@@ -5,6 +5,13 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	var vm = {};
 	$scope.vm = vm;
 
+	vm.isTutor = false;
+	// UserService.isCurrentUserAtutor().then(function (isTutor) {
+
+	// }, function (err) { 
+	// 	console.log(err);
+	// });
+
 	vm.toggleViewQuestions = false;
 
 	vm.question = {
@@ -136,10 +143,6 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.dumpQuestionDatabase = function(){
 		QuestionService.dumpQuestionDatabase();
-	}
-
-	vm.test = function(){
-
 	}
 
 }]);

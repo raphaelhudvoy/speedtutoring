@@ -7,7 +7,7 @@ Tuto.factory('TagService', function ($http, $q) {
 			user = {}
 		}
 
-		this.id = tag.id ||
+		this.id = tag.id || "";
 		this.tag = tag.tag || "";
 		this.type = tag.type || "";
 	}

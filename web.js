@@ -249,6 +249,23 @@ app.get('/api/v1/user/questions', function (req, res) {
 
 });
 
+app.get('/api/v1/user/isTutor', function (req, res) {
+
+  var p = userManager.isTutor(req.user._doc._id);
+
+  p.then(function(isTutor){
+    if(isTutor){
+      res.send(200, isTutor);
+    }else{
+      res.send(400, {isTutor: false});
+    }    
+  }, function(err){
+    res.send(500, err);
+  })
+
+});
+
+
 //app.get('/api/v1/tag/type?school')
 
 

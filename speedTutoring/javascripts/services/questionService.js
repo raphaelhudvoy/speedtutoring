@@ -22,9 +22,10 @@ Tuto.factory('QuestionService', function ($http, $q) {
 		var url = "/api/v1/question/";
 
 		$http.post(url, question).success(function(res){
-			console.log("POST OF QUESTION COMPLETE");
+			deferred.resolve(res);
 		});
 
+		return deferred.promise;
 	};
 
 	Service.viewQuestions = function(){

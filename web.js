@@ -176,7 +176,29 @@ app.post('/api/v1/question/', function (req, res) {
     var p = questionManager.askQuestion(question,req,res);
 
     p.then(function(docs){
-      res.send(200, docs);
+
+      var questionTags = docs.tags;
+
+      var bestMatch = {tags:[]};
+      
+      for(var person in people){
+        if(person.isAvailable){
+
+          var currentTutorMatch = 0;
+          person.tags.forEach(function(tutorTag){
+            questionTags.forEach(function(questionTag){
+              if(tutorTag._id == questionTag._id){
+                currentTutorMatch++;
+              }
+            });
+          });
+          if(currentTutorMatch> bestMatch.tags.length){
+            bestMatch = person;
+          }
+        }
+      }
+
+      res.send(200, person);
     }, function(err2){
       res.send(500,err);
     });

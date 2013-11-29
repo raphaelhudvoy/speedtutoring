@@ -13,7 +13,9 @@ var questionSchema = new Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-exports.askQuestion = function (q, res) {
+exports.askQuestion = function (q, req, res) {
+
+	q.userId = req.user._doc._id;
 
 	var question = new Question(q);
 
@@ -31,10 +33,10 @@ exports.askQuestion = function (q, res) {
 };
 
 
-exports.viewQuestions = function (userId) {
+exports.viewQuestions = function (uId) {
 	var promise = new mongoose.Promise;
 
-	Question.find({userId: mongoose.Types.ObjectId(userId)},function (err, docs) {
+	Question.find({userId: uId},function (err, docs) {
 	  	  if (err){
 		  	promise.resolve(err);
 		  }else{

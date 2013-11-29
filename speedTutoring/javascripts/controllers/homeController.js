@@ -67,7 +67,6 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.askQuestion = function (question) {
 
-		question.userId = "5297f7906b58234219000001";
 		if(!question)
 			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
@@ -93,7 +92,7 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 		vm.toggleViewQuestions = !vm.toggleViewQuestions;
 
-		QuestionService.viewQuestions("5297f7906b58234219000001").then(function(questions){
+		QuestionService.viewQuestions().then(function(questions){
 			$scope.loggedInUser.questions = questions;
 		});
 	}

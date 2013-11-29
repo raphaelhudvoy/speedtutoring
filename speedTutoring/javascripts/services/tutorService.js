@@ -6,8 +6,6 @@ Tuto.factory('TutorService', function ($http, $q) {
 		if (!tutor) {
 			tutor = {};
 		}
-
-		this.title 	= tutor.title 	|| "Pat";
 		this.tags = tutor.tags || [];
 
 	}
@@ -20,12 +18,14 @@ Tuto.factory('TutorService', function ($http, $q) {
 
 		var url = "/api/v1/tutor/";
 
-		$http.post(url, tutor).success(function(tutor){
-			deferred.resolve(tutor);
-		}.error(function(err){
-			deferred.reject(err);
-		}));
 
+		$http.post(url, tutor).success(function (registeredTutor) {
+			deferred.resolve(registeredTutor);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
 	};
 
 	return Service;

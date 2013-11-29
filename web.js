@@ -136,7 +136,7 @@ app.get('/logout', function (req, res){
 });
 
 app.get('/api/v1/user/id/', function (req, res) {
-  res.send(req.user._id);
+  res.send(req.user);
 });
 
 app.post('/api/v1/user/', function (req, res) {
@@ -177,28 +177,40 @@ app.post('/api/v1/question/', function (req, res) {
 
     p.then(function(docs){
 
-      var questionTags = docs.tags;
+      var questionTags = docs._doc.tags;
 
       var bestMatch = {tags:[]};
       
-      for(var person in people){
-        if(person.isAvailable){
+      function match(cb){
+        for(var socketId in people){
+          var person = people[socketId];
+          if(person.isAvailable){
 
-          var currentTutorMatch = 0;
-          person.tags.forEach(function(tutorTag){
-            questionTags.forEach(function(questionTag){
-              if(tutorTag._id == questionTag._id){
-                currentTutorMatch++;
+            var pInfo = tutorManager.getInfo(person.userId);
+
+            var currentTutorMatch = 0;
+
+            pInfo.then(function(tutorTags){
+              tutorTags.forEach(function(tutorTag){
+                questionTags.forEach(function(questionTag){
+                  if(tutorTag._id == questionTag._id){
+                    currentTutorMatch++;
+                  }
+                });
+              });
+
+              if(currentTutorMatch> bestMatch.tags.length){
+                bestMatch = person.userId;
               }
             });
-          });
-          if(currentTutorMatch> bestMatch.tags.length){
-            bestMatch = person;
           }
         }
+        cb(bestMatch);     
       }
 
-      res.send(200, person);
+      match(function(bm){
+        res.send(200, bm);
+      });
     }, function(err2){
       res.send(500,err);
     });

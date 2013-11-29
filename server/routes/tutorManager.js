@@ -36,3 +36,18 @@ exports.registerTutor = function(req){
 
 	return promise;
 }
+
+exports.getInfo = function(uId){
+
+	var promise = new mongoose.Promise;
+
+	Tutor.findOne({userId: mongoose.Types.ObjectId(uId)}, function(err, tutor){
+		if(err){
+			promise.resolve(err);
+		}else{
+			promise.resolve(null, tutor.tags);
+		}
+	});
+
+	return promise;
+}

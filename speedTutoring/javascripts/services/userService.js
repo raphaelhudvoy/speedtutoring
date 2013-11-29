@@ -76,8 +76,8 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 
 		var url =  "/api/v1/user/id/";
 
-		$http.get(url, this).success(function (userId) {
-			deferred.resolve(userId);
+		$http.get(url, this).success(function (user) {
+			deferred.resolve(user._id);
 		}).error(function (err) {
 			deferred.reject(err);
 		});

@@ -39,10 +39,6 @@ exports.logUser = function (profile, done) {
 	    if (!err && user != null) {
 	    	done(null, user);
 	    } else {
-	    	var id = profile.id.toString(16);
-	    	
-
-
 			var user = new User({
 				_id: mongoose.Types.ObjectId(id),
 				firstName: profile.name.givenName,

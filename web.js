@@ -65,16 +65,16 @@ passport.use(new LocalStrategy({
 
 function ensureAuthenticated (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/')
+    res.redirect('/login');
 }
 
 //mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 
 //mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
-mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
+// mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
 
-//mongoose.connect('mongodb://localhost/speed');
+mongoose.connect('mongodb://localhost/speed');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -112,15 +112,18 @@ if ('development' == app.get('env')) {
 }
 
 // routes
-app.get('/', routes.index);
 app.get('/ping', routes.ping);
 app.get('/home', ensureAuthenticated, function(req, res){
   res.render('home', { user: req.user });
 });
 
-app.get('/', function(req, res){
-  res.render('login', { user: req.user });
+app.get('/', ensureAuthenticated, function(req, res){
+  res.render('home', { user: req.user });
 });
+
+app.get('/login', function(req, res){
+  res.render('index');
+})
 
 app.get('/auth/facebook', passport.authenticate('facebook'),
   function(req, res){ });

@@ -179,38 +179,54 @@ app.post('/api/v1/question/', function (req, res) {
 
       var questionTags = docs._doc.tags;
 
-      var bestMatch = {tags:[]};
-      
-      function match(cb){
-        for(var socketId in people){
-          var person = people[socketId];
-          if(person.isAvailable){
+      var matchedTutor = undefined;
+      var matchedTags = 0;
 
-            var pInfo = tutorManager.getInfo(person.userId);
+      var tutorList = [];
+      var numberOfTutor = 0;
+      var tutorCounter = 0;
 
-            var currentTutorMatch = 0;
-
-            pInfo.then(function(tutorTags){
-              tutorTags.forEach(function(tutorTag){
-                questionTags.forEach(function(questionTag){
-                  if(tutorTag._id == questionTag._id){
-                    currentTutorMatch++;
-                  }
-                });
-              });
-
-              if(currentTutorMatch> bestMatch.tags.length){
-                bestMatch = person.userId;
-              }
-            });
-          }
+      // Get a list of available tutor
+      for (var socketId in people) {
+        if(people[socketId].isAvailable) {
+          tutorList.push(people[socketId]);
         }
-        cb(bestMatch);     
       }
 
-      match(function(bm){
-        res.send(200, bm);
+      numberOfTutor = tutorList.length;
+
+      function match(cb) {
+        tutorList.forEach(function (tutor) {
+          var pInfo = tutorManager.getInfo(tutor.userId);
+
+          var numberOfMatchedTags = 0;
+
+          pInfo.then(function (tutorTags) {
+            tutorTags.forEach(function (tutorTag) {
+              questionTags.forEach(function (qstTags) {
+                if (tutorTags._id == qstTags._id) {
+                  numberOfMatchedTags++;
+                }
+              });
+            });
+            cb(tutor.userId, numberOfMatchedTags);
+          });
+        });
+      }
+
+      match(function(tutorId, numberOfMatchedTags){
+        tutorCounter++;
+
+        if (numberOfMatchedTags > matchedTags) {
+          matchedTags = numberOfMatchedTags;
+          matchedTutor = tutorId;
+        }
+
+        if (tutorCounter == numberOfTutor) {
+          res.send(200, matchedTutor);
+        }
       });
+
     }, function(err2){
       res.send(500,err);
     });

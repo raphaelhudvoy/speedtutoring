@@ -30,7 +30,6 @@ Tuto.factory('UserService', function ($http, $q) {
 		});
 
 		return deferred.promise;
-
 	}
 
 	

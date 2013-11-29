@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
 	},
 	firstName		: {type:String},
 	lastName		: {type:String},
+	password 		: {type:String},
 	location 		: {type:String},
 	created 		: {type: Date}
 });
@@ -20,7 +21,18 @@ exports.findById = function (id, done) {
 		if(!err) done(null, user);
 		else done(err, null);
 	})
-}
+};
+
+exports.findUserByUsername = function (username, cb) {
+	
+	User.findOne({'username' : username }, function (err, user) {
+		if (err) {
+			cb(err);
+		} else {
+			cb(null, user);
+		}
+	});
+};
 
 exports.logUser = function (profile, done) {
 
@@ -63,18 +75,6 @@ exports.createUser = function (req, res) {
 	return promise;
 };
 
-exports.findUserByUsername = function (username) {
-	
-	User.find({'firstName' : username }, function (err, user) {
-		if (err) {
-			promise.resolve(err);
-		} else {
-			promise.resolve(null, user);
-		}
-	});
-
-	return promise;
-}
 
 exports.dumpUserDatabase = function (req, res) {
 

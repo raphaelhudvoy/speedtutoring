@@ -35,6 +35,34 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
+//Passport-local strategy
+passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
+  },
+
+  function(username, password, done) {
+
+    //asynchronous verificatoin, for effect...
+    process.nextTick(function () {
+
+      userManager.findUserByUsername(username, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) { 
+                    //Invalid username
+          return done(null, false, { message: 'Unknown user ' + username});
+        } 
+          if (user.password == password) {
+            return done(null, user);
+          } else {
+            return done(null, false, { message: 'Invalid password'})
+          }
+      })
+
+    });
+    }
+));
+
 function ensureAuthenticated (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     res.redirect('/')
@@ -43,10 +71,10 @@ function ensureAuthenticated (req, res, next) {
 //mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 
-// mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
-//mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
+//mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
+mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
 
-mongoose.connect('mongodb://localhost/speed');
+//mongoose.connect('mongodb://localhost/speed');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -180,11 +208,11 @@ app.post('/api/v1/login/', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) { return next(err) }
         if (!user) {
-            return res.redirect('/login.html')
+            return res.redirect('/')
         }
         req.logIn(user, function (err) {
             if (err) { return next(err); }
-            return res.redirect('/');
+            return res.redirect('/home');
         });
     })(req, res, next);
 });

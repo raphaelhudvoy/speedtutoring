@@ -27,11 +27,11 @@ Tuto.factory('QuestionService', function ($http, $q) {
 
 	};
 
-	Service.viewQuestions = function(userId){
+	Service.viewQuestions = function(){
 
 		var deferred = $q.defer();
 
-		var url = "/api/v1/user/"+userId+"/questions";
+		var url = "/api/v1/user/questions";
 		$http.get(url).success(function(questions){
 			deferred.resolve(questions);
 		});

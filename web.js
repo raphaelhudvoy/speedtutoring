@@ -173,7 +173,7 @@ app.post('/api/v1/question/', function (req, res) {
   var pTags = tagManager.createIfNotExistFromQuestion(req, res);
 
   pTags.then(function(question){
-    var p = questionManager.askQuestion(question,res);
+    var p = questionManager.askQuestion(question,req,res);
 
     p.then(function(docs){
       res.send(200, docs);
@@ -186,13 +186,10 @@ app.post('/api/v1/question/', function (req, res) {
 
 });
 
-app.get('/api/v1/user/:userId/questions', function (req, res) {
-
-  var splitUrl = req.url.split("/");
+app.get('/api/v1/user/questions', function (req, res) {
 
 
-
-  var p = questionManager.viewQuestions(splitUrl[4]);
+  var p = questionManager.viewQuestions(req.user._doc._id);
 
   p.then(function(questions){
     res.send(200, questions);

@@ -6,7 +6,7 @@ Tuto.factory('QuestionService', function ($http, $q) {
 		if (!question) {
 			question = {};
 		}
-
+		this.userId = question.userId || "";
 		this.question 	= question.question 	|| "?";
 		this.tags 	= question.tags 	|| [];
 
@@ -26,6 +26,13 @@ Tuto.factory('QuestionService', function ($http, $q) {
 		});
 
 	};
+
+	Service.viewQuestions = function(userId){
+		var url = "/api/v1/user/"+userId+"/questions";
+		$http.get(url).success(function(questions){
+			console.log(questions);
+		});
+	}
 
 	Service.dumpQuestionDatabase = function(){
 		var deferred = $q.defer();

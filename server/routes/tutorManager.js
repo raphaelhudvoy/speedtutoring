@@ -12,7 +12,6 @@ var Tutor = mongoose.model('Tutor', tutorSchema);
 exports.registerTutor = function(req, res){
 	var tutor = new Tutor(req.body);
 
-
 	var promise = Mongoose.Promise;
 	tutor.save(function (err) {
 	  if (err){

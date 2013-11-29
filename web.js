@@ -82,11 +82,6 @@ db.once('open', function callback () {
   console.log("Connected to MongoDB");
 });
 
-/*
- * SCHEMAS
- */
-
-
 var app = express();
 
 // all environments
@@ -167,6 +162,23 @@ app.post('/api/v1/question/', function (req, res) {
   });
 
 });
+
+app.get('/api/v1/user/:userId/questions', function (req, res) {
+
+  var splitUrl = req.url.split("/");
+
+
+
+  var p = questionManager.viewQuestions(splitUrl[4]);
+
+  p.then(function(questions){
+    res.send(200, questions);
+  }, function(err){
+    res.send(500, err);
+  })
+
+});
+
 
 app.get('/api/v1/tag/', function ( req ,res ) {
   var allTags = tagManager.getAllTags();

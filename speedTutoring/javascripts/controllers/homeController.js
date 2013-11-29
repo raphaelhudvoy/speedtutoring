@@ -57,12 +57,12 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.askQuestion = function (question) {
 
-		question.userId = $scope.loggedInUser.id;
+		question.userId = "5297f7906b58234219000001";
 		if(!question)
 			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
 
-		if(!question.tags){
+		if(!question.tags || question.tags.length==0){
 			question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
 		}
 		vm.displayTagsSearch = false;
@@ -77,6 +77,10 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 		vm.searchTags.input = "";
 		vm.searchTags.results = [];
+	}
+
+	vm.viewQuestions = function(){
+		QuestionService.viewQuestions("5297f7906b58234219000001");
 	}
 
 	vm.searchForTags = function () {

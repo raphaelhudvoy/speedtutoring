@@ -32,7 +32,7 @@ exports.createIfNotExistFromQuestion = function(req,res){
 
 	function processTag (tag, callback){
     	if(tag._id){
-    		callback(null,{_id:tag._id});
+    		callback(null,{_id:mongoose.Types.ObjectId(tag._id)});
     	}else{
     		var newTag = new Tag(tag);
 

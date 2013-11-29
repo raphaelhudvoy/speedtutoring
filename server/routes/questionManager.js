@@ -29,3 +29,24 @@ exports.askQuestion = function (q, res) {
 
 	return promise;
 };
+
+
+exports.viewQuestions = function (userId) {
+	var promise = new mongoose.Promise;
+
+	Question.find({userId: mongoose.Types.ObjectId(userId)},function (err, docs) {
+	  	  if (err){
+		  	promise.resolve(err);
+		  }else{
+		  	var questions = [];
+		  	docs.forEach(function(doc){
+		  		questions.push(doc._doc);
+		  	})
+
+
+		  	promise.resolve(null, questions);
+		  }
+	});
+
+	return promise;
+};

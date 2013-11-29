@@ -61,6 +61,10 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 		if(!question)
 			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
+
+		if(!question.tags){
+			question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
+		}
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 

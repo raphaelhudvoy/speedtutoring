@@ -1,8 +1,14 @@
 var mongoose = require('mongoose');
 
-var questionSchema = new mongoose.Schema({
-  question:  String,
-  tags: [mongoose.ObjectId]
+var Schema = mongoose.Schema;
+
+var questionSchema = new Schema({
+  question: {type:String, required:true} ,
+  userId: {
+  	type:Schema.ObjectId,
+  	required : true
+  },
+  tags: [Schema.ObjectId]
 });
 
 var Question = mongoose.model('Question', questionSchema);
@@ -22,16 +28,4 @@ exports.askQuestion = function (q, res) {
 	});
 
 	return promise;
-};
-
-exports.dumpQuestionDatabase = function (req, res) {
-
-	Question.find({}, function (err, questions) {
-
-         var questionMap = {};
-         questions.forEach(function(question) {
-              questionMap[question._id] = question;
-         });
-         res.send(questionMap);
-   });
 };

@@ -57,14 +57,7 @@ db.once('open', function callback () {
 /*
  * SCHEMAS
  */
-var Schema = mongoose.Schema;
 
-var tutorSchema = new Schema({
-  userId:  String,
-  tags: [String] 
-});
-
-var Tutor = mongoose.model('Tutor', tutorSchema);
 
 var app = express();
 
@@ -115,10 +108,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
-
 app.post('/api/v1/user/', function (req, res) {
-
   var p = userManager.createUser(req, res);
 
   p.then(function(docs){
@@ -126,16 +116,8 @@ app.post('/api/v1/user/', function (req, res) {
     }, function (err){
       res.send(500,err);
     }
-
   );
-
 });
-
-app.get('/api/v1/user/', function (req, res) {
-
-  userManager.dumpUserDatabase(req, res);
-});
-
 
 app.post('/api/v1/question/', function (req, res) {
 
@@ -155,11 +137,6 @@ app.post('/api/v1/question/', function (req, res) {
 
 });
 
-app.get('/api/v1/question/', function (req, res) {
-
-  questionManager.dumpQuestionDatabase(req, res);
-});
-
 app.get('/api/v1/tag/', function ( req ,res ) {
   var allTags = tagManager.getAllTags();
 
@@ -173,7 +150,13 @@ app.get('/api/v1/tag/', function ( req ,res ) {
 
 
 app.post('/api/v1/tutor/', function (req, res) {
-  tutorManager.registerTutor(Tutor, req, res);
+  var p = tutorManager.registerTutor(req, res);
+
+  p.then(function(tutor){
+    res.send(200, tutor);
+  }, function(err){
+    res.send(500, err);
+  })
 });
 
 app.post('/api/v1/login/', function (req, res, next) {

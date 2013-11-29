@@ -12,6 +12,8 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	var vm = {};
 	$scope.vm = vm;
 
+	vm.toggleViewQuestions = false;
+
 	vm.question = {
 		title 	: "",
 		tags	: []
@@ -47,7 +49,7 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	vm.chooseTags = false;
 	vm.isTutor = false;
 
-	vm.tutor={};
+	vm.tutor={tags:[]};
 
 	vm.checkEnter = function(event){
 		if(event.keyCode == 13){
@@ -58,10 +60,11 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	vm.registerTutor = function(){
 		vm.chooseTags = false;
 		vm.isTutor = true;
-		TutorService.registerTutor(tutor).then(function (tutor) {
+
+		TutorService.registerTutor(vm.tutor).then(function (tutor) {
 			alert('You are now a tutor');
 		}, function (err) {
-			alert('Error: ' + err);
+			// alert('Error: ' + err);
 		});
 	}
 
@@ -90,7 +93,12 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	}
 
 	vm.viewQuestions = function(){
-		QuestionService.viewQuestions("5297f7906b58234219000001");
+
+		vm.toggleViewQuestions = !vm.toggleViewQuestions;
+
+		QuestionService.viewQuestions("5297f7906b58234219000001").then(function(questions){
+			$scope.loggedInUser.questions = questions;
+		});
 	}
 
 	vm.searchForTags = function () {

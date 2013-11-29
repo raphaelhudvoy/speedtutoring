@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+
 var userSchema = new Schema({
 	tutor: {type:{tags:[Schema.ObjectId]}},
 	username:{
@@ -74,6 +75,20 @@ exports.createUser = function (req, res) {
 			promise.resolve(err);
 		}else{
 			promise.resolve(null, user);
+		}
+	});
+	return promise;
+};
+
+exports.updateTutor = function (tutor) {
+
+	var promise = new mongoose.Promise;
+
+	User.update({_id : tutor.userId}, {tutorId : tutor._id}).exec(function (err) {
+		if (err){
+			promise.resolve(err);
+		}else{
+			promise.resolve(null, tutor);
 		}
 	});
 	return promise;

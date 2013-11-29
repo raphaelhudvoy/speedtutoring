@@ -38,7 +38,7 @@
 				</ul>
 				<ul class="right">
 					<li>
-						<a href="#" data-ng-click="vm.registerTutor()"> Become a tutor </a>
+						<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
 					</li>
 					<li>
 						<a href="/logout"> Logout</a>
@@ -60,16 +60,47 @@
 		</div> -->
 
 		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
-
 			<span>Asked a question! Trying to find a Tutor</span>
-			<img src="images/loading.gif" alt="LOADING">
 			<a href="#" class="close">&times;</a>
 		</div>
 
 
+		<div class = "row" data-ng-show="vm.toggleViewQuestions">
+			<div class="small-centered large-8 large-centered columns">
+				<span data-ng-repeat="question in loggedInUser.questions" style="float:left;width:auto;height:auto;clear:both;padding:25px 0 10px 0;"><h4>Question:</h4><br>{{question}}</span>
+			</div>
+		</div>
+
 		<!-- ASK QUESTION -->
-		<div class="row" >
+		<div class="row" data-ng-hide="vm.toggleViewQuestions" >
+
 			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns">
+				<div data-ng-switch-when="0" class="qst-form">
+					<!-- ADD TAGS -->
+					<div class="row">
+						<div>
+							<div style="text-align: center;font-size: large; ">
+								What would you like to tutor?
+							</div>
+						</div>
+						<div>
+							<ul class="tags-list">
+								<li data-ng-repeat="tag in vm.tutor.tags track by tag._id">{{ tag.tag }}</li>
+							</ul>
+						</div>
+						<div class="large-10 small-8 columns">
+							<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
+							<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
+								<div data-ng-click="vm.tutor.tags.push(tag)">{{ tag.tag }}</div>
+							</div>
+						</div>
+						<div class="large-2 small-4 columns ask-button">
+							<div class="button prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
+						</div>
+					</div>
+
+				</div>
+
 				<div ng-switch-when="1" class="qst-form">
 					<!-- ASK QUESTION -->
 					<div data-ng-show="vm.askStep==1" >	

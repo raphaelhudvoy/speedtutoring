@@ -63,18 +63,6 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		return deferred.promise;
 	}
 
-
-	Service.dumpUserDatabase = function(){
-		var deferred = $q.defer();
-
-		var url = "/api/v1/user/";
-
-		$http.get(url).success(function(response){
-			//console.log(response);
-			return response;
-		});
-	}
-
 	Service.getLoginUser = function () {
 		return new LoginUser();
 	}

@@ -149,6 +149,24 @@ app.post('/api/v1/user/', function (req, res) {
   );
 });
 
+app.post('/api/v1/tutor/', function(req, res){
+
+  var pTutor = tutorManager.registerTutor(req);
+
+  pTutor.then(function(tutor){
+    var pUser = userManager.updateTutor(tutor);
+
+    pUser.then(function(tutor2){
+      res.send(200,tutor2);
+
+    }, function(err){
+      res.send(500, err);
+    });
+  }, function(err){
+    res.send(500, err);
+  })
+});
+
 app.post('/api/v1/question/', function (req, res) {
 
   var pTags = tagManager.createIfNotExistFromQuestion(req, res);

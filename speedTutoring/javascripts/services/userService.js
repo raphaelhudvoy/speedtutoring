@@ -84,10 +84,10 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 	Service.getCurrentUserId = function () {
 		var deferred = $q.defer();
 
-		var url =  "/api/v1/user/id";
+		var url =  "/api/v1/user/id/";
 
 		$http.get(url, this).success(function (userId) {
-			deferred.resolve(userID);
+			deferred.resolve(userId);
 		}).error(function (err) {
 			deferred.reject(err);
 		});

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 var userSchema = new Schema({
 	tutorId: {type:Schema.ObjectId},
 	username:{
@@ -20,6 +19,17 @@ exports.findById = function (id, done) {
 		if(!err) done(null, user);
 		else done(err, null);
 	})
+};
+
+exports.findUserByUsername = function (username, cb) {
+	
+	User.findOne({'username' : username }, function (err, user) {
+		if (err) {
+			cb(err);
+		} else {
+			cb(null, user);
+		}
+	});
 };
 
 exports.logUser = function (profile, done) {
@@ -66,16 +76,3 @@ exports.createUser = function (req, res) {
 	});
 	return promise;
 };
-
-exports.findUserByUsername = function (username) {
-	
-	User.find({'username' : username }, function (err, user) {
-		if (err) {
-			promise.resolve(err);
-		} else {
-			promise.resolve(null, user);
-		}
-	});
-
-	return promise;
-}

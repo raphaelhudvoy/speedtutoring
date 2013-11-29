@@ -60,12 +60,12 @@
 				<div class=" form large-4 large-centered small-4 small-centered columns">
 					<form novalidate class="simple-form">
 						<div>
-							<input type="text" placeholder = "Username" ng-model="user.username.value"/> 
+							<input type="text" placeholder = "Username" ng-model="vm.user.username"/> 
 						</div>
 						<div>
-					    	<input type="password" placeholder = "password" ng-model="user.password.value" />
+					    	<input type="password" placeholder = "password" ng-model="vm.user.password" />
 						</div>
-						<button class="button">Login</button>
+						<button class="button" data-ng-click="vm.user.submit()">Login</button>
 				   	</form>
 				</div>
 					<a href="/auth/facebook">

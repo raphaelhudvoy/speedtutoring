@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+
 var userSchema = new Schema({
 	tutorId: {type:Schema.ObjectId},
 	username:{
@@ -7,6 +8,7 @@ var userSchema = new Schema({
 		unique	: true	},
 	firstName		: {type:String},
 	lastName		: {type:String},
+	password 		: {type:String},
 	location 		: {type:String},
 	created 		: {type: Date}
 });
@@ -18,7 +20,7 @@ exports.findById = function (id, done) {
 		if(!err) done(null, user);
 		else done(err, null);
 	})
-}
+};
 
 exports.logUser = function (profile, done) {
 

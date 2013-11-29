@@ -53,14 +53,18 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.isTutor = true;
 		tutor.userId = $scope.loggedInUser.username;
 		TutorService.registerTutor(tutor);
-
 	}
 
 	vm.askQuestion = function (question) {
-		
+
+		question.userId = $scope.loggedInUser.id;
 		if(!question)
 			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
+
+		if(!question.tags){
+			question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
+		}
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 

@@ -1,12 +1,10 @@
 var mongoose = require('mongoose');
-
-var userSchema = new mongoose.Schema({
-
-	userID : Number,
+var Schema = mongoose.Schema;
+var userSchema = new Schema({
+	tutorId: {type:Schema.ObjectId},
 	username:{
 		type	: String,
-		unique	: true
-	},
+		unique	: true	},
 	firstName		: {type:String},
 	lastName		: {type:String},
 	password 		: {type:String},
@@ -36,13 +34,13 @@ exports.findUserByUsername = function (username, cb) {
 
 exports.logUser = function (profile, done) {
 
-	User.findOne({ userID: profile.id }, function(err, user) {
+	User.findById(profile.id, function(err, user) {
 	    if(err) { console.log(err); }
 	    if (!err && user != null) {
 	    	done(null, user);
 	    } else {
 			var user = new User({
-				userID: profile.id,
+				_id: mongoose.Types.ObjectId(id),
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				location: profile._json.location.name,
@@ -73,17 +71,4 @@ exports.createUser = function (req, res) {
 		}
 	});
 	return promise;
-};
-
-
-exports.dumpUserDatabase = function (req, res) {
-
-	User.find({}, function (err, users) {
-
-         var userMap = {};
-         users.forEach(function(user) {
-              userMap[user._id] = user;
-         });
-         res.send(userMap);
-   });
 };

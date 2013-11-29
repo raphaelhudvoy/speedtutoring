@@ -1,5 +1,6 @@
 var express         	= require('express')
   , http            	= require('http')
+  , io                = require('socket.io')
   , reload 				    = require('reload')
   , path            	= require('path')
   , passport 			    = require('passport')
@@ -197,6 +198,11 @@ app.get('/api/v1/tag/', function ( req ,res ) {
 
 });
 
+app.get('/api/v1/dev/tools/connectedUser', function (req, res) {
+
+  res.send(200, people)
+  
+})
 
 app.post('/api/v1/tutor/', function (req, res) {
   var p = tutorManager.registerTutor(req, res);
@@ -221,13 +227,20 @@ app.post('/api/v1/login/', function (req, res, next) {
     })(req, res, next);
 });
 
+
 /***** Dynamic Files *****/
 
-var server = http.createServer(app);
+var socket = require('socket.io').listen(app.listen(app.get('port')));
+var people  = {};
 
-reload(server, app, 1500);
+socket.sockets.on('connection', function (clientSocket) {
+  console.log('connected', clientSocket.id);
+  clientSocket.on('join', function (userId) {
+    console.log('Join',userId);
+    people[clientSocket.id] = userId;  
+  });
 
-
-server.listen(app.get('port'), function (){
-    console.log('Express server listening on port ' + app.get('port'));
+  // clientSocket.on('disconnect', function(clientSocket) {
+  //   delete people[clientSocket.id];
+  // })
 });

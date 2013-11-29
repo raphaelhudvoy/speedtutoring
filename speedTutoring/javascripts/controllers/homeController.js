@@ -1,13 +1,6 @@
-Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', function ($scope, UserService, TutorService, QuestionService,  TagService) {
+Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory) {
 
 	$scope.loggedInUser = {username:""};
-
-	userId = null;
-	UserService.getCurrentUserId().then(function(id) {
-		userId = id;
-	}, function(err) {
-		console.log("not abble to fecth the userID");
-	});
 
 	var vm = {};
 	$scope.vm = vm;

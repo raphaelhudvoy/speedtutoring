@@ -1,4 +1,4 @@
-Tuto.factory('UserService', function ($http, $q) {
+Tuto.factory('UserService', function ($http, $q, $location) {
 
 	var Service = {};
 
@@ -24,6 +24,7 @@ Tuto.factory('UserService', function ($http, $q) {
 		var url = "/api/v1/user/";
 
 		$http.post(url, this).success(function (results){
+			window.location = "login";
 			deferred.resolve(results);
 		}).error(function (results) {
 			deferred.reject(results);
@@ -52,7 +53,8 @@ Tuto.factory('UserService', function ($http, $q) {
 		var url =  "/api/v1/login/";
 
 		$http.post(url, this).success(function (results) {
-			deferred.resolve();
+			window.location = "home";
+			deferred.resolve(results);
 		}).error(function (results) {
 			deferred.reject(results);
 		});
@@ -78,6 +80,20 @@ Tuto.factory('UserService', function ($http, $q) {
 
 	Service.getNewRegisterUser = function () {
 		return new NewRegisterUser();
+	}
+
+	Service.getCurrentUserId = function () {
+		var deferred = $q.defer();
+
+		var url =  "/api/v1/user/id/";
+
+		$http.get(url, this).success(function (userId) {
+			deferred.resolve(userId);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
 	}
 
 

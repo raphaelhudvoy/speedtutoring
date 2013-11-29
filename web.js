@@ -72,7 +72,7 @@ function ensureAuthenticated (req, res, next) {
 
 
 //mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
-// mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
+//mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
 
 mongoose.connect('mongodb://localhost/speed');
 
@@ -129,9 +129,13 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
   }
 );
 
-app.get('/logout', function(req, res){
+app.get('/logout', function (req, res){
   req.logout();
   res.redirect('/');
+});
+
+app.get('/api/v1/user/id/', function (req, res) {
+  res.send(req.user._id);
 });
 
 app.post('/api/v1/user/', function (req, res) {

@@ -256,9 +256,9 @@ app.get('/api/v1/user/isTutor', function (req, res) {
 
   p.then(function(isTutor){
     if(isTutor){
-      res.send(200, isTutor);
+      res.send(200, true);
     }else{
-      res.send(400, {isTutor: false});
+      res.send(200, false);
     }    
   }, function(err){
     res.send(500, err);
@@ -325,7 +325,11 @@ socket.sockets.on('connection', function (clientSocket) {
 
   clientSocket.on('availability-on', function () {
     people[clientSocket.id].isAvailable = true;
-  })
+  });
+
+  clientSocket.on('availability-off', function () {
+    people[clientSocket.id].isAvailable = false;
+  });
 
   clientSocket.on('disconnect', function () {
     delete people[clientSocket.id];

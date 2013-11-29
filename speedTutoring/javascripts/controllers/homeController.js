@@ -6,11 +6,13 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	$scope.vm = vm;
 
 	vm.isTutor = false;
-	// UserService.isCurrentUserAtutor().then(function (isTutor) {
+	UserService.isCurrentUserATutor().then(function (isTutor) {
+		vm.isTutor = isTutor;
+	}, function (err) { 
+		console.log(err);
+	});
 
-	// }, function (err) { 
-	// 	console.log(err);
-	// });
+	vm.isAvailable = false;
 
 	vm.toggleViewQuestions = false;
 
@@ -53,6 +55,12 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 	vm.setAvailabilityOn = function () {
 		WebSocketFactory.setAvailabilityOn();
+		vm.isAvailable = true;
+	}
+
+	vm.setAvailabilityOff = function () {
+		WebSocketFactory.setAvailabilityOff();
+		vm.isAvailable = false;
 	}
 
 	vm.checkEnter = function(event){

@@ -39,8 +39,14 @@
 					</li>
 				</ul>
 				<ul class="right">
-					<li>
+					<li data-ng-hide="vm.isTutor">
 						<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
+					</li>
+					<li data-ng-show="vm.isAvailable">
+						<a href="#" data-ng-click="vm.setAvailabilityOff()">Available</a>
+					</li>
+					<li data-ng-hide="vm.isAvailable">
+						<a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
 					</li>
 					<li>
 						<a href="/logout"> Logout</a>

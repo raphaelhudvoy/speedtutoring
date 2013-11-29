@@ -85,6 +85,20 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		return deferred.promise;
 	}
 
+	Service.isCurrentUserATutor = function () {
+		var deferred = $q.defer();
+
+		var url =  "/api/v1/user/isTutor";
+
+		$http.get(url, this).success(function (isTutor) {
+			deferred.resolve(isTutor);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+	}
+
 
 	return Service;
 

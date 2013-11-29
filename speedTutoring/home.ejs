@@ -32,7 +32,7 @@
 						<img src="images/speedtutoringlogo.png" class="logo" > </a>
 					</li>	
 					<li class="username">
-						<a href="#"><%=user.firstName %></a>
+						<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
 					</li>
 					<li>
 						<button href="#question" data-ng-click="vm.viewQuestions()">My Questions</button>
@@ -185,8 +185,8 @@
 
  <!-- Services -->
 
-  <script type="text/javascript" src="javascripts/services/socketManager.js"></script>
   <script type="text/javascript" src="javascripts/services/userService.js"></script>
+  <script type="text/javascript" src="javascripts/services/socketManager.js"></script>
   <script type="text/javascript" src="javascripts/services/tagService.js"></script>
   <script type="text/javascript" src="javascripts/services/questionService.js"></script>
   <script type="text/javascript" src="javascripts/services/tutorService.js"></script>

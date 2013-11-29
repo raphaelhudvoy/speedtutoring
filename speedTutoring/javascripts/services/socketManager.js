@@ -25,6 +25,10 @@ Tuto.factory('WebSocketFactory', function ($rootScope, UserService) {
         });
     };
 
+    Service.setAvailabilityOn = function () {
+        socket.emit('availability-on');
+    }
+
     UserService.getCurrentUserId().then(function (userId){
         socket.emit('join', userId);
     }, function (err){

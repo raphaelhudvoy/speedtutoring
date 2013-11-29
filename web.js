@@ -273,11 +273,15 @@ var people  = {};
 socket.sockets.on('connection', function (clientSocket) {
   console.log('connected', clientSocket.id);
   clientSocket.on('join', function (userId) {
-    console.log('Join',userId);
-    people[clientSocket.id] = userId;  
+    //console.log('Join',userId);
+    people[clientSocket.id] = { userId : userId, isAvailable : false};  
   });
 
-  // clientSocket.on('disconnect', function(clientSocket) {
-  //   delete people[clientSocket.id];
-  // })
+  clientSocket.on('availability-on', function () {
+    people[clientSocket.id].isAvailable = true;
+  })
+
+  clientSocket.on('disconnect', function () {
+    delete people[clientSocket.id];
+  });
 });

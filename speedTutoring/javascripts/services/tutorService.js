@@ -20,9 +20,11 @@ Tuto.factory('TutorService', function ($http, $q) {
 
 		var url = "/api/v1/tutor/";
 
-		$http.post(url, tutor).success(function(res){
-			// console.log("TUTOR POST COMPLETE");
-		});
+		$http.post(url, tutor).success(function(tutor){
+			deferred.resolve(tutor);
+		}.error(function(err){
+			deferred.reject(err);
+		}));
 
 	};
 

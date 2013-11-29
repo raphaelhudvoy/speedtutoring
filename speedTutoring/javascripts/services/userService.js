@@ -14,6 +14,7 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		this.username 	= user.username 	|| "";
 		this.password  	= user.password		|| ""
 		this.email 		= user.email 		|| "";
+		this.school 	= user.school 		|| "";
 
 	}
 

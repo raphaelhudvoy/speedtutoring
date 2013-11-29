@@ -22,6 +22,16 @@ exports.getAllTags = function(req, res){
     return promise;
 }
 
+exports.getAllOfType = function (req, res) {
+
+    var promise = new mongoose.Promise;
+
+   // var type = req.url.split("/")[]
+
+    // Tag.find({"ytpe", type},)
+
+}
+
 exports.createIfNotExistFromQuestion = function(req,res){
 
 	var question = req.body;

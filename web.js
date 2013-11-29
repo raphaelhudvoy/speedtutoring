@@ -172,6 +172,8 @@ app.post('/api/v1/question/', function (req, res) {
 
 });
 
+//app.get('/api/v1/tag/type?school')
+
 app.get('/api/v1/tag/', function ( req ,res ) {
   var allTags = tagManager.getAllTags();
 

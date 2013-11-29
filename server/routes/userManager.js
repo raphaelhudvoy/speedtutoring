@@ -9,7 +9,13 @@ var userSchema = new Schema({
 	lastName		: {type:String},
 	password 		: {type:String},
 	location 		: {type:String},
-	created 		: {type: Date}
+	tutorId			: {type:String},
+	created 		: {type:Date}
+});
+
+var tutorSchema = new Schema({
+  userId:  {type:Schema.ObjectId, required:true, unique:true},
+  tags: [Schema.ObjectId] 
 });
 
 var User = mongoose.model('User', userSchema);

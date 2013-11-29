@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var userSchema = new Schema({
-	tutorId: {type:Schema.ObjectId},
+	tutor: {type:{tags:[Schema.ObjectId]}},
 	username:{
 		type	: String,
 		unique	: true	},
@@ -22,7 +22,7 @@ exports.findById = function (id, done) {
 };
 
 exports.findUserByUsername = function (username, cb) {
-	
+
 	User.findOne({'username' : username }, function (err, user) {
 		if (err) {
 			cb(err);

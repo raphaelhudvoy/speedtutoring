@@ -102,10 +102,12 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	vm.viewQuestions = function(){
 
 		vm.toggleViewQuestions = !vm.toggleViewQuestions;
-
-		QuestionService.viewQuestions().then(function(questions){
-			$scope.loggedInUser.questions = questions;
-		});
+		
+		if(vm.toggleViewQuestions){
+			QuestionService.viewQuestions().then(function(questions){
+				$scope.loggedInUser.questions = questions;
+			});
+		}
 	}
 
 	vm.searchForTags = function () {

@@ -204,7 +204,7 @@ app.post('/api/v1/question/', function (req, res) {
           pInfo.then(function (tutorTags) {
             tutorTags.forEach(function (tutorTagId) {
               questionTags.forEach(function (qstTagId) {
-                if (tutorTagId == qstTagId) {
+                if (tutorTagId.equals(qstTagId)) {
                   numberOfMatchedTags++;
                 }
               });

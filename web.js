@@ -183,6 +183,8 @@ app.get('/api/v1/user/:userId/questions', function (req, res) {
 
 });
 
+//app.get('/api/v1/tag/type?school')
+
 
 app.get('/api/v1/tag/', function ( req ,res ) {
   var allTags = tagManager.getAllTags();

@@ -10,7 +10,10 @@ var tutorSchema = new Schema({
 var Tutor = mongoose.model('Tutor', tutorSchema);
 
 exports.registerTutor = function(req, res){
-	var tutor = new Tutor(req.body);
+	var tutor = new Tutor({
+		userId	: req.user._id,
+		tags	: req.body.tags
+	});
 
 	var promise = Mongoose.Promise;
 	tutor.save(function (err) {

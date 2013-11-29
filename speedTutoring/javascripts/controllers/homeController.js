@@ -55,11 +55,14 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 		}
 	}
 
-	vm.registerTutor = function(tutor){
+	vm.registerTutor = function(){
 		vm.chooseTags = false;
 		vm.isTutor = true;
-		tutor.userId = $scope.loggedInUser.username;
-		TutorService.registerTutor(tutor);
+		TutorService.registerTutor(tutor).then(function (tutor) {
+			alert('You are now a tutor');
+		}, function (err) {
+			alert('Error: ' + err);
+		});
 	}
 
 	vm.askQuestion = function (question) {

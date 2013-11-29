@@ -24,6 +24,7 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		var url = "/api/v1/user/";
 
 		$http.post(url, this).success(function (results){
+			window.location = "login";
 			deferred.resolve(results);
 		}).error(function (results) {
 			deferred.reject(results);
@@ -52,7 +53,7 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		var url =  "/api/v1/login/";
 
 		$http.post(url, this).success(function (results) {
-			$location.path("home");
+			window.location = "home";
 			deferred.resolve(results);
 		}).error(function (results) {
 			deferred.reject(results);

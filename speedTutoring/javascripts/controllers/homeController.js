@@ -84,7 +84,11 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 
-		QuestionService.askQuestion(question);
+		var p = QuestionService.askQuestion(question);
+
+		p.then(function(tutor){
+			alert('Found tutor: '+ tutor);
+		});
 
 		vm.question = {
 			title 	: "",

@@ -93,3 +93,18 @@ exports.updateTutor = function (tutor) {
 	});
 	return promise;
 };
+
+exports.isTutor = function(userId){
+
+	var promise = new mongoose.Promise;
+
+	User.findById(userId, function(err, user){
+		if(err){
+			promise.resolve(err);
+		}else{
+			promise.resolve(null, user.tutorId);
+		}
+	});
+
+	return promise;
+}

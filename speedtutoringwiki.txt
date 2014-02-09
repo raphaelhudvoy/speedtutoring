@@ -33,12 +33,12 @@ Running the application:
 
 	3. From root of project, execute: 
 
-		- For normal use : $ node app.js
+		- For normal use : $ node web.js
 
-		- For developping: $ hotnode app.js
+		- For developping: $ hotnode web.js
 
 		- For debugging  : 
-			1. $ hotnode --debug app.js
+			1. $ hotnode --debug web.js
 			2. (In new terminal) $ node-inspector &
 
 	4. Application is now running. To test, open browser and navigate to "localhost:4000"

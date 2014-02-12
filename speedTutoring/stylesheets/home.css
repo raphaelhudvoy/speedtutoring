@@ -147,10 +147,10 @@ input.search-tags {
 /* line 164, ../sass/home.scss */
 .questions {
   float: left;
-  width: 100%;
   height: auto;
   clear: both;
   border: 1px solid #b3b3b3;
+  margin-top: 2em;
   padding: 25px 0 10px 0;
 }
 

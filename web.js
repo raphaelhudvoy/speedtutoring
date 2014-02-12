@@ -31,10 +31,8 @@ passport.use(new FacebookStrategy({
   callbackURL: config.fb.callbackURL,
 },
 function(accessToken, refreshToken, profile, done) {
-
   userManager.logUser(profile, done);
-}
-));
+}));
 
 //Passport-local strategy
 passport.use(new LocalStrategy({
@@ -321,14 +319,6 @@ socket.sockets.on('connection', function (clientSocket) {
   clientSocket.on('join', function (userId) {
     //console.log('Join',userId);
     people[clientSocket.id] = { userId : userId, isAvailable : false};  
-  });
-
-  clientSocket.on('availability-on', function () {
-    people[clientSocket.id].isAvailable = true;
-  });
-
-  clientSocket.on('availability-off', function () {
-    people[clientSocket.id].isAvailable = false;
   });
 
   clientSocket.on('disconnect', function () {

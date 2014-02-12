@@ -74,11 +74,10 @@
 
 
 		<div class = "row" data-ng-show="vm.toggleViewQuestions">
-			<div class="small-centered large-8 large-centered columns">
-				<h4>Questions:</h4>
-				<div data-ng-repeat="question in loggedInUser.questions" class="row questions">
-						<span class="large-8 small-8">{{question.question}}</span>
-						<button class="large-4 small-4" data-ng-click="vm.askAgain(question._id)">Ask Again</button>
+			<div data-ng-repeat="question in loggedInUser.questions" class="small-centered large-8 large-centered columns questions">
+				<div class="row">
+					<span class="large-8 small-8 columns">{{question.question}}</span>
+					<button class="large-4 small-4 columns" data-ng-click="vm.askAgain(question._id)">Ask Again</button>
 				</div>
 			</div>
 		</div>

@@ -107,6 +107,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/views/:name', ensureAuthenticated, function (req, res) {
+  var name = req.params.name;
+  res.render('views/' + name, {user : req.user});
+});
+
 // routes
 app.get('/ping', routes.ping);
 app.get('/home', ensureAuthenticated, function(req, res){

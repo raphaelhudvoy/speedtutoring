@@ -1,4 +1,28 @@
-Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory) {
+var App = angular.module('app', [
+  'ngRoute',
+  'speedTutoring'
+]);
+
+
+App.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/main', {
+        templateUrl   : 'views/home',
+        controller    : 'HomeController'
+      }).
+      when('/question', {
+        templateUrl   : 'views/questions',
+        controller    : 'QstController'
+      }).
+      otherwise({
+        redirectTo: '/main'
+     });
+}]);
+
+var Tuto = angular.module('speedTutoring', []);
+
+Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory) {
 
 	$scope.loggedInUser = {username:""};
 
@@ -158,5 +182,24 @@ Tuto.controller('homeController', ['$scope', 'UserService', 'TutorService', 'Que
 	vm.dumpQuestionDatabase = function(){
 		QuestionService.dumpQuestionDatabase();
 	}
+
+}]);
+
+Tuto.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {
+
+	var vm = {};
+	$scope.vm = vm;
+
+	vm.registerUser = function () {
+		vm.user = UserService.getNewRegisterUser();
+	}
+
+	vm.cancelRegistration = function () {
+		vm.user = UserService.getLoginUser();
+	}
+
+	vm.user = UserService.getLoginUser();
+
+
 
 }]);

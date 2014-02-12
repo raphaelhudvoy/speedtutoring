@@ -1,1 +1,0 @@
-var Tuto = angular.module('speedTutoring', []);

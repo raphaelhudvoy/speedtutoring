@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="images/logosymbol.ico">
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>SpeedTutoring: Learn the quick way</title>
+  <title>SpeedTutoring: Learn the quick wayYyy</title>
   
   <link rel="stylesheet" href="stylesheets/app.css">
   <link rel="stylesheet" href="stylesheets/home.css">
@@ -18,142 +18,42 @@
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body class="main" data-ng-app="speedTutoring">
+<body class="main" data-ng-app="app">
 
-	<div data-ng-controller="homeController">
-	
-		<nav class="top-bar">
-			<section class="top-bar-section">
-				<ul class="left">
-					<li>
-						<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.askQuestion({})" > </a>
-					</li>	
-					<li>
-						<img src="images/speedtutoringlogo.png" class="logo" > </a>
-					</li>	
-					<li class="username">
-						<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
-					</li>
-					<li>
-						<button href="#question" data-ng-click="vm.viewQuestions()">My Questions</button>
-					</li>
-				</ul>
-				<ul class="right">
-					<li data-ng-hide="vm.isTutor">
-						<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
-					</li>
-					<li data-ng-show="vm.isAvailable">
-						<a href="#" data-ng-click="vm.setAvailabilityOff()">Available</a>
-					</li>
-					<li data-ng-hide="vm.isAvailable">
-						<a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
-					</li>
-					<li>
-						<a href="/logout"> Logout</a>
-					</li>	
-				</ul>
-			</section>
-		</nav>
-<!-- 
+	<nav class="top-bar">
+		<section class="top-bar-section">
+			<ul class="left">
+				<li>
+					<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.askQuestion({})" > </a>
+				</li>	
+				<li>
+					<img src="images/speedtutoringlogo.png" class="logo" > </a>
+				</li>	
+				<li class="username">
+					<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
+				</li>
+				<li>
+					<button href="#question" data-ng-click="vm.viewQuestions()">My Questions</button>
+				</li>
+			</ul>
+			<ul class="right">
+				<li data-ng-hide="vm.isTutor">
+					<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
+				</li>
+				<li data-ng-show="vm.isAvailable">
+					<a href="#" data-ng-click="vm.setAvailabilityOff()">Available</a>
+				</li>
+				<li data-ng-hide="vm.isAvailable">
+					<a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
+				</li>
+				<li>
+					<a href="/logout"> Logout</a>
+				</li>	
+			</ul>
+		</section>
+	</nav>
 
-		<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button> -->
-
-<!-- 		<div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
-			
-			<div class="small-centered large-8 large-centered columns">
-				<select data-ng-model="vm.tutor.tag" ng-options="tag.tag for tag in vm.allTags">
-				</select>
-				<button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
-		   	</div>
-		</div> -->
-
-		<div data-alert class="alert-box success" data-ng-show="vm.askedQuestion">
-			<span>Asked a question! Trying to find a Tutor</span>
-			<a href="#" class="close">&times;</a>
-		</div>
-
-
-		<div class = "row" data-ng-show="vm.toggleViewQuestions">
-			<div class="small-centered large-8 large-centered columns">
-				<span data-ng-repeat="question in loggedInUser.questions" style="float:left;width:auto;height:auto;clear:both;padding:25px 0 10px 0;"><h4>Question:</h4><br>{{question}}</span>
-			</div>
-		</div>
-
-		<!-- ASK QUESTION -->
-		<div class="row" data-ng-hide="vm.toggleViewQuestions" >
-
-			<div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns">
-				<div data-ng-switch-when="0" class="qst-form">
-					<!-- ADD TAGS -->
-					<div class="row">
-						<div>
-							<div style="text-align: center;font-size: large; ">
-								What would you like to tutor?
-							</div>
-						</div>
-						<div>
-							<ul class="tags-list">
-								<li data-ng-repeat="tag in vm.tutor.tags track by tag._id">{{ tag.tag }}</li>
-							</ul>
-						</div>
-						<div class="large-10 small-8 columns">
-							<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
-							<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
-								<div data-ng-click="vm.tutor.tags.push(tag)">{{ tag.tag }}</div>
-							</div>
-						</div>
-						<div class="large-2 small-4 columns ask-button">
-							<div class="button prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div ng-switch-when="1" class="qst-form">
-					<!-- ASK QUESTION -->
-					<div data-ng-show="vm.askStep==1" >	
-						<div class="large-10 small-8 columns">
-							<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.question" ng-keyup="vm.checkEnter($event)"/>
-						</div>
-						<div class="large-2 small-4 columns ask-button">
-							<button class="button prefix" ng-click="vm.askStep=2"  data-ng-disabled="!vm.question.question">Add tags</button>
-						</div>
-					</div>
-				</div> 
-				<div ng-switch-when="2" class="qst-form">
-					<!-- ADD TAGS -->
-					<div class="row">
-						<div>
-							<div style="text-align: center;font-size: large; ">
-								{{ vm.question.question }}
-							</div>
-						</div>
-						<div>
-							<ul class="tags-list">
-								<li data-ng-repeat="tag in vm.question.tags track by tag._id">{{ tag.tag }}</li>
-							</ul>
-						</div>
-						<div class="large-10 small-8 columns">
-							<input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
-							<div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
-								<div data-ng-click="vm.tags.add(tag)">{{ tag.tag }}</div>
-							</div>
-						</div>
-						<div class="large-2 small-4 columns ask-button">
-							<div class="button prefix" ng-click="vm.askQuestion(vm.question); vm.askStep=1 ">ask</div>
-						</div>
-					</div>
-				</div>
-
-				<div ng-switch-default> </div>
-			</div>
-		</div>
-		
-		<!--
-		{{db}}
-		<button data-ng-click="vm.dumpUserDatabase()">DUMP USER DB</button>
-		<button data-ng-click="vm.dumpQuestionDatabase()">DUMP QUESTION DB</button>-->
-	</div>
+	<div ng-view></div>
 
   <script>
   document.write('<script src=' +
@@ -162,26 +62,7 @@
   </script>
 
   	<script src="javascripts/vendor/angular.js"></script>
-  	<script src="javascripts/foundation/foundation.js"></script>
-	<script src="javascripts/foundation/foundation.abide.js"></script>
-	<script src="javascripts/foundation/foundation.alerts.js"></script>
-	<script src="javascripts/foundation/foundation.clearing.js"></script>
-	<script src="javascripts/foundation/foundation.cookie.js"></script>
-	<script src="javascripts/foundation/foundation.dropdown.js"></script>
-	<script src="javascripts/foundation/foundation.forms.js"></script>
-	<script src="javascripts/foundation/foundation.interchange.js"></script>
-	<script src="javascripts/foundation/foundation.joyride.js"></script>
-	<script src="javascripts/foundation/foundation.magellan.js"></script>
-	<script src="javascripts/foundation/foundation.orbit.js"></script>
-	<script src="javascripts/foundation/foundation.placeholder.js"></script>
-	<script src="javascripts/foundation/foundation.reveal.js"></script>
-	<script src="javascripts/foundation/foundation.section.js"></script>
-	<script src="javascripts/foundation/foundation.tooltips.js"></script>
-	<script src="javascripts/foundation/foundation.topbar.js"></script>
-
- <!-- Module -->
-
-  <script type="text/javascript" src="javascripts/modules/speedTutoringModules.js"></script>
+  	<script src="javascripts/vendor/ngRoute.js"></script>
 
 
  <!-- Controllers -->
@@ -198,9 +79,5 @@
   <script type="text/javascript" src="javascripts/services/tutorService.js"></script>
 
  <!-- Filters -->
-
-  <script>
-    $(document).foundation();
-  </script>
 </body>
 </html>

@@ -31,10 +31,8 @@ passport.use(new FacebookStrategy({
   callbackURL: config.fb.callbackURL,
 },
 function(accessToken, refreshToken, profile, done) {
-
   userManager.logUser(profile, done);
-}
-));
+}));
 
 //Passport-local strategy
 passport.use(new LocalStrategy({
@@ -106,6 +104,11 @@ app.use(express.static(path.join(__dirname, 'speedTutoring')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+app.get('/views/:name', ensureAuthenticated, function (req, res) {
+  var name = req.params.name;
+  res.render('views/' + name, {user : req.user});
+});
 
 // routes
 app.get('/ping', routes.ping);
@@ -321,14 +324,6 @@ socket.sockets.on('connection', function (clientSocket) {
   clientSocket.on('join', function (userId) {
     //console.log('Join',userId);
     people[clientSocket.id] = { userId : userId, isAvailable : false};  
-  });
-
-  clientSocket.on('availability-on', function () {
-    people[clientSocket.id].isAvailable = true;
-  });
-
-  clientSocket.on('availability-off', function () {
-    people[clientSocket.id].isAvailable = false;
   });
 
   clientSocket.on('disconnect', function () {

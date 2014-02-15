@@ -11,9 +11,8 @@ App.config(['$routeProvider',
         templateUrl   : 'views/home',
         controller    : 'HomeController'
       }).
-      when('/question', {
-        templateUrl   : 'views/questions',
-        controller    : 'QstController'
+      when('/whiteboard', {
+        templateUrl   : 'views/whiteboard'
       }).
       otherwise({
         redirectTo: '/main'
@@ -217,6 +216,11 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 	}
 
 }]);
+
+Tuto.controller('whiteboardController', ['$scope', function ($scope) {
+	
+}])
+
 
 Tuto.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {
 

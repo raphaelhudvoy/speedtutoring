@@ -51,3 +51,18 @@ exports.getInfo = function(uId){
 
 	return promise;
 }
+
+exports.getAllTutors = function(){
+
+	var promise = new mongoose.Promise;
+
+	Tutor.find({}, function(err, tutors){
+      if(err){
+          promise.resolve(err);
+      }else{
+          promise.resolve(null, tutors);
+      }
+  });
+
+	return promise;
+}

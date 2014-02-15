@@ -195,13 +195,23 @@ app.post('/api/v1/question/', function (req, res) {
 
     //find tutors with tags and sort
 
-    var availableTutorsWithTags = [];
+    var allTutors = tutorManager.getAllTutors();
 
-    availableQuestion.tutors = availableTutorsWithTags;
+    allTutors.then(function(docs){
+      var availableTutorsWithTags = docs._doc.tutors;
 
-    availableQuestions[studentId]=availableQuestion;
+      availableQuestion.tutors = availableTutorsWithTags;
 
-    contactTutor(studentId);
+      availableQuestions[studentId]=availableQuestion;
+
+      contactTutor(studentId);
+
+      res.send(200);
+    }, function(err){
+      res.send(500,err);
+    });
+
+    
 
     res.send(200);
   }, function(err){
@@ -217,43 +227,44 @@ function contactTutor(studentId){
 
   var availableQuestion = getAvailableQuestionFromStudent(studentId);
 
-  availableQuestion.question.tutorId = studentId;
+  
 
-  //for debugging, emitting to student
-  console.log(availableQuestion);
-  console.log("Emitting event for new Question");
-  socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
-    console.log("got response");
-  });
+  // //for debugging, emitting to student
+  // console.log(availableQuestion);
+  // console.log("Emitting event for new Question");
+  // socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
+  //   console.log("got response");
+  // });
 
-  // if(availableQuestion !=null){
-  //   if(availableQuestion.tutors.length > 0 ){
-  //     for(var i = 0; i< availableQuestion.tutors.length; i++ ){
-  //     //todo: check if exist tutor and refactor method
-  //       tutor = availableQuestion.tutors[i];
-  //       if(isAvailable(tutor.userId)){
+  if(availableQuestion !=null){
+    if(availableQuestion.tutors.length > 0 ){
+      for(var i = 0; i< availableQuestion.tutors.length; i++ ){
+      //todo: check if exist tutor and refactor method
+        tutor = availableQuestion.tutors[i];
 
-  //         console.log(availableQuestion);
-  //         console.log("Emitting event for new Question");
-  //         socket.sockets.in(tutor.userId).emit("newQuestion", availableQuestion.question, function(response){
-  //           console.log("got response");
-  //         });
-  //         break;
-  //       }else{
-  //         removeTutorFromQuestion(studentId, tutor.userId);
-  //       }
-  //     }
-  //   }
-  // }
+        if(isAvailable(tutor.userId)){
+          availableQuestion.question.tutorId = tutor.userId;
+          console.log(availableQuestion);
+          console.log("Emitting event for new Question");
+          socket.sockets.in(tutor.userId).emit("newQuestion", availableQuestion.question, function(response){
+            console.log("got response");
+          });
+          break;
+        }else{
+          removeTutorFromQuestion(studentId, tutor.userId);
+        }
+      }
+    }
+  }
 };
 
 function tutorIsAvailable(tutorId){
-  if(tutorList != null){
-    if(tutorList[tutorId] !=null){
-      return true;
-    }
-  }
-  return false;
+  // if(tutorList != null){
+  //   if(tutorList[tutorId] !=null){
+  //     return true;
+  //   }
+  // }
+  return true;
 }
 
 function getAvailableQuestionFromStudent(studentId){
@@ -464,8 +475,6 @@ socket.sockets.on('connection', function (clientSocket) {
 
       contactTutor(studentId);
       
-    } else{
-      //qustion is unclear, must do something eventually
     }
   });
 

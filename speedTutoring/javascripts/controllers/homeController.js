@@ -21,7 +21,7 @@ App.config(['$routeProvider',
 
 var Tuto = angular.module('speedTutoring', []);
 
-Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory) {
+Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', '$location', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory, $location) {
 
 	$scope.loggedInUser = {username:""};
 
@@ -118,9 +118,11 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 	};
 
 	vm.tutorResponse = function(response){
-		vm.tutorAvailable.response = response;
-		WebSocketFactory.emit('tutorResponse', vm.tutorAvailable);
-		vm.askStep =5;
+
+		$location.path("/whiteboard");
+		// vm.tutorAvailable.response = response;
+		// WebSocketFactory.emit('tutorResponse', vm.tutorAvailable);
+		// vm.askStep =5;
 	};
 
 

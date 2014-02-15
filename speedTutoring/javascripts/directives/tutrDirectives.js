@@ -1,6 +1,9 @@
 Tuto.directive('tutrCanvas', function () {
 	return {
 		restrict: 'A',
+        controller : function () {
+
+        },
         link: function(scope, elm, attrs, ctrl) {
 
             paper.setup(elm[0]);

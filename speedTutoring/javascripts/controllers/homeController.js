@@ -98,14 +98,32 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.displayAvailableQuestion(data);
 	});
 
-	WebSocketFactory.emit('questionResponse', response, function(data){
-
+	WebSocketFactory.receive('foundTutor', function(data){
+		console.log("found a tutor");
+		vm.displayTutorAccept(data);
 	});
 
 	vm.displayAvailableQuestion = function(question){
-		vm.availableQuestion = question.question;
+		vm.availableQuestion = question;
 		vm.askStep =3;
 	};
+
+	vm.displayTutorAccept = function(tutor){
+		vm.tutorAvailable = tutor;
+		vm.askStep =4;
+	};
+
+	vm.questionResponse = function(response){
+		vm.availableQuestion.response = response;
+		WebSocketFactory.emit('questionResponse', vm.availableQuestion);
+	};
+
+	vm.tutorResponse = function(response){
+		vm.tutorAvailable.response = response;
+		WebSocketFactory.emit('tutorResponse', vm.tutorAvailable);
+		vm.askStep =5;
+	};
+
 
 	vm.registerTutor = function(){
 		vm.chooseTags = false;
@@ -124,16 +142,17 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
 
 
-		if(!question.tags || question.tags.length==0){
-			question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
-		}
+		// if(!question.tags || question.tags.length==0){
+		// 	question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
+		// }
+
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 
 		var p = QuestionService.askQuestion(question);
 
 		p.then(function(tutor){
-			alert('Found tutor: '+ tutor);
+			// alert('Found tutor: '+ tutor);
 		});
 
 		vm.question = {

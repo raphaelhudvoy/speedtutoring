@@ -55,7 +55,6 @@
 						<div class="button prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
 					</div>
 				</div>
-
 			</div>
 
 			<div ng-switch-when="1" class="qst-form">
@@ -93,7 +92,19 @@
 					</div>
 				</div>
 			</div>
-
+			<div ng-switch-when="3">
+					<h1>A wild question has appeared!</h1>
+					<div class="large-10 small-8 columns">
+						<div style="text-align: center;font-size: large; ">
+							{{ vm.availableQuestion }}
+						</div>
+					</div>
+					<div class="large-2 small-4 columns ask-button">
+						<button class="button prefix" ng-click="vm.questionResponse(0)">I have the answer</button>
+						<button class="button prefix" ng-click="vm.questionResponse(1)">I can't answer</button>
+						<button class="button prefix" ng-click="vm.questionResponse(2)">This is unclear</button>
+					</div>
+				</div>
 			<div ng-switch-default> </div>
 		</div>
 	</div>

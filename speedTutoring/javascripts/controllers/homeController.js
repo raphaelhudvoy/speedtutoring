@@ -93,6 +93,16 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		}
 	}
 
+	WebSocketFactory.receive('newQuestion', function(data, cb){
+		console.log("yoyo");
+		cb();
+	});
+
+	WebSocketFactory.emit('questionResponse', response, function(data){
+		
+	});
+
+
 	vm.registerTutor = function(){
 		vm.chooseTags = false;
 		vm.isTutor = true;

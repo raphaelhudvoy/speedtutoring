@@ -24,6 +24,7 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 
 		var url = "/api/v1/user/";
 
+
 		$http.post(url, this).success(function (results){
 			window.location = "login";
 			deferred.resolve(results);

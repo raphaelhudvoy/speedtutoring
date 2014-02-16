@@ -11,6 +11,7 @@ var express         	= require('express')
   , tutorManager      = require('./server/routes/tutorManager.js')
   , tagManager        = require('./server/routes/tagManager.js')
   , routes            = require('./server/routes')
+  , matching          = require('./server/matching.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy
   , LocalStrategy     = require('passport-local').Strategy;
 
@@ -67,7 +68,7 @@ function ensureAuthenticated (req, res, next) {
     res.redirect('/login');
 }
 
-//mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
+// mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 
 //mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
@@ -171,73 +172,30 @@ app.post('/api/v1/tutor/', function(req, res){
   })
 });
 
+
+
 app.post('/api/v1/question/', function (req, res) {
 
-  var pTags = tagManager.createIfNotExistFromQuestion(req, res);
-
-  pTags.then(function(question){
-    var p = questionManager.askQuestion(question,req,res);
+    var p = questionManager.askQuestion(req.body,req,res);
 
     p.then(function(docs){
 
-      var questionTags = docs._doc.tags;
+      var availableQuestion = {question: docs.doc, tutors: []};
 
-      var matchedTutor = undefined;
-      var matchedTags = 0;
+      //find tutors with tags and sort
 
-      var tutorList = [];
-      var numberOfTutor = 0;
-      var tutorCounter = 0;
+      var availableTutorsWithTags = [];
 
-      // Get a list of available tutor
-      for (var socketId in people) {
-        if(people[socketId].isAvailable) {
-          tutorList.push(people[socketId]);
-        }
-      }
+      availableQuestion.tutors = availableTutorsWithTags;
 
-      numberOfTutor = tutorList.length;
+      availableQuestions[question.userId]=availableQuestion;
 
-      function match(cb) {
-        tutorList.forEach(function (tutor) {
-          var pInfo = tutorManager.getInfo(tutor.userId);
+      contactTutor(question.userId);
 
-          var numberOfMatchedTags = 0;
-
-          pInfo.then(function (tutorTags) {
-            tutorTags.forEach(function (tutorTagId) {
-              questionTags.forEach(function (qstTagId) {
-                if (tutorTagId.equals(qstTagId)) {
-                  numberOfMatchedTags++;
-                }
-              });
-            });
-            cb(tutor.userId, numberOfMatchedTags);
-          });
-        });
-      }
-
-      match(function(tutorId, numberOfMatchedTags){
-        tutorCounter++;
-
-        if (numberOfMatchedTags > matchedTags) {
-          matchedTags = numberOfMatchedTags;
-          matchedTutor = tutorId;
-        }
-
-        if (tutorCounter == numberOfTutor) {
-          console.log("matched Tutor id", matchedTutor);
-          res.send(200, matchedTutor);
-        }
-      });
-
-    }, function(err2){
+      res.send(200);
+    }, function(err){
       res.send(500,err);
     });
-  }, function(err){
-    res.send(500, err);
-  });
-
 });
 
 app.get('/api/v1/user/questions', function (req, res) {
@@ -270,9 +228,6 @@ app.get('/api/v1/user/isTutor', function (req, res) {
 });
 
 
-//app.get('/api/v1/tag/type?school')
-
-
 app.get('/api/v1/tag/', function ( req ,res ) {
   var allTags = tagManager.getAllTags();
 
@@ -281,7 +236,6 @@ app.get('/api/v1/tag/', function ( req ,res ) {
   }, function(err){
     res.send(500, err);
   });
-
 });
 
 app.get('/api/v1/dev/tools/connectedUser', function (req, res) {
@@ -292,7 +246,6 @@ app.get('/api/v1/dev/tools/connectedUser', function (req, res) {
 
 app.post('/api/v1/tutor/', function (req, res) {
   var p = tutorManager.registerTutor(req, res);
-
   p.then(function(tutor){
     res.send(200, tutor);
   }, function(err){
@@ -318,15 +271,55 @@ app.post('/api/v1/login/', function (req, res, next) {
 
 var socket = require('socket.io').listen(app.listen(app.get('port')));
 var people  = {};
+var availableQuestions = {};
+
+var tutorList = [];
 
 socket.sockets.on('connection', function (clientSocket) {
   console.log('connected', clientSocket.id);
   clientSocket.on('join', function (userId) {
     //console.log('Join',userId);
     people[clientSocket.id] = { userId : userId, isAvailable : false};  
+
+    client.join(userId);
+  });
+
+  clientSocket.on('availability-on', function () {
+    tutorList;
+
+    //check available questions
+
+  });
+
+  clientSocket.on('availability-off', function () {
+
+    tutorList.remove({ socketId: clientSocket.id, userId : userId});
+
+  });
+
+  clientSocket.on('questionResponse', function(response){
+    var studentId = response.question.userId;
+    var tutorId = response.tutor.userId;
+    
+    if(response.option == 'yes'){
+
+      socket.sockets.in(studentId).emit("foundTutor", tutorId);
+
+    } else if(response.option == 'no'){
+
+      removeTutorFromQuestion(studentId, tutorId);
+
+      contactTutor(studentId);
+      
+    } else{
+      //qustion is unclear, must do something eventually
+    }
   });
 
   clientSocket.on('disconnect', function () {
+
+    tutorList.remove({ socketId: clientSocket.id, userId : userId});
     delete people[clientSocket.id];
+
   });
 });

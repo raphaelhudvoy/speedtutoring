@@ -10,57 +10,18 @@
   <title>SpeedTutoring: Learn the quick way</title>
 
   <link rel="stylesheet" href="stylesheets/bootstrap/bootstrap.css"> 
+  <link rel="stylesheet" href="stylesheets/login.css"> 
+
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 <!-- <a href="#" data-ng-click="vm.registerUser()"> Create Account</a> -->
 </head>
+
 <body class="main" data-ng-app="speedTutoring">
 
 	<div data-ng-controller="loginController">
 
 		<!-- Vertical Navigation Bar -->
-		<div class="container">
-		    <nav class="navbar navbar-default" role="navigation">
-
-		        <!-- Brand and toggle get grouped for better mobile display -->
-		        <div class="navbar-header">
-		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
-		                    class="icon-bar"></span><span class="icon-bar"></span>
-		            </button>
-		            <a class="navbar-brand">SpeedTutoring</a>
-		        </div>
-
-		        <!-- Collect the nav links, forms, and other content for toggling -->
-		        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		            <ul class="nav navbar-nav">
-		            </ul>
-		            <ul class="nav navbar-nav navbar-right">
-		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-		                    class="glyphicon glyphicon-comment"></span>Questions <span class="label label-primary">4</span>
-		                </a>
-		                    <ul class="dropdown-menu">
-		                        <li><a href="#"><span class="label label-warning">MATH 263 </span>How do you get the biggest </a></li>
-		                        <li><a href="#"><span class="label label-warning">GEOG 101 </span>Who are we? </a></li>
-		                        <li><a href="#"><span class="label label-warning">ENG  123 </span>What am I?  </a></li>
-		                        <li class="divider"></li>
-		                        <li><a href="#" class="text-center">View All</a></li>
-		                    </ul>
-		                </li>
-		               
-		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-		                    class="glyphicon glyphicon-user"></span>Admin <b class="caret"></b></a>
-		                    <ul class="dropdown-menu">
-		                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-		                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
-		                        <li class="divider"></li>
-		                        <li><a href="#"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
-		                    </ul>
-		                </li>
-		            </ul>
-		        </div>
-		        <!-- /.navbar-collapse -->
-		    </nav>
-		</div>
+		<div ng-include src="'views/v_nav.html'"></div>
 
 
 		<!-- **************** -->
@@ -69,72 +30,18 @@
 
 		<div data-ng-switch="vm.user.type" class="container">
 
-			<!-- **** 				   *** -->
-			<!-- The login form !          -->
-			<!-- ****************          -->
-
-		    <div data-ng-switch-default class="row vertical-offset-100">
-		    	<div class="col-md-4 col-md-offset-4">
-		    		<div class="panel panel-default">
-					  	<div class="panel-heading">
-					    	<h3 class="panel-title">Please sign in</h3>
-					 	</div>
-					  	<div class="panel-body">
-					    	<form accept-charset="UTF-8" role="form">
-		                    <fieldset>
-					    	  	<div class="form-group">
-					    		    <input class="form-control" placeholder="E-mail" name="email" type="text"  ng-model="vm.user.username">
-					    		</div>
-					    		<div class="form-group">
-					    			<input class="form-control" placeholder="Password" name="password" type="password" ng-model="vm.user.password">
-					    		</div>
-					    		<div class="checkbox">
-					    	    	<label>
-					    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-					    	    	</label>
-					    	    </div>
-					    		<input class="btn btn-lg btn-success btn-block" data-ng-click="vm.user.submit()" value="Login">
-					    	</fieldset>
-					      	</form>
-					    </div>
-					</div>
-				</div>
-			</div>
-		<!--
-
-		<div class="row" data-ng-switch="vm.user.type">
-			<div data-ng-switch-when="registerUser" class=" form large-4 large-centered small-4 small-centered columns">
-				<form novalidate class="simple-form">
-					<input type="text" placeholder = "Username" ng-model="vm.user.username"/> <br/>
-					<input type="password" placeholder = "Password" ng-model="vm.user.password"/> <br/>
-					<input type="password" placeholder = "Confirm Password" /> <br/>
-			    	<input type="text" placeholder = "First Name" ng-model="vm.user.firstName" /><br/>
-			    	<input type="text" placeholder = "Last Name" ng-model="vm.user.lastName" /><br/>
-			        <input type="text" placeholder = "Email" ng-model="vm.user.email" /><br />
-			        <input type="text" placeholder = "School" ng-model="vm.user.school" /><br />
-			        <button class="button" data-ng-click="vm.user.submit()">Register</button>
-			        <button class=" right button" data-ng-click="vm.cancelRegistration()">Cancel</button>
-			   	</form>
+			<!-- the register form -->
+			<div data-ng-switch-when="registerUser">
+				<div ng-include src="'loginViews/register.html'"></div>
 			</div>
 
-			<div data-ng-switch-default>
-				<div class=" form large-4 large-centered small-4 small-centered columns">
-					<form novalidate class="simple-form">
-						<div>
-							<input type="text" placeholder = "Username" ng-model="vm.user.username"/> 
-						</div>
-						<div>
-					    	<input type="password" placeholder = "password" ng-model="vm.user.password" />
-						</div>
-						<button class="button" data-ng-click="vm.user.submit()">Login</button>
-				   	</form>
-				</div>
-					<a href="/auth/facebook">
-						<div class="fb-button large-centered small-centered columns "></div>
-					</a>
+			<!-- the login form-->
+			<div data-ng-switch-default >
+				<div ng-include src="'loginViews/login.html'"></div>
 			</div>
+
 		</div>
-		-->
+
 	</div>
 
   <script>

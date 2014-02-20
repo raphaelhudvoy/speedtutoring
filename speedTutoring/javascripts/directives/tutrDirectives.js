@@ -57,7 +57,7 @@ Tuto.directive('tutrCanvas', function () {
                 // Send path every 100ms
                 timer = setInterval( function() {
 
-                    WebSocketFactory.emit('drawing-progress', JSON.stringify(pathToSend));
+                    WebSocketFactory.emit('drawing:progress', {path : JSON.stringify(pathToSend), id : socketId});
                     pathToSend.path = new Array();
                 }, 100);
             }
@@ -80,7 +80,7 @@ Tuto.directive('tutrCanvas', function () {
                 path.add(point);
 
                 pathToSend.end = point;
-                WebSocketFactory.emit('drawing-end', JSON.stringify(pathToSend));
+                WebSocketFactory.emit('drawing:end', {path : JSON.stringify(pathToSend), id : socketId});
 
                 clearInterval(timer);
                 path.smooth();
@@ -89,19 +89,29 @@ Tuto.directive('tutrCanvas', function () {
             // External path (other user) handling
             var externalPath = {};
 
-            WebSocketFactory.receive('drawing-progress', function (user, path) {
+            WebSocketFactory.receive('drawing:progress', function (data) {
+                var user = data.id
+                  , path = data.path;
+
+                console.log('drawing');
+
                 if (user != socketId && path) {
-                    drawPath(path, user);
+                    drawPath(JSON.parse(path), user);
                 }
             });
 
-            WebSocketFactory.receive('drawing-end', function (user, path) {
+            WebSocketFactory.receive('drawing:end', function (data) {
+                var user = data.id
+                  , path = data.path;
+
+                console.log('end-drawing');
+
                 if (user != socketId && path) {
-                    endPath(path, user);
+                    endPath(JSON.parse(path), user);
                 }
             });
 
-            function drawPath (path, user) {
+            function drawPath (data, user) {
 
                 var path = externalPath[user];
 
@@ -113,12 +123,13 @@ Tuto.directive('tutrCanvas', function () {
                     path = externalPath[user];
 
                     //Start path
-                    path.add(path.start);
+                    path.strokeColor = data.color;
+                    path.add(new paper.Point(data.start[1], data.start[2]));
                 }
 
                 // Draw path points
-                for (var i = 0, point; point = path.path[i]; i++) {
-                    path.add(point);
+                for (var i = 0, point; point = data.path[i]; i++) {
+                    path.add(new paper.Point(point[1], point[2]));
                 }
 
                 path.smooth();
@@ -126,11 +137,11 @@ Tuto.directive('tutrCanvas', function () {
                 paper.view.draw();
             };
 
-            function endPath (path, user) {
+            function endPath (data, user) {
                 var path = externalPath[user];
 
                 if (path) {
-                    path.add(path.end);
+                    path.add(new paper.Point(data.end[1], data.end[2]));
                     path.smooth();
 
                     externalPath[user] = false;

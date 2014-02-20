@@ -17,7 +17,7 @@ App.config(['$routeProvider',
         controllerAs  : 'wb'
       }).
       otherwise({
-        redirectTo: '/home'
+        redirectTo: '/whiteboard'
      });
 }]);
 

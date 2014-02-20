@@ -12,10 +12,12 @@ App.config(['$routeProvider',
         controller    : 'HomeController'
       }).
       when('/whiteboard', {
-        templateUrl   : 'views/whiteboard'
+        templateUrl   : 'views/whiteboard',
+        controller    : 'whiteboardController',
+        controllerAs  : 'wb'
       }).
       otherwise({
-        redirectTo: '/main'
+        redirectTo: '/home'
      });
 }]);
 
@@ -219,9 +221,10 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 }]);
 
-Tuto.controller('whiteboardController', ['$scope', function ($scope) {
+Tuto.controller('whiteboardController', ['WebSocketFactory', function (WebSocketFactory) {
 	
-}])
+	
+}]);
 
 
 Tuto.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {

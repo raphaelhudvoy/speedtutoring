@@ -13,7 +13,8 @@ var express         	= require('express')
   , routes            = require('./server/routes')
   , matching          = require('./server/matching.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy
-  , LocalStrategy     = require('passport-local').Strategy;
+  , LocalStrategy     = require('passport-local').Strategy
+  , whiteboard        = require('./server/libs/whiteboard.js');
 
 // serialize and deserialize
 passport.serializeUser(function(user, done) {
@@ -414,13 +415,23 @@ app.post('/api/v1/login/', function (req, res, next) {
 
 /***** Dynamic Files *****/
 
-var socket = require('socket.io').listen(app.listen(app.get('port')));
-var people  = {};
-var availableQuestions = {};
+var socket             = require('socket.io').listen(app.listen(app.get('port')));
 
-var tutorList = {};
+var people             = {};
+var availableQuestions = {};
+var tutorList          = {};
 
 socket.sockets.on('connection', function (clientSocket) {
+
+  clientSocket.on('join-wb-room', function (data, cb) {
+
+    cb(clientSocket.id);
+    whiteboard.init(socket, clientSocket);
+
+  });
+
+
+
   console.log('connected', clientSocket.id);
   clientSocket.on('join', function (userId) {
     //console.log('Join',userId);

@@ -13,11 +13,10 @@ App.config(['$routeProvider',
       }).
       when('/whiteboard', {
         templateUrl   : 'views/whiteboard',
-        controller    : 'whiteboardController',
-        controllerAs  : 'wb'
+        controller    : 'whiteboardController'
       }).
       otherwise({
-        redirectTo: '/main'
+        redirectTo: '/whiteboard'
      });
 }]);
 
@@ -223,7 +222,7 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 Tuto.controller('whiteboardController', ['WebSocketFactory', function (WebSocketFactory) {
 
-	this.love;
+	this.test;
 	
 	
 }]);

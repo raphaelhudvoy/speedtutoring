@@ -1,3 +1,50 @@
+Tuto.directive('wbColors', function () {
+    return {
+        restrict : 'A', 
+        controller : function ($scope) {
+            var colorPickers = [];
+            var counter = 0;
+
+            this.saveElement = function (elm, index) {
+                counter = counter + 1;
+                var length = colorPickers.push(elm);
+                return length - 1;
+            }
+
+            this.selectColor = function (index) {
+                for (var i = 0, element; element = colorPickers[i]; i++) {
+                    if (i == index) {
+                        element.addClass('active');
+                    } else {
+                        element.removeClass('active');
+                    }
+                }
+            }
+
+            $scope.colors = ['#FFF432', '#FFA432', '#BFF432'];
+        }
+    }
+})
+
+
+Tuto.directive('wbSelectColor', function () {
+    return {
+        priority: 1000,
+        restrict: 'A',
+        require:'^wbColors',
+        link : function (scope, elm, attrs, ctrl) {
+
+            var index = ctrl.saveElement(elm, index);
+
+            elm.on('click', function () {
+                ctrl.selectColor(index);
+            });
+
+        }
+    }
+});
+
+
 Tuto.directive('tutrCanvas', function () {
 	return {
 		restrict: 'A',

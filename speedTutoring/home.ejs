@@ -1,16 +1,17 @@
 
 <!DOCTYPE html>
-<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
 <link rel="shortcut icon" href="images/logosymbol.ico">
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>SpeedTutoring: Learn the quick wayYyy</title>
+  <title>SpeedTutoring: Learn the quick way</title>
   
   <link rel="stylesheet" href="stylesheets/app.css">
   <link rel="stylesheet" href="stylesheets/home.css">
+  
 
   <script src="/socket.io/socket.io.js"></script>
   
@@ -20,40 +21,40 @@
 </head>
 <body class="main" data-ng-app="app">
 
-	<nav class="top-bar">
-		<section class="top-bar-section">
-			<ul class="left">
-				<li>
-					<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.askQuestion({})" > </a>
-				</li>	
-				<li>
-					<img src="images/speedtutoringlogo.png" class="logo" > </a>
-				</li>	
-				<li class="username">
-					<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
-				</li>
-				<li>
-					<button href="#question" data-ng-click="vm.viewQuestions()">My Questions</button>
-				</li>
-			</ul>
-			<ul class="right">
-				<li data-ng-hide="vm.isTutor">
-					<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
-				</li>
-				<li data-ng-show="vm.isAvailable">
-					<a href="#" data-ng-click="vm.setAvailabilityOff()">Available</a>
-				</li>
-				<li data-ng-hide="vm.isAvailable">
-					<a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
-				</li>
-				<li>
-					<a href="/logout"> Logout</a>
-				</li>	
-			</ul>
-		</section>
-	</nav>
+  <nav class="top-bar">
+    <section class="top-bar-section">
+      <ul class="left">
+        <li>
+          <img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.askQuestion({})" > </a>
+        </li> 
+        <li>
+          <img src="images/speedtutoringlogo.png" class="logo" > </a>
+        </li> 
+        <li class="username">
+          <a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
+        </li>
+        <li>
+          <button href="#question" data-ng-click="vm.viewQuestions()">My Questions</button>
+        </li>
+      </ul>
+      <ul class="right">
+        <li data-ng-hide="vm.isTutor">
+          <a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
+        </li>
+        <li data-ng-show="vm.isAvailable">
+          <a href="#" data-ng-click="vm.setAvailabilityOff()">Available</a>
+        </li>
+        <li data-ng-hide="vm.isAvailable">
+          <a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
+        </li>
+        <li>
+          <a href="/logout"> Logout</a>
+        </li> 
+      </ul>
+    </section>
+  </nav>
 
-	<div ng-view></div>
+  <div ng-view></div>
 
   <script>
   document.write('<script src=' +
@@ -61,9 +62,9 @@
   '.js><\/script>')
   </script>
 
-  	<script src="javascripts/vendor/angular.js"></script>
-  	<script src="javascripts/vendor/ngRoute.js"></script>
-  	<script type="text/javascript" src="javascripts/vendor/paper.js"></script>
+    <script src="javascripts/vendor/angular.js"></script>
+    <script src="javascripts/vendor/ngRoute.js"></script>
+    <script type="text/javascript" src="javascripts/vendor/paper.js"></script>
 
 
  <!-- Controllers -->

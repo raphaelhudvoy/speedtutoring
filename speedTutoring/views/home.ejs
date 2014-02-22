@@ -1,4 +1,4 @@
-<div>popo
+<div>
 <!-- 
 
 	<button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button> -->
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
+						<div class="btn btn-primary prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
 					</div>
 				</div>
 
@@ -58,7 +58,7 @@
 						<input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.question" ng-keyup="vm.checkEnter($event)"/>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<button class="button prefix" ng-click="vm.askStep=2"  data-ng-disabled="!vm.question.question">Add tags</button>
+						<button class="btn btn-primary prefix" ng-click="vm.askStep=2"  data-ng-disabled="!vm.question.question">Add tags</button>
 					</div>
 				</div>
 			</div> 
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 					<div class="large-2 small-4 columns ask-button">
-						<div class="button prefix" ng-click="vm.askQuestion(vm.question); vm.askStep=1 ">ask</div>
+						<div class="btn btn-primary prefix" ng-click="vm.askQuestion(vm.question); vm.askStep=1 ">ask</div>
 					</div>
 				</div>
 			</div>
@@ -93,9 +93,9 @@
 						{{ vm.availableQuestion.question }}
 					</div>
 				</div>
-					<button class="button" ng-click="vm.questionResponse(0)">I have the answer</button>
-					<button class="button" ng-click="vm.questionResponse(1)">I can't answer</button>
-					<button class="button" ng-click="vm.questionResponse(2)">This is unclear</button>
+					<button class="btn btn-primary" ng-click="vm.questionResponse(0)">I have the answer</button>
+					<button class="btn btn-primary" ng-click="vm.questionResponse(1)">I can't answer</button>
+					<button class="btn btn-primary" ng-click="vm.questionResponse(2)">This is unclear</button>
 			</div>
 			<div ng-switch-when="4">
 				<h1>A tutor has been found!</h1>
@@ -104,8 +104,8 @@
 						{{ vm.tutorAvailable }}
 					</div>
 				</div>
-					<button class="button" ng-click="vm.tutorResponse(0)">I'm ready</button>
-					<button class="button" ng-click="vm.tutorResponse(1)">I'm not ready</button>
+					<button class="btn btn-primary" ng-click="vm.tutorResponse(0)">I'm ready</button>
+					<button class="btn btn-primary" ng-click="vm.tutorResponse(1)">I'm not ready</button>
 			</div>
 			<div ng-switch-when="5">
 				<h1>WHITEBOARD</h1>

@@ -8,13 +8,23 @@ App.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/main', {
-        templateUrl   : 'views/home',
+        templateUrl   : 'views/home2',
         controller    : 'HomeController'
       }).
       when('/whiteboard', {
         templateUrl   : 'views/whiteboard',
         controller    : 'whiteboardController',
         controllerAs  : 'wb'
+      }).
+      when('/question',{
+      	templateUrl   : 'views/question',
+        controller    : 'questionController',
+        controllerAs  : 'qst'
+      }).
+      when('/tutor',{
+      	templateUrl   : 'views/tutor',
+        controller    : 'tutorController',
+        controllerAs  : 'tutor'
       }).
       otherwise({
         redirectTo: '/main'
@@ -152,19 +162,15 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 
+
 		var p = QuestionService.askQuestion(question);
 
 		p.then(function(tutor){
 			// alert('Found tutor: '+ tutor);
 		});
 
-		vm.question = {
-			title 	: "",
-			tags	: []
-		};
+		$location.path("/question");
 
-		vm.searchTags.input = "";
-		vm.searchTags.results = [];
 	}
 
 	vm.viewQuestions = function(){
@@ -222,6 +228,20 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 }]);
 
 Tuto.controller('whiteboardController', ['WebSocketFactory', function (WebSocketFactory) {
+
+	this.love;
+	
+	
+}]);
+
+Tuto.controller('questionController', ['WebSocketFactory', function (WebSocketFactory) {
+
+	this.love;
+	
+	
+}]);
+
+Tuto.controller('tutorController', ['WebSocketFactory', function (WebSocketFactory) {
 
 	this.love;
 	

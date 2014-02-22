@@ -21,7 +21,7 @@ App.config(['$routeProvider',
      });
 }]);
 
-var Tuto = angular.module('speedTutoring', []);
+var Tuto = angular.module('speedTutoring', ['colorpicker.module']);
 
 Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', '$location', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory, $location) {
 
@@ -222,6 +222,8 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 }]);
 
 Tuto.controller('whiteboardController', ['WebSocketFactory', function (WebSocketFactory) {
+
+	this.love;
 	
 	
 }]);

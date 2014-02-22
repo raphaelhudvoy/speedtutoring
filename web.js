@@ -199,7 +199,17 @@ app.post('/api/v1/question/', function (req, res) {
     var allTutors = tutorManager.getAllTutors();
 
     allTutors.then(function(docs){
-      var availableTutorsWithTags = docs._doc.tutors;
+
+      var tutors = [];
+
+      for(var i=0; i< docs.length;i++){
+
+        var tutor = docs[i];
+
+        tutors.push(tutor._doc);
+      }
+
+      var availableTutorsWithTags = tutors;
 
       availableQuestion.tutors = availableTutorsWithTags;
 
@@ -228,7 +238,6 @@ function contactTutor(studentId){
 
   var availableQuestion = getAvailableQuestionFromStudent(studentId);
 
-  
 
   // //for debugging, emitting to student
   // console.log(availableQuestion);
@@ -241,13 +250,13 @@ function contactTutor(studentId){
     if(availableQuestion.tutors.length > 0 ){
       for(var i = 0; i< availableQuestion.tutors.length; i++ ){
       //todo: check if exist tutor and refactor method
-        tutor = availableQuestion.tutors[i];
+        var tutor = availableQuestion.tutors[i];
 
-        if(isAvailable(tutor.userId)){
+        if(tutorIsAvailable(tutor.userId)){
           availableQuestion.question.tutorId = tutor.userId;
           console.log(availableQuestion);
           console.log("Emitting event for new Question");
-          socket.sockets.in(tutor.userId).emit("newQuestion", availableQuestion.question, function(response){
+          socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
             console.log("got response");
           });
           break;

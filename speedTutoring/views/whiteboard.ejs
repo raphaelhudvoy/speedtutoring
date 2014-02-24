@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<canvas id="myCanvas" resize tutr-canvas></canvas> 
+		<canvas id="myCanvas" resize wb-canvas></canvas> 
 	</div>
 </div>
 <div class="row">
@@ -22,10 +22,19 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 	      <ul class="nav navbar-nav" wb-colors>
 	        <li class="btn-group">
-				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[0]" value="" style="background-color : {{colors[0]}}" wb-select-color></button>
-				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[1]" value="" style="background-color : {{colors[1]}}" wb-select-color></button>
-				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[2]" value="" style="background-color : {{colors[2]}}" wb-select-color></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[0]" value="" style="background-color : {{colors[0]}}" wb-select-color="#222222"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[1]" value="" style="background-color : {{colors[1]}}" wb-select-color="#FFF432"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[2]" value="" style="background-color : {{colors[2]}}" wb-select-color="#BFF432"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[3]" value="" style="background-color : {{colors[3]}}" wb-select-color="#BFA432"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[4]" value="" style="background-color : {{colors[4]}}" wb-select-color="#0723A6"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[5]" value="" style="background-color : {{colors[5]}}" wb-select-color="#F64F06"></button>
+				<button colorpicker="hex" type="button" colorpicker-position="top" colorpicker-fixed-position="true" class="btn btn-lg navbar-btn" ng-model="colors[6]" value="" style="background-color : {{colors[6]}}" wb-select-color="#A8248F"></button>
 			</li>
+			<li class="slider-container">
+				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="40" data-slider-step="1" data-slider-value="3" wb-slider/>
+				<span id="ex6CurrentSliderValLabel"><span id="ex6SliderVal"></span>px</span>
+			</li>
+	      	
 	      </ul>
 	      
 	      <ul class="nav navbar-nav navbar-right">

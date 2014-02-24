@@ -65,7 +65,7 @@
 						<fieldset>
 							<hr class="colorgraph">
 							<div class="form-group">
-			        			<input type="text" name="email" id="email" class="form-control input-lg" placeholder="Username" ng-model="vm.user.username">
+			        			<input type="text" name="email" id="username" class="form-control input-lg" placeholder="Username" ng-model="vm.user.username">
 							</div>
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6">
@@ -139,6 +139,9 @@
   document.write('<script src=' +
   ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
   '.js><\/script>')
+
+	document.getElementById('username').focus();
+
   </script>
 
   <!-- Facebook button -->

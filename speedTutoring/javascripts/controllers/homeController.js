@@ -253,18 +253,7 @@ Tuto.controller('loginController', ['$scope', 'UserService', function ($scope, U
 
 	var vm = {};
 	$scope.vm = vm;
-
-	vm.goToRegisterUser = function () {
-		vm.user = UserService.getNewRegisterUser();
-		
-	}
-
-	vm.cancelRegistration = function () {
-		vm.user = UserService.getLoginUser();
-	}
-
+	vm.regUser = UserService.getNewRegisterUser();
 	vm.user = UserService.getLoginUser();
-
-
 
 }]);

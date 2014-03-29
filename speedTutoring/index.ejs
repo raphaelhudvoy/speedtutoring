@@ -23,100 +23,111 @@
 		<!-- **************** -->
 		<!-- Login / Register -->
 		<!-- **************** -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-5 col-lg-offset-1">
+					<div class = "row">
+						<h1>Speed Tutoring</h1>
+					</div>
+					<div class = "row">
 
-		<div data-ng-switch="vm.user.type" class="container">
+						<dl>
+						  <dt>Connect</dt>
+						  <dd>Get matched quickly to your peers</dd>
+						</dl>
+						<dl>
+						  <dt>Learn</dt>
+						  <dd>Find the help you need</dd>
+						</dl>
+						<dl>
+						  <dt>Teach</dt>
+						  <dd>Help others with what you know</dd>
+						</dl>
+<!-- 						<div class="list-group">
+						  <a href="#" class="list-group-item">
+						    <h4 class="list-group-item-heading"></h4>
+						    <p class="list-group-item-text"></p>
+						  </a>
+						  <a href="#" class="list-group-item">
+						    <h4 class="list-group-item-heading">Learn</h4>
+						    <p class="list-group-item-text">Find help with the questions you have</p>
+						  </a>
+						  <a href="#" class="list-group-item">
+						    <h4 class="list-group-item-heading">Teach</h4>
+						    <p class="list-group-item-text">Help others with what you know</p>
+						  </a>
+						</div> -->
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<h2>Sign In</h2>
+					<form role="form">
+						<fieldset>
+							<hr class="colorgraph">
+							<div class="form-group">
+			        			<input type="text" name="email" id="username" class="form-control input-lg" placeholder="Username" ng-model="vm.user.username">
+							</div>
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+			          				<input  type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" ng-model="vm.user.password">
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<input type="submit" class="btn btn-lg btn-success btn-block" data-ng-click="vm.user.submit()" value="Sign In">
+								</div>
+							</div>
 
-			<!-- the register form -->
-			<div data-ng-switch-when="registerUser">
-<div class="container">
+							<!-- NOT YET IMPLEMENTED -->
+							<!--
+							<span class="button-checkbox">
+								<button type="button" class="btn" data-color="info">Remember Me</button>
+			                    <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+								<a href="" class="btn btn-link pull-right">Forgot Password?</a>
+							</span>-->
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-			<form role="form">
-				<h2>Register!</h2>
-				<hr class="colorgraph">
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<div class="form-group">
-			                    <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" ng-model="vm.user.firstName">
+							<hr class="colorgraph">
+						</fieldset>
+					</form>
+					<form role="form">
+						<h2>Register</h2>
+						<hr class="colorgraph">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<div class="form-group">
+					                    <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" ng-model="vm.regUser.firstName">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6">
+									<div class="form-group">
+										<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" ng-model="vm.regUser.lastName">
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" ng-model="vm.user.lastName">
+								<input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="School" tabindex="3" ng-model="vm.regUser.school">
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="School" tabindex="3" ng-model="vm.user.school">
-					</div>
-					<div class="form-group">
-						<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" ng-model="vm.user.email">
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="vm.user.password">
+								<input type="text" name="email" id="email" class="form-control input-lg" placeholder="Username" tabindex="4" ng-model="vm.regUser.username">
 							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" ng-model="vm.regUser.password">
+									</div>
+								</div>
 							</div>
-						</div>
+							<hr class="colorgraph">
+							<div class="row">
+								<div class="col-lg-12">
+			          				<input type="submit" class="btn btn-lg btn-success btn-block" data-ng-click="vm.regUser.submit()" value="Register">
+								</div>
+							</div>
+						</form>
 					</div>
-					
-					<hr class="colorgraph">
-					<div class="row">
-						<div class="col-xs-6 col-sm-6 col-md-6">
-	          	<input type="submit" class="btn btn-lg btn-success btn-block" data-ng-click="vm.user.submit()" value="Register">
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-6">
-							<a href="" class="btn btn-lg btn-primary btn-block" data-ng-click="vm.cancelRegistration()" >Cancel</a>
-						</div>
-					</div>
-				</form>
+				</div>
+
 			</div>
-		</div>
-
-	</div>
 			</div>
-
-			<!-- the login form-->
-			<div data-ng-switch-default >
-				<div class="row" style="margin-top:20px">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-		<form role="form">
-			<fieldset>
-				<h2 class="text-center">Speed Tutoring</h2>
-				<hr class="colorgraph">
-				<div class="form-group">
-        	<input type="text" name="email" id="email" class="form-control input-lg" placeholder="Email Address" ng-model="vm.user.username">
-				</div>
-				<div class="form-group">
-        	<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" ng-model="vm.user.password">
-				</div>
-
-				<!-- NOT YET IMPLEMENTED -->
-				<!--
-				<span class="button-checkbox">
-					<button type="button" class="btn" data-color="info">Remember Me</button>
-                    <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
-					<a href="" class="btn btn-link pull-right">Forgot Password?</a>
-				</span>-->
-
-				<hr class="colorgraph">
-				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-6">
-          	<input type="submit" class="btn btn-lg btn-success btn-block" data-ng-click="vm.user.submit()" value="Sign In">
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="" class="btn btn-lg btn-primary btn-block" data-ng-click="vm.goToRegisterUser()" >Register</a>
-					</div>
-				</div>
-			</fieldset>
-		</form>
-	</div>
+    
 </div>
 			</div>
 
@@ -128,12 +139,15 @@
   document.write('<script src=' +
   ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
   '.js><\/script>')
+
+	document.getElementById('username').focus();
+
   </script>
 
   <!-- Facebook button -->
 
   	<script src="javascripts/vendor/angular.js"></script>
- 
+ 		<script src="javascripts/vendor/angular-animate.js"></script>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>

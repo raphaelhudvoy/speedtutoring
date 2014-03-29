@@ -1,4 +1,4 @@
-/* line 36, ../sass/home.scss */
+/* line 37, ../sass/home.scss */
 .qst-form {
   margin-top: 8em;
   width: auto;
@@ -14,12 +14,12 @@
   box-shadow: 0px 0px 10px 3px #6d91ab;
 }
 
-/* line 47, ../sass/home.scss */
+/* line 48, ../sass/home.scss */
 .qst-container {
   padding: 0 0 0 0;
 }
 
-/* line 51, ../sass/home.scss */
+/* line 52, ../sass/home.scss */
 img.logo, img.logo-icon {
   height: 35px;
   top: 12px;
@@ -28,69 +28,69 @@ img.logo, img.logo-icon {
   position: relative;
 }
 
-/* line 60, ../sass/home.scss */
+/* line 61, ../sass/home.scss */
 img.logo-icon {
   top: 14px;
 }
 
-/* line 67, ../sass/home.scss */
+/* line 68, ../sass/home.scss */
 .top-bar {
   height: 57px;
   outline: 3px solid #6d91ab;
   background-color: #ffffff;
   box-shadow: 5px 5px 10px #6d91ab;
 }
-/* line 73, ../sass/home.scss */
+/* line 74, ../sass/home.scss */
 .top-bar section {
   margin-left: 20em;
   margin-right: 15em;
   height: 100%;
 }
-/* line 77, ../sass/home.scss */
+/* line 78, ../sass/home.scss */
 .top-bar section ul {
   background: transparent;
   height: 100% !important;
 }
-/* line 80, ../sass/home.scss */
+/* line 81, ../sass/home.scss */
 .top-bar section ul li {
   height: 100% !important;
   background: transparent;
 }
-/* line 85, ../sass/home.scss */
+/* line 86, ../sass/home.scss */
 .top-bar section ul li a {
   height: 100% !important;
   background: none !important;
 }
-/* line 91, ../sass/home.scss */
+/* line 92, ../sass/home.scss */
 .top-bar section ul li.username {
   margin-left: 13px;
   background-color: #338fd5;
 }
-/* line 97, ../sass/home.scss */
+/* line 98, ../sass/home.scss */
 .top-bar section ul.right {
   background-color: #4578a0;
 }
-/* line 100, ../sass/home.scss */
+/* line 101, ../sass/home.scss */
 .top-bar section ul.right li a {
   background: none;
 }
 
-/* line 110, ../sass/home.scss */
+/* line 111, ../sass/home.scss */
 .main {
   background-color: #fcfeff;
 }
 
-/* line 114, ../sass/home.scss */
+/* line 115, ../sass/home.scss */
 .button {
   background-color: #4578a0;
 }
 
-/* line 118, ../sass/home.scss */
+/* line 119, ../sass/home.scss */
 .ask-button {
   padding: 0 0 0 0;
 }
 
-/* line 121, ../sass/home.scss */
+/* line 122, ../sass/home.scss */
 .form {
   margin-top: 5em;
   margin-bottom: 0em;
@@ -105,7 +105,7 @@ img.logo-icon {
   box-shadow: 0px 0px 10px 3px #6d91ab;
 }
 
-/* line 132, ../sass/home.scss */
+/* line 133, ../sass/home.scss */
 .tag-form {
   margin-top: 10em;
   padding: 1em 1em 4em 1em;
@@ -119,11 +119,11 @@ img.logo-icon {
   background-color: #ffffff;
 }
 
-/* line 142, ../sass/home.scss */
+/* line 143, ../sass/home.scss */
 ul.tags-list {
   font-family: inherit;
 }
-/* line 146, ../sass/home.scss */
+/* line 147, ../sass/home.scss */
 ul.tags-list li {
   display: inline;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -139,12 +139,12 @@ ul.tags-list li {
   border-radius: 3px;
 }
 
-/* line 160, ../sass/home.scss */
+/* line 161, ../sass/home.scss */
 input.search-tags {
   margin: 0 0 0 0;
 }
 
-/* line 164, ../sass/home.scss */
+/* line 165, ../sass/home.scss */
 .questions {
   float: left;
   height: auto;
@@ -154,7 +154,7 @@ input.search-tags {
   padding: 25px 0 10px 0;
 }
 
-/* line 173, ../sass/home.scss */
+/* line 174, ../sass/home.scss */
 .tags {
   width: 100%;
   padding: 0.5em 0 0.5em 0.5em;
@@ -165,7 +165,7 @@ input.search-tags {
   cursor: pointer;
 }
 
-/* line 183, ../sass/home.scss */
+/* line 184, ../sass/home.scss */
 .tags:hover {
   background-color: #fff2c7;
 }

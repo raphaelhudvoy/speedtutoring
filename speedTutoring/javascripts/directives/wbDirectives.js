@@ -106,7 +106,8 @@ Tuto.directive('wbCanvas', function () {
               , pathToSend = {}
               , color = 'black'
               , timer
-              , params = WBService.params;
+              , params = WBService.params
+              , drawingInProgress = false;
 
             this.init = function (elm) {
 
@@ -141,13 +142,6 @@ Tuto.directive('wbCanvas', function () {
                     start : point,
                     path : []
                 };
-
-                // Send path every 100ms
-                timer = setInterval( function() {
-
-                    WebSocketFactory.emit('drawing:progress', {path : JSON.stringify(pathToSend), id : socketId});
-                    pathToSend.path = new Array();
-                }, 100);
             }
 
             this.onMouseDrag = function (event) {
@@ -159,10 +153,27 @@ Tuto.directive('wbCanvas', function () {
 
                 pathToSend.path.push(point);
 
+                // Send path every 100ms
+
+                if (!drawingInProgress) {
+
+                    timer = setInterval( function() {
+
+                        console.log('sending');
+
+                        WebSocketFactory.emit('drawing:progress', {path : JSON.stringify(pathToSend), id : socketId});
+                        pathToSend.path = new Array();
+                    }, 100);
+                }
+
+                drawingInProgress = true;
+
                 
             };
 
             this.onMouseUp = function (event) {
+
+                drawingInProgress = false;
 
                 var point = new paper.Point(event.clientX - offLeft, event.clientY - offTop);
                 path.add(point);
@@ -172,6 +183,8 @@ Tuto.directive('wbCanvas', function () {
 
                 clearInterval(timer);
                 path.smooth();
+
+
             };
 
             // External path (other user) handling
@@ -245,6 +258,7 @@ Tuto.directive('wbCanvas', function () {
             ctrl.init(elm[0]);
 
             elm.on('mousedown', function (event) {
+                elm.css("background-color", "red");
                 ctrl.onMouseDown(event);
 
                 elm.on('mousemove', function (event) {
@@ -252,6 +266,7 @@ Tuto.directive('wbCanvas', function () {
                 });
 
                 elm.on('mouseup', function (event) {
+                    elm.css("background-color", "blue");
                     ctrl.onMouseUp(event);
                     elm.unbind('mousemove');
                     elm.unbind('mouseup');

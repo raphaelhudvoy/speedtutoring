@@ -1,21 +1,126 @@
-<div ng-include="'partials/navbar'"></div>
+<div>
+<!-- 
 
-<div class="jumbotron">
-  <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
+  <button data-ng-show="(loggedInUser.username && !vm.isTutor)" data-ng-click="vm.chooseTags=true;">Become a tutor</button> -->
 
-<div class="row marketing">
-  <div ng-repeat="thing in awesomeThings">
-      <h4>{{thing.name}}</h4>
-      <p>{{thing.info}}</p>
+<!--    <div class="row" style="margin-top:150px;" data-ng-show="vm.chooseTags" >
+    
+    <div class="small-centered large-8 large-centered columns">
+      <select data-ng-model="vm.tutor.tag" ng-options="tag.tag for tag in vm.allTags">
+      </select>
+      <button data-ng-disabled="!vm.tutor" data-ng-click="vm.registerTutor(vm.tutor)">Register as a tutor</button>
+      </div>
+  </div> -->
+  <div class = "row" data-ng-show="vm.toggleViewQuestions">
+    <div class="small-centered large-8 large-centered columns">
+      <h4>Questions:</h4>
+      <div data-ng-repeat="question in loggedInUser.questions" class="row questions">
+          <span class="large-8 small-8">{{question.question}}</span>
+          <button class="large-4 small-4" data-ng-click="vm.askAgain(question._id)">Ask Again</button>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+  <!-- ASK QUESTION -->
+  <div class="row" data-ng-hide="vm.toggleViewQuestions" >
+
+    <div ng-switch="vm.askStep" class="small-centered large-8 large-centered columns">
+      <div data-ng-switch-when="0" class="qst-form">
+        <!-- ADD TAGS -->
+        <div class="row">
+          <div>
+            <div style="text-align: center;font-size: large; ">
+              What would you like to tutor?
+            </div>
+          </div>
+          <div>
+            <ul class="tags-list">
+              <li data-ng-repeat="tag in vm.tutor.tags track by tag._id">{{ tag.tag }}</li>
+            </ul>
+          </div>
+          <div class="large-10 small-8 columns">
+            <input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
+            <div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
+              <div data-ng-click="vm.tutor.tags.push(tag)">{{ tag.tag }}</div>
+            </div>
+          </div>
+          <div class="large-2 small-4 columns ask-button">
+            <div class="btn btn-primary prefix" ng-click="vm.registerTutor(vm.tutor); vm.askStep=1 ">Become Tutor</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div ng-switch-when="1" class="qst-form">
+        <!-- ASK QUESTION -->
+        <div data-ng-show="vm.askStep==1" > 
+          <div class="large-10 small-8 columns">
+            <input name="question" placeholder="Ask a question" type="text" data-ng-model="vm.question.question" ng-keyup="vm.checkEnter($event)"/>
+          </div>
+          <div class="large-2 small-4 columns ask-button">
+            <button class="btn btn-primary prefix" ng-click="vm.askStep=2"  data-ng-disabled="!vm.question.question">Add tags</button>
+          </div>
+        </div>
+      </div> 
+      <div ng-switch-when="2" class="qst-form">
+        <!-- ADD TAGS -->
+        <div class="row">
+          <div>
+            <div style="text-align: center;font-size: large; ">
+              {{ vm.question.question }}
+            </div>
+          </div>
+          <div>
+            <ul class="tags-list">
+              <li data-ng-repeat="tag in vm.question.tags track by tag._id">{{ tag.tag }}</li>
+            </ul>
+          </div>
+          <div class="large-10 small-8 columns">
+            <input class="search-tags" placeholder="Search for tags" type="text" ng-change="vm.searchForTags()" data-ng-model="vm.searchTags.input"/>
+            <div class="tags" data-ng-repeat="tag in vm.searchTags.results | filter:vm.searchTags.input "> 
+              <div data-ng-click="vm.tags.add(tag)">{{ tag.tag }}</div>
+            </div>
+          </div>
+          <div class="large-2 small-4 columns ask-button">
+            <div class="btn btn-primary prefix" ng-click="vm.askQuestion(vm.question); vm.askStep=1 ">ask</div>
+          </div>
+        </div>
+      </div>
+      <div ng-switch-when="3">
+        <h1>A wild question has appeared...</h1>
+        <div class="large-10 small-8 columns">
+          <div style="text-align: center;font-size: large; ">
+            {{ vm.availableQuestion.question }}
+          </div>
+        </div>
+          <button class="btn btn-primary" ng-click="vm.questionResponse(0)">I have the answer</button>
+          <button class="btn btn-primary" ng-click="vm.questionResponse(1)">I can't answer</button>
+          <button class="btn btn-primary" ng-click="vm.questionResponse(2)">This is unclear</button>
+      </div>
+      <div ng-switch-when="4">
+        <h1>A tutor has been found!</h1>
+        <div class="large-10 small-8 columns">
+          <div style="text-align: center;font-size: large; ">
+            {{ vm.tutorAvailable }}
+          </div>
+        </div>
+          <button class="btn btn-primary" ng-click="vm.tutorResponse(0)">I'm ready</button>
+          <button class="btn btn-primary" ng-click="vm.tutorResponse(1)">I'm not ready</button>
+      </div>
+      <div ng-switch-when="5">
+        <h1>WHITEBOARD</h1>
+        <div class="large-10 small-8 columns">
+          <div style="text-align: center;font-size: large; ">
+            {{ vm.tutorAvailable.question }}
+          </div>
+        </div>
+      </div>
+      <div ng-switch-default> </div>
+    </div>
+  </div>
+  
+  <!--
+  {{db}}
+  <button data-ng-click="vm.dumpUserDatabase()">DUMP USER DB</button>
+  <button data-ng-click="vm.dumpQuestionDatabase()">DUMP QUESTION DB</button>-->
 </div>

@@ -1,4 +1,8 @@
-#ignore npm stuff#
 node_modules
-node_modules/*
-*.sublime*
+public
+.tmp
+.sass-cache
+app/bower_components
+heroku
+/views
+dist

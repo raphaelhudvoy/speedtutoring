@@ -86,6 +86,17 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		return deferred.promise;
 	}
 
+	Service.getCurrentUser = function (cb) {
+
+		var url =  "/api/v1/user/id/";
+
+		$http.get(url, this).success(function (user) {
+			cb(null,user);
+		}).error(function (err) {
+			cb(err);
+		});
+	}
+
 	Service.isCurrentUserATutor = function () {
 		var deferred = $q.defer();
 
@@ -100,6 +111,28 @@ Tuto.factory('UserService', function ($http, $q, $location) {
 		return deferred.promise;
 	}
 
+	Service.updateTutor = function(tags, cb){
+		var deferred = $q.defer();
+
+		var url =  "/api/v1/user/id/";
+
+		$http.get(url, this).success(function (user) {
+
+			if(user.tutorId){
+
+			}else{
+
+			}
+
+			deferred.resolve(user._id);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+
+
+	}
 
 	return Service;
 

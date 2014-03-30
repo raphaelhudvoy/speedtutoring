@@ -29,7 +29,7 @@ App.config(['$routeProvider',
      });
 }]);
 
-var Tuto = angular.module('speedTutoring', ['colorpicker.module', 'bootstrap-tagsinput']);
+var Tuto = angular.module('speedTutoring', ['colorpicker.module']);
 
 Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', '$location', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory, $location) {
 
@@ -223,7 +223,7 @@ Tuto.controller('questionController', ['WebSocketFactory', function (WebSocketFa
 	
 }]);
 
-Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', 'UserService', function ($scope, WebSocketFactory, TagService, UserService) {
+Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', 'UserService', 'TutorService' , function ($scope, WebSocketFactory, TagService, UserService, TutorService) {
 
 	var vm = {};
 	$scope.vm = vm;
@@ -238,6 +238,9 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 			}else{
 				vm.newTag="";
 				vm.myTags.push(newTag);
+				TagService.getAllTags().then(function(tags){
+					vm.allTags = tags;
+				});
 			}
 		});
 	}
@@ -264,12 +267,61 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 	}
 
 	vm.saveSettings = function(){
-		//TODO: update user's tags
+		
+		UserService.getCurrentUser(function(err, user){
+			var tutorId = user.tutorId;
+			if(err){
+				console.log(err);
+			}else{
+				if(tutorId){
+					TutorService.updateTutor(tutorId, vm.myTags, function(err, data){
+						if(err){
+							console.log(err);
+						}else{
+
+						}
+					});
+				}else{
+					var newTutor = {};
+					newTutor.userId = user.id;
+					newTutor.tags = vm.myTags;
+
+					TutorService.registerTutor(newTutor, function(err, data){
+						if(err){
+							console.log(err);
+						}else{
+
+						}
+					});
+				}
+			}
+		});
 	}
 
 	TagService.getAllTags().then(function(tags){
 		vm.allTags = tags;
 	});
+
+	getTags = function(){
+		UserService.getCurrentUser(function(err, user){
+			var tutorId = user.tutorId;
+			if(err){
+				console.log(err);
+			}else{
+				if(tutorId){
+					TutorService.getTags(tutorId, function(err, data){
+						if(err){
+							console.log(err);
+						}else{
+							vm.myTags = data;
+						}
+					});
+				}
+			}
+		});
+	}
+
+	getTags();
 	
 }]);
 

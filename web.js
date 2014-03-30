@@ -157,25 +157,32 @@ app.post('/api/v1/user/', function (req, res) {
 
 app.post('/api/v1/tutor/', function(req, res){
 
-  var pTutor = tutorManager.registerTutor(req);
+  tutorManager.registerTutor(req, function(err, data){
+      if(err){
+        res.send(500, err);
+      }else{
+        userManager.updateTutor(data, function(err2, data2){
 
-  pTutor.then(function(tutor){
-    var pUser = userManager.updateTutor(tutor);
-
-    pUser.then(function(tutor2){
-      res.send(200,tutor2);
-
-    }, function(err){
-      res.send(500, err);
-    });
-  }, function(err){
-    res.send(500, err);
-  })
+          if(err2){
+            res.send(500, err2);
+          }else{
+            res.send(200, data2);
+          }
+       });
+     }
+  });
 });
 
+app.put('/api/v1/tutor/', function(req, res){
 
-
-
+  tutorManager.updateTutor(req, function(err, data){
+      if(err){
+        res.send(500, err);
+      }else{
+        
+     }
+  });
+});
 
 app.post('/api/v1/question/', function (req, res) {
 

@@ -9,9 +9,8 @@ var tutorSchema = new Schema({
 
 var Tutor = mongoose.model('Tutor', tutorSchema);
 
-exports.registerTutor = function(req){
+exports.registerTutor = function(req, cb){
 	var tutorObj = req.body;
-	var promise = new mongoose.Promise;
 
 	var tags = [];
 
@@ -27,14 +26,12 @@ exports.registerTutor = function(req){
 
 	tutor.save(function (err) {
 	  if (err){
-	  	promise.resolve(err);
+	  	cb(err);
 	  }else{
-	  	promise.resolve(null, tutor);
+	  	cb(null, tutor);
 	  }
 	  
 	});
-
-	return promise;
 }
 
 exports.getInfo = function(uId){

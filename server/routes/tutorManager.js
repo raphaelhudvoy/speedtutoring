@@ -66,26 +66,30 @@ exports.getAllTutors = function(){
 
 exports.updateTutor = function(req, cb){
 
-	var tutorObj = req.body;
+	var tutor = req.body;
 
 	var tags = [];
 
+	Tutor.findOne({_id : tutor.tutorId}, function (err, user) {
+		if (err) { cb(err) 
 
-	tutorObj.tags.forEach(function(tag){
-		tags.push(mongoose.Types.ObjectId(tag._id));
-	});
+		} else if (user == null) {
+			cb('no tutor find');
 
-	tutorObj.userId = req.user._doc._id;
-	tutorObj.tags = tags;
+		} else {
 
-	var tutor = new Tutor(tutorObj);
+			tutor.tags.forEach(function(tag){
+				tags.push(mongoose.Types.ObjectId(tag._id));
+			});
 
-	tutor.save(function (err) {
-	  if (err){
-	  	cb(err);
-	  }else{
-	  	cb(null, tutor);
-	  }
-	  
+			tutor.tags = tags;
+
+			user.save(function (err, user) {
+				if (err) { cb(err)}
+				else {
+					cb(null, user);
+				}
+			});
+		}
 	});
 }

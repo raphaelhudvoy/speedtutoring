@@ -57,3 +57,21 @@ Tuto.factory('TutorService', function ($http, $q) {
 	return Service;
 
 });
+
+
+Tuto.factory('WBService', function () {
+
+	var Service = {};
+
+	Service.params = {
+		color 	: 'black',
+		stroke 	: 1
+	};
+
+	Service.setColor = function (color) {
+		Service.params.color = color;
+	}
+
+	return Service;
+
+});

@@ -1,7 +1,91 @@
-Tuto.directive('tutrCanvas', function () {
+Tuto.directive('wbColors', function () {
+    return {
+        restrict : 'A', 
+        controller : function ($scope, WBService) {
+            var colorPickers = [];
+
+            this.saveElement = function (elm) {
+                var length = colorPickers.push(elm);
+                return length - 1;
+            }
+
+            this.selectColor = function (index) {
+                for (var i = 0, element; element = colorPickers[i]; i++) {
+                    if (i == index) {
+                        WBService.setColor($scope.colors[index]);
+                        element.addClass('active');
+                    } else {
+                        element.removeClass('active');
+                    }
+                }
+            }
+
+            //$scope.colors = ['#FFF432', '#FFA432', '#BFF432'];
+        },
+        link : function (scope, elm, attrs, ctrl) {
+            var pickers = elm.find("button");
+
+            scope.colors = [];
+
+            for (var i = 0, picker; picker = pickers[i]; i++ ) {
+                scope.colors[i] = picker.attributes['wb-select-color'].value;
+            }
+        }
+    }
+});
+
+Tuto.directive('wbSlider', function () {
+    return {
+        controller : function (WBService) {
+
+            var params = WBService.params;
+
+            this.slide = function (value) {
+                params.stroke = value;
+            }
+        },
+        link: function (scope, elm, attrs, ctrl) {
+
+            elm.slider({
+                formater: function(value) {
+                    return 'Current value: ' + value;
+                }
+            });
+
+            ctrl.slide(attrs.sliderValue);
+            $("#ex6SliderVal").text(attrs.sliderValue);
+
+            elm.on('slide', function(slideEvt) {
+                ctrl.slide(slideEvt.value);
+                $("#ex6SliderVal").text(slideEvt.value);
+            });
+        }
+    }
+});
+
+
+Tuto.directive('wbSelectColor', function () {
+    return {
+        priority: 1000,
+        restrict: 'A',
+        require:'^wbColors',
+        link : function (scope, elm, attrs, ctrl) {
+
+            var index = ctrl.saveElement(elm);
+
+            elm.on('click', function () {
+                ctrl.selectColor(index);
+            });
+
+        }
+    }
+});
+
+
+Tuto.directive('wbCanvas', function () {
 	return {
 		restrict: 'A',
-        controller : function (WebSocketFactory) {
+        controller : function (WebSocketFactory, WBService) {
 
             // Connect socket with server
             var socketId = null;
@@ -21,7 +105,8 @@ Tuto.directive('tutrCanvas', function () {
               , path = {}
               , pathToSend = {}
               , color = 'black'
-              , timer;
+              , timer
+              , params = WBService.params;
 
             this.init = function (elm) {
 
@@ -30,8 +115,9 @@ Tuto.directive('tutrCanvas', function () {
 
                 // Init canvas
                 canvas = elm;
-                offLeft = canvas.offsetLeft;
-                offTop  = canvas.offsetTop;
+                offLeft = canvas.offsetLeft - 13;
+                //offTop  = canvas.offsetTop;
+                offTop = 70;
 
                 // Init path
                 path = new paper.Path();
@@ -40,16 +126,18 @@ Tuto.directive('tutrCanvas', function () {
 
             this.onMouseDown = function (event) {
 
-                var point = new paper.Point(event.x - offLeft, event.y - offTop);
+                var point = new paper.Point(event.clientX - offLeft, event.clientY - offTop);
 
                 path = new paper.Path();
-                path.strokeColor = color;
+                path.strokeColor = params.color;
+                path.strokeWidth = params.stroke;
 
                 path.add(point);
 
                 // Initialize the new path that will be send 
                 pathToSend = {
-                    color : color,
+                    color : params.color,
+                    stroke : params.stroke,
                     start : point,
                     path : []
                 };
@@ -64,7 +152,7 @@ Tuto.directive('tutrCanvas', function () {
 
             this.onMouseDrag = function (event) {
     
-                var point = new paper.Point(event.x - offLeft, event.y - offTop);
+                var point = new paper.Point(event.clientX - offLeft, event.clientY - offTop);
 
                 path.add(point);
                 path.smooth();
@@ -76,7 +164,7 @@ Tuto.directive('tutrCanvas', function () {
 
             this.onMouseUp = function (event) {
 
-                var point = new paper.Point(event.x - offLeft, event.y - offTop);
+                var point = new paper.Point(event.clientX - offLeft, event.clientY - offTop);
                 path.add(point);
 
                 pathToSend.end = point;
@@ -124,6 +212,7 @@ Tuto.directive('tutrCanvas', function () {
 
                     //Start path
                     path.strokeColor = data.color;
+                    path.strokeWidth = data.stroke;
                     path.add(new paper.Point(data.start[1], data.start[2]));
                 }
 

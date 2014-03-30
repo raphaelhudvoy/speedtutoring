@@ -20,7 +20,6 @@ Tuto.directive('wbColors', function () {
                 }
             }
 
-            //$scope.colors = ['#FFF432', '#FFA432', '#BFF432'];
         },
         link : function (scope, elm, attrs, ctrl) {
             var pickers = elm.find("button");
@@ -258,7 +257,6 @@ Tuto.directive('wbCanvas', function () {
             ctrl.init(elm[0]);
 
             elm.on('mousedown', function (event) {
-                elm.css("background-color", "red");
                 ctrl.onMouseDown(event);
 
                 elm.on('mousemove', function (event) {
@@ -266,7 +264,6 @@ Tuto.directive('wbCanvas', function () {
                 });
 
                 elm.on('mouseup', function (event) {
-                    elm.css("background-color", "blue");
                     ctrl.onMouseUp(event);
                     elm.unbind('mousemove');
                     elm.unbind('mouseup');

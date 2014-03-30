@@ -173,6 +173,23 @@ app.post('/api/v1/tutor/', function(req, res){
   });
 });
 
+app.get('/api/v1/tutor/id/', function (req, res) {
+  tutorManager.getTutor(req.user.id, function(err, data){
+    if(err){
+      res.send(500, err);
+    }else{
+      
+      var tags = [];
+
+      for(var i=0; i< data.tags.length; i++){
+        
+      }
+
+      res.send(200, data);
+    }
+  });
+});
+
 app.put('/api/v1/tutor/', function(req, res){
 
   tutorManager.updateTutor(req, function(err, data){
@@ -228,9 +245,6 @@ app.post('/api/v1/question/', function (req, res) {
     }, function(err){
       res.send(500,err);
     });
-
-    
-
     res.send(200);
   }, function(err){
     res.send(500,err);
@@ -244,14 +258,6 @@ function contactTutor(studentId){
   console.log("Attempting to contact tutor");
 
   var availableQuestion = getAvailableQuestionFromStudent(studentId);
-
-
-  // //for debugging, emitting to student
-  // console.log(availableQuestion);
-  // console.log("Emitting event for new Question");
-  // socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
-  //   console.log("got response");
-  // });
 
   if(availableQuestion !=null){
     if(availableQuestion.tutors.length > 0 ){
@@ -276,11 +282,6 @@ function contactTutor(studentId){
 };
 
 function tutorIsAvailable(tutorId){
-  // if(tutorList != null){
-  //   if(tutorList[tutorId] !=null){
-  //     return true;
-  //   }
-  // }
   return true;
 }
 
@@ -311,54 +312,6 @@ function removeTutorFromQuestion(studentId, tutorId){
     }
   }
 };
-
-/*
-var questionTags = docs._doc.tags;
-
-      var questionTutors = [];
-
-      var matchedTags = 0;
-      var numberOfTutor = 0;
-      var tutorCounter = 0;
-
-      numberOfTutor = tutorList.length;
-
-      function match(cb) {
-        tutorList.forEach(function (tutor) {
-          var pInfo = tutorManager.getInfo(tutor.userId);
-
-          var numberOfMatchedTags = 0;
-
-          pInfo.then(function (tutorTags) {
-            tutorTags.forEach(function (tutorTagId) {
-              questionTags.forEach(function (qstTagId) {
-                if (tutorTagId.equals(qstTagId)) {
-                  numberOfMatchedTags++;
-                }
-              });
-            });
-            cb(tutor.userId, numberOfMatchedTags);
-          });
-        });
-      }
-
-      match(function(tutorId, numberOfMatchedTags){
-        tutorCounter++;
-
-        if (numberOfMatchedTags > matchedTags) {
-          matchedTags = numberOfMatchedTags;
-          matchedTutor = tutorId;
-        }
-
-        if (tutorCounter == numberOfTutor) {
-          console.log("matched Tutor id", matchedTutor);
-          res.send(200, matchedTutor);
-        }
-      });
-
-*/
-
-
 
 app.get('/api/v1/user/questions', function (req, res) {
 
@@ -415,15 +368,6 @@ app.get('/api/v1/dev/tools/connectedUser', function (req, res) {
   res.send(200, people)
   
 })
-
-app.post('/api/v1/tutor/', function (req, res) {
-  var p = tutorManager.registerTutor(req, res);
-  p.then(function(tutor){
-    res.send(200, tutor);
-  }, function(err){
-    res.send(500, err);
-  })
-});
 
 app.post('/api/v1/login/', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {

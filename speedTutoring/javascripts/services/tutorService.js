@@ -42,10 +42,10 @@ Tuto.factory('TutorService', function ($http, $q) {
 		});
 	}
 
-	Service.getTutor = function(tutorId, cb){
-		var url = "/api/v1/tutor/";
+	Service.getTutor = function(cb){
+		var url = "/api/v1/tutor/id/";
 
-		$http.get(url, tutorId).success(function(tutor){
+		$http.get(url).success(function(tutor){
 			cb(null, tutor);
 		}).error(function(err){
 			cb(err);

@@ -337,13 +337,14 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 	});
 
 	getTags = function(){
+		console.log("IN GET TAGS FOR TUTORS");
 		UserService.getCurrentUser(function(err, user){
 			var tutorId = user.tutorId;
 			if(err){
 				console.log(err);
 			}else{
 				if(tutorId){
-					TutorService.getTutor(tutorId, function(err, data){
+					TutorService.getTutor(function(err, data){
 						if(err){
 							console.log(err);
 						}else{

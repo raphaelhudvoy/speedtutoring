@@ -25,7 +25,7 @@ exports.getAllOfType = function (req, res) {
 
 exports.createTag = function (req, callback) {
     var tag = new Tag(req.body);
-    
+
     tag.save(function (err) {
         if (err){
             callback(err)
@@ -37,6 +37,16 @@ exports.createTag = function (req, callback) {
     });
     // return promise;
 };
+
+exports.getTag = function(tagId, cb){
+    Tag.findById(tagId, function(err, tag){
+        if(err){
+            cb(err);
+        }else{
+            cb(null, tag);
+        }
+    })
+}
 
 exports.createIfNotExistFromQuestion = function(req,res){
 

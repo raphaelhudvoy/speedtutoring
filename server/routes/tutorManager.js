@@ -89,3 +89,13 @@ exports.updateTutor = function(req, cb){
 	  
 	});
 }
+
+exports.getTutor = function(userId, cb){
+	Tutor.findOne({userId: mongoose.Types.ObjectId(userId)}, function(err, tutor){
+		if(err){
+			cb(err);
+		}else{
+			cb(null, tutor);
+		}
+	});
+}

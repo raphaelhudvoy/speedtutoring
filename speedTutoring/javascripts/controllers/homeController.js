@@ -3,7 +3,6 @@ var App = angular.module('app', [
   'speedTutoring'
 ]);
 
-
 App.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -23,15 +22,14 @@ App.config(['$routeProvider',
       }).
       when('/tutor',{
       	templateUrl   : 'views/tutor',
-        controller    : 'tutorController',
-        controllerAs  : 'tutor'
+        controller    : 'tutorController'
       }).
       otherwise({
         redirectTo: '/main'
      });
 }]);
 
-var Tuto = angular.module('speedTutoring', ['colorpicker.module']);
+var Tuto = angular.module('speedTutoring', ['colorpicker.module', 'bootstrap-tagsinput']);
 
 Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'QuestionService', 'TagService', 'WebSocketFactory', '$location', function ($scope, UserService, TutorService, QuestionService,  TagService, WebSocketFactory, $location) {
 
@@ -41,11 +39,6 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 	$scope.vm = vm;
 
 	vm.isTutor = false;
-	UserService.isCurrentUserATutor().then(function (isTutor) {
-		vm.isTutor = isTutor;
-	}, function (err) { 
-		console.log(err);
-	});
 
 	vm.isAvailable = false;
 
@@ -65,17 +58,8 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 
 		add : function (tag) {
 			vm.question.tags.push(tag);
-
 		}
 	}
-
-	vm.allTags = [ { tagID : 1, title: "Math"}
-					,{ tagID : 2, title: "English"}
-					,{ tagID : 3, title: "Art"}
-					,{ tagID : 4, title: "Computer"}
-					,{ tagID : 5, title: "Internet"}
-					,{ tagID : 6, title: "Electricity"}
-					,{ tagID : 7, title: "Algebra"}];
 
 	vm.displayTagsSearch = false;
 	vm.askedQuestion = false;
@@ -231,23 +215,63 @@ Tuto.controller('whiteboardController', ['WebSocketFactory', function (WebSocket
 
 	this.love;
 	
-	
 }]);
 
 Tuto.controller('questionController', ['WebSocketFactory', function (WebSocketFactory) {
 
 	this.love;
 	
-	
 }]);
 
-Tuto.controller('tutorController', ['WebSocketFactory', function (WebSocketFactory) {
+Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', 'UserService', function ($scope, WebSocketFactory, TagService, UserService) {
 
-	this.love;
-	
+	var vm = {};
+	$scope.vm = vm;
+	vm.allTags=[];
+	vm.myTags=[];
+	vm.newTag="";
+
+	vm.createTag = function(tag){
+		TagService.createTag(tag, function(err, newTag){
+			if(err){
+				
+			}else{
+				vm.newTag="";
+				vm.myTags.push(newTag);
+			}
+		});
+	}
+
+	vm.addTag = function(tag){
+		var flag = false;
+		for(var i=0; i<vm.myTags.length; i++){
+			if(vm.myTags[i].tag == tag.tag){
+				flag =true;
+				break;
+			}
+		}
+		if(!flag){
+			vm.myTags.push(tag);
+		}
+	}
+
+	vm.removeTag = function(tag){
+		for(var i=0; i<vm.myTags.length; i++){
+			if(vm.myTags[i].tag == tag.tag){
+				vm.myTags.splice(i,1);
+			}
+		}
+	}
+
+	vm.saveSettings = function(){
+		//TODO: update user's tags
+	}
+
+	TagService.getAllTags().then(function(tags){
+		vm.allTags = tags;
+	});
 	
 }]);
-
 
 Tuto.controller('loginController', ['$scope', 'UserService', function ($scope, UserService) {
 

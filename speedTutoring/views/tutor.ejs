@@ -1,8 +1,28 @@
 <div class="row">
-	BECOME A TUTOR
+	<div class = "col-lg-8 col-lg-offset-2">Your current tags</div>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg">
+		<button type="button" class="btn btn-primary" data-ng-repeat="tag in vm.myTags" data-ng-click="vm.removeTag(tag)">{{tag.tag}}</button>
+</div>
 
-	FORM
+<div class="row">
+	<div class = "col-lg-8 col-lg-offset-2">Choose additional tags</div>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg">
+		<button class="btn btn-primary" data-ng-repeat="tag in vm.allTags" data-ng-click="vm.addTag(tag)">{{tag.tag}}</button>
+	</div>
+</div>
+<div class="row">
+	<div class = "col-lg-8 col-lg-offset-2">Create a tag</div>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg">
+		<input type="text" class="form-control inline" ng-model="vm.newTag">
+		<button type="button" class="btn btn-primary" type="button" ng-click="vm.createTag(newTag)">Add</button>
+	</div>
+</div>
+	
 
-	REGISTER
+</div>
+<div class="row">
+	<div class="col-lg-offset-8">
+		<button type="button" class="btn btn-primary" type="button" ng-click="vm.saveSettings()">Save settings</button>
+	</div>
 
 </div>

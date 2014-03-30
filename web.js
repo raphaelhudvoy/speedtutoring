@@ -384,12 +384,22 @@ app.get('/api/v1/user/isTutor', function (req, res) {
 
 
 app.get('/api/v1/tag/', function ( req ,res ) {
-  var allTags = tagManager.getAllTags();
+  var allTags = tagManager.getAllTags(function(err, data){
+    if(err){
+      res.send(500, err);
+    }else{
+      res.send(200, data);
+    }
+  });
+});
 
-  allTags.then(function(tags){
-    res.send(200, tags);
-  }, function(err){
-    res.send(500, err);
+app.post('/api/v1/tag/', function ( req ,res ) {
+  var newTag = tagManager.createTag(req, function(err, data){
+    if(err){
+      res.send(500, err);
+    }else{
+      res.send(200, data);
+    }
   });
 });
 

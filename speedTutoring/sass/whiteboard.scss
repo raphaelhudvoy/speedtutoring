@@ -1,7 +1,82 @@
+@import "compass/css3";
+@import "compass/css3/border-radius";
+ 
+
+
 .slider-selection {
 	background: #BABABA;
 }
 
 .slider-container {
 	margin : 0.55em 0 0 1em;
+}
+
+button.active {
+	border : 3px solid black; 
+}
+
+div.chat {
+	top:0px;
+	padding-top: 60px;
+	padding-bottom: 50px;
+	padding-left: 0px;
+	border-right : 1px solid rgb(228, 217, 217); 
+	z-index: -1;
+	position: absolute;
+	float: right;
+	width: 400px;
+	height: 100%;
+	background: transparent;
+	@include box-sizing(border-box);
+
+	ul {
+		
+		overflow: auto;
+		overflow-x: hidden;
+		max-height: 100%;
+		list-style-type: none;
+		padding-bottom: 40px;
+
+		div.msg-content {
+			word-wrap: break-word;
+			@include box-sizing(border-box);
+			margin-bottom : 0.4em;
+			padding: 0.2em;
+			border : 1px solid rgba(0, 0, 0, .18);
+			background-color : #f7f7f7;
+			@include border-radius(5px);
+			font-size: 1.1em;
+
+
+		}
+
+		div.me {
+			background-color : #dbedfe;
+		}
+	
+	}
+	
+
+}
+
+div.chat-tools {
+	width: 100%;
+	position: absolute;
+	bottom: 50px;
+	@include box-sizing(border-box);
+
+	input.chat-input {
+		width: 100%;
+		height:40px;
+		border: none;
+		border-top: 1px solid rgb(228, 217, 217);
+		font-size: 1.1em;
+	}
+}
+
+
+canvas {
+	position: absolute;
+	left: 400px;
+
 }

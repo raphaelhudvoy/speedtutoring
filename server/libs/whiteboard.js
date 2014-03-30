@@ -15,7 +15,12 @@ exports.init = function(sckt, clientSocket) {
 
 	client.on('drawing:end', function (data) {
 		socket.sockets.in('bigWB').emit('drawing:end', { id : data.id, path: data.path});
-		socket.sockets.in('bigWB').emit('new-artist');
+		//socket.sockets.in('bigWB').emit('new-artist');
 
+	});
+
+	client.on('chat:send', function (msg, cb) {
+		socket.sockets.in('bigWB').emit('chat:newMsg', msg);
+		cb();
 	});
 }

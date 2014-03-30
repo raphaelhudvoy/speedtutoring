@@ -24,7 +24,7 @@ App.config(['$routeProvider',
         controller    : 'tutorController'
       }).
       otherwise({
-        redirectTo: '/whiteboard'
+        redirectTo: '/main'
      });
 }]);
 

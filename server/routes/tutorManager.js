@@ -63,3 +63,29 @@ exports.getAllTutors = function(){
 
 	return promise;
 }
+
+exports.updateTutor = function(req, cb){
+
+	var tutorObj = req.body;
+
+	var tags = [];
+
+
+	tutorObj.tags.forEach(function(tag){
+		tags.push(mongoose.Types.ObjectId(tag._id));
+	});
+
+	tutorObj.userId = req.user._doc._id;
+	tutorObj.tags = tags;
+
+	var tutor = new Tutor(tutorObj);
+
+	tutor.save(function (err) {
+	  if (err){
+	  	cb(err);
+	  }else{
+	  	cb(null, tutor);
+	  }
+	  
+	});
+}

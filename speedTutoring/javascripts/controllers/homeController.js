@@ -308,11 +308,11 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 				console.log(err);
 			}else{
 				if(tutorId){
-					TutorService.getTags(tutorId, function(err, data){
+					TutorService.getTutor(tutorId, function(err, data){
 						if(err){
 							console.log(err);
 						}else{
-							vm.myTags = data;
+							vm.myTags = data.tags;
 						}
 					});
 				}

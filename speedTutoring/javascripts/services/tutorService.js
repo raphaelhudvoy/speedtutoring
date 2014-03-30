@@ -42,17 +42,15 @@ Tuto.factory('TutorService', function ($http, $q) {
 		});
 	}
 
-	// Service.updateTutor = function(tutor, cb){
+	Service.getTutor = function(tutorId, cb){
+		var url = "/api/v1/tutor/";
 
-	// 	var url = "/api/v1/tutor/";
-
-
-	// 	$http.put(url, tutor).success(function (updatedTutor) {
-	// 		cb(null, updatedTutor);
-	// 	}).error(function (err) {
-	// 		cb(err);
-	// 	});
-	// }
+		$http.get(url, tutorId).success(function(tutor){
+			cb(null, tutor);
+		}).error(function(err){
+			cb(err);
+		});
+	}
 
 	return Service;
 

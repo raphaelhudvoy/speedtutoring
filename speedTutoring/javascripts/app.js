@@ -1,6 +1,7 @@
 var App = angular.module('app', [
   'ngRoute',
-  'speedTutoring'
+  'speedTutoring',
+  'ui.bootstrap'
 ]);
 
 App.config(['$routeProvider',
@@ -16,9 +17,8 @@ App.config(['$routeProvider',
         controllerAs : 'wb'
       }).
       when('/question',{
-      	templateUrl   : 'views/question',
-        controller    : 'questionController',
-        controllerAs  : 'qst'
+      	templateUrl   : 'views/matching',
+        controller    : 'matchingController'
       }).
       when('/tutor',{
       	templateUrl   : 'views/tutor',

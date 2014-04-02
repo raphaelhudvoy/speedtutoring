@@ -55,40 +55,6 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		}
 	}
 
-	WebSocketFactory.receive('newQuestion', function(data){
-		console.log("received question");
-		vm.displayAvailableQuestion(data);
-	});
-
-	WebSocketFactory.receive('foundTutor', function(data){
-		console.log("found a tutor");
-		vm.displayTutorAccept(data);
-	});
-
-	vm.displayAvailableQuestion = function(question){
-		vm.availableQuestion = question;
-		vm.askStep =3;
-	};
-
-	vm.displayTutorAccept = function(tutor){
-		vm.tutorAvailable = tutor;
-		vm.askStep =4;
-	};
-
-	vm.questionResponse = function(response){
-		vm.availableQuestion.response = response;
-		WebSocketFactory.emit('questionResponse', vm.availableQuestion);
-	};
-
-	vm.tutorResponse = function(response){
-
-		$location.path("/whiteboard");
-		// vm.tutorAvailable.response = response;
-		// WebSocketFactory.emit('tutorResponse', vm.tutorAvailable);
-		// vm.askStep =5;
-	};
-
-
 	vm.registerTutor = function(){
 		vm.chooseTags = false;
 		vm.isTutor = true;
@@ -114,13 +80,11 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.askedQuestion = true;
 
 
-		var p = QuestionService.askQuestion(question);
-
-		p.then(function(tutor){
-			// alert('Found tutor: '+ tutor);
-		});
+		
 
 		$location.path("/question");
+
+		QuestionService.askQuestion(question);
 
 	}
 

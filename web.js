@@ -11,7 +11,6 @@ var express         	= require('express')
   , tutorManager      = require('./server/routes/tutorManager.js')
   , tagManager        = require('./server/routes/tagManager.js')
   , routes            = require('./server/routes')
-  , matching          = require('./server/matching.js')
   , FacebookStrategy 	= require('passport-facebook').Strategy
   , LocalStrategy     = require('passport-local').Strategy
   , whiteboard        = require('./server/libs/whiteboard.js');
@@ -205,51 +204,60 @@ app.post('/api/v1/question/', function (req, res) {
 
   console.log("Received a new question");
 
-  var p = questionManager.askQuestion(req.body,req,res);
-
-  p.then(function(docs){
-
-    var question = {};
-
-    question.question = docs._doc.question;
-    var studentId = docs._doc.userId;
-
-    question.studentId = studentId;
-
-    var availableQuestion = {'question': question, tutors: []};
-
-    //find tutors with tags and sort
-
-    var allTutors = tutorManager.getAllTutors();
-
-    allTutors.then(function(docs){
-
-      var tutors = [];
-
-      for(var i=0; i< docs.length;i++){
-
-        var tutor = docs[i];
-
-        tutors.push(tutor._doc);
-      }
-
-      var availableTutorsWithTags = tutors;
-
-      availableQuestion.tutors = availableTutorsWithTags;
-
-      availableQuestions[studentId]=availableQuestion;
-
-      contactTutor(studentId);
-
+  questionManager.askQuestion(req.body,req,res, function(err, savedQuestion){
+    if(err){
+      res.send(500, err);
+    }else{
       res.send(200);
-    }, function(err){
-      res.send(500,err);
-    });
-    res.send(200);
-  }, function(err){
-    res.send(500,err);
-  });
 
+      var question = {};
+
+      question.question = savedQuestion._doc.question;
+      var studentId = savedQuestion._doc.userId;
+
+      question.studentId = studentId;
+
+      var availableQuestion = {'question': question, tutors: []};
+
+      //find tutors with tags and sort
+
+      // TODO: pending questions,  emit from student that he is ready to move onto  available questions,
+
+      socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
+        console.log("got response");
+      });
+
+      // tutorManager.getAllTutors(function(err, docs){
+      //   if (err){
+      //     res.send(500, err);
+      //   }else{
+      //     var tutors = [];
+
+      //     for(var i=0; i< docs.length;i++){
+
+      //       var tutor = docs[i];
+
+      //       tutors.push(tutor._doc);
+      //     }
+
+      //     var availableTutorsWithTags = tutors;
+
+      //     //
+
+
+      //     availableQuestion.tutors = availableTutorsWithTags;
+
+      //     availableQuestions[studentId]=availableQuestion;
+
+      //     // contactTutor(studentId);
+
+
+
+          // res.send(200);
+      //   }
+      // });
+    }
+  });
 });
 
 
@@ -269,7 +277,8 @@ function contactTutor(studentId){
           availableQuestion.question.tutorId = tutor.userId;
           console.log(availableQuestion);
           console.log("Emitting event for new Question");
-          socket.sockets.in(studentId).emit("newQuestion", availableQuestion.question, function(response){
+          
+          socket.sockets.in(tutor.userId).emit("newQuestion", availableQuestion.question, function(response){
             console.log("got response");
           });
           break;
@@ -414,15 +423,28 @@ socket.sockets.on('connection', function (clientSocket) {
 
     //check available questions
 
+    //if available qst list empty -> contact tutor
+
   });
 
   clientSocket.on('availability-off', function () {
+
+    var user = people[clientSocket.id];
+    user.isAvailable = false;
+
+    var tutorQuestions = tutorList[user.userId];
+
+    for(var i = 0; i<tutorQuestions.questions.length;i++){
+      removeTutorFromQuestion(tutorQuestions.questions[i].studentId, user.userId);
+    }
+
+    delete tutorList[user.userId];
 
     // tutorList.remove({ socketId: clientSocket.id, userId : userId});
 
   });
 
-  clientSocket.on('questionResponse', function(response){
+  clientSocket.on('tutorResponse', function(response){
     var studentId = response.studentId;
     var tutorId = response.tutorId;
     
@@ -442,7 +464,7 @@ socket.sockets.on('connection', function (clientSocket) {
   });
 
 
-  clientSocket.on('tutorResponse', function(response){
+  clientSocket.on('studentResponse', function(response){
     var studentId = response.studentId;
     var tutorId = response.tutorId;
     

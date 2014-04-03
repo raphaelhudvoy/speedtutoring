@@ -12,7 +12,7 @@ Tuto.factory('TagService', function ($http, $q) {
 	}
 
 
-	Service.getAllTags = function () {
+	Service.suggestsTag = function () {
 
 		var deferred = $q.defer();
 		var url = "/api/v1/tag/";
@@ -26,6 +26,20 @@ Tuto.factory('TagService', function ($http, $q) {
 		return deferred.promise;
 
 	};
+
+	Service.searchTag = function (input) {
+		var deferred = $q.defer();
+		var url = "/api/v1/tag/"+input;
+
+		$http.get(url).success(function (res) {
+			deferred.resolve(res);
+		}).error(function(err) {
+			console.log(err);
+		});
+
+		return deferred.promise;
+	}
+
 
 	Service.createTag = function(tag, cb){
 

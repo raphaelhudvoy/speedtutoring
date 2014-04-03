@@ -231,16 +231,13 @@ app.post('/api/v1/question/', function (req, res) {
 
       var pendingQuestion = {'question': question, tutors: []};
 
-      //find tutors with tags and sort
-
-
       var availableTutorsWithTags = getAllMatchedTutors(question.question);
 
       pendingQuestion.tutors = availableTutorsWithTags;
 
       pendingQuestions[studentId]=pendingQuestion;
 
-      // contactTutor(studentId);
+      // contactTutor(studentId); // do this only when student is ready on client side
 
       res.send(200);
       // TODO: pending questions,  emit from student that he is ready to move onto  available questions,
@@ -254,9 +251,10 @@ function getAllMatchedTutors(question){
     var tutor = availableTutorList[tutorId];
 
     if(matchTutor(question)){
-
+      matchedTutorList.push(tutor);
     }
   }
+  return matchedTutorList;
 }
 
 function matchTutor (tutor, question){
@@ -522,7 +520,7 @@ socket.sockets.on('connection', function (clientSocket) {
 
     contactTutor(userId);
 
-    pendingQuestions[userId] =null;
+    pendingQuestions[userId] = null;
 
   });
 

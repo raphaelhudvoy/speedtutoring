@@ -8,10 +8,28 @@ var Tag = mongoose.model('Tag', tagSchema);
 
 exports.getAllTags = function(callback){
 
-    Tag.find({}, function(err, tags){
+    var query = {};
+    var fields = { tag : true};
+    var options = {limit : 25};
+
+    Tag.find(query, fields, options, function(err, tags){
         if(err){
             callback(err);
         }else{
+            callback(null, tags);
+        }
+    });
+}
+
+exports.searchForTags = function (input, callback) {
+
+    var query = { tag : {$regex : '^'+input}};
+    var fields = { tag : true};
+
+    Tag.find(query, fields, function (err, tags) {
+        if (err) {
+            callback(err);
+        } else {
             callback(null, tags);
         }
     });
@@ -46,6 +64,16 @@ exports.getTag = function(tagId, cb){
             cb(null, tag);
         }
     })
+}
+
+exports.getTags = function (tags, cb) {
+    Tag.find({_id : { $in : tags}}, {tag : true}, function (err, tags) {
+        if (err) {
+            cb(err);
+        } else {
+            cb(null, tags);
+        }
+    });
 }
 
 exports.createIfNotExistFromQuestion = function(req,res){

@@ -3,8 +3,29 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 	var vm = {};
 	$scope.vm = vm;
 	vm.allTags=[];
-	vm.myTags=[];
+	vm.myTags={};
 	vm.newTag="";
+
+	vm.suggestedTags = {};
+
+	vm.test = "allo!";
+
+
+	TagService.suggestsTag().then(function (tags) {
+
+		for (var i = 0, tag; tag = tags[i]; i++) {
+			vm.suggestedTags[tag.tag] = tag._id;
+		}
+
+	}, function (err) {
+
+		console.log('Not abble to suggest tags');
+
+	});
+
+	vm.beAvailable = function () {
+		WebSocketFactory.emit('availability-on', {});
+	}
 
 	vm.createTag = function(tag){
 		TagService.createTag(tag, function(err, newTag){
@@ -21,24 +42,13 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 	}
 
 	vm.addTag = function(tag){
-		var flag = false;
-		for(var i=0; i<vm.myTags.length; i++){
-			if(vm.myTags[i].tag == tag.tag){
-				flag =true;
-				break;
-			}
-		}
-		if(!flag){
-			vm.myTags.push(tag);
-		}
+		vm.myTags[tag] = vm.suggestedTags[tag]
+		delete vm.suggestedTags[tag];
 	}
 
 	vm.removeTag = function(tag){
-		for(var i=0; i<vm.myTags.length; i++){
-			if(vm.myTags[i].tag == tag.tag){
-				vm.myTags.splice(i,1);
-			}
-		}
+		vm.suggestedTags[tag] = vm.myTags[tag]
+		delete vm.myTags[tag];
 	}
 
 	vm.saveSettings = function(){
@@ -49,7 +59,15 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 				console.log(err);
 			}else{
 				if(tutorId){
-					TutorService.updateTutor(tutorId, vm.myTags, function(err, data){
+
+					// Converts tags to array
+					var tags = [];
+					for (var tag in vm.myTags) {
+						tags.push({tag: tag, _id : vm.myTags[tag]});
+					}
+
+
+					TutorService.updateTutor(tutorId, tags, function(err, data){
 						if(err){
 							console.log(err);
 						}else{
@@ -73,12 +91,7 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 		});
 	}
 
-	TagService.getAllTags().then(function(tags){
-		vm.allTags = tags;
-	});
-
 	getTags = function(){
-		console.log("IN GET TAGS FOR TUTORS");
 		UserService.getCurrentUser(function(err, user){
 			var tutorId = user.tutorId;
 			if(err){
@@ -89,7 +102,9 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 						if(err){
 							console.log(err);
 						}else{
-							vm.myTags = data.tags;
+							for (var i = 0, tag; tag = data.tags[i]; i++) {
+								vm.myTags[tag.tag] = tag._id;
+							}
 						}
 					});
 				}

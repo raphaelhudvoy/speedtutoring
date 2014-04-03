@@ -180,11 +180,24 @@ app.get('/api/v1/tutor/id/', function (req, res) {
       
       var tags = [];
 
-      for(var i=0; i< data.tags.length; i++){
-        
+      for (var i = 0, tag; tag = data.tags[i]; i++) {
+        tags.push(tag);
       }
 
-      res.send(200, data);
+      tagManager.getTags(tags, function (err , tags) {
+        if (err) {
+          res.send(500);
+        } else {
+
+          data._doc.tags = [];
+
+          for (var i = 0, tag; tag = tags[i]; i++) {
+            data._doc.tags.push(tag._doc);
+          }
+
+          res.send(200, data);
+        }
+      })
     }
   });
 });
@@ -362,6 +375,20 @@ app.get('/api/v1/tag/', function ( req ,res ) {
   });
 });
 
+app.get('/api/v1/tag/:input', function ( req ,res ) {
+
+  var input = req.params.input;
+
+  var allTags = tagManager.searchForTags(input, function(err, data){
+    if(err){
+      res.send(500, err);
+    }else{
+      res.send(200, data);
+    }
+  });
+});
+
+
 app.post('/api/v1/tag/', function ( req ,res ) {
   var newTag = tagManager.createTag(req, function(err, data){
     if(err){
@@ -397,6 +424,7 @@ app.post('/api/v1/login/', function (req, res, next) {
 var socket             = require('socket.io').listen(app.listen(app.get('port')));
 
 var people             = {};
+
 var availableQuestions = {};
 var tutorList          = {};
 
@@ -422,6 +450,7 @@ socket.sockets.on('connection', function (clientSocket) {
   clientSocket.on('availability-on', function () {
 
     //check available questions
+    console.log('NEW TUTRO AVAILABLE');
 
     //if available qst list empty -> contact tutor
 

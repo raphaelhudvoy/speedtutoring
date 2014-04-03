@@ -1,14 +1,20 @@
 <div class="row">
-	<div class = "col-lg-8 col-lg-offset-2">Your current tags</div>
-	<div class = "col-lg-8 col-lg-offset-2 well well-lg">
-		<button type="button" class="btn btn-primary" data-ng-repeat="tag in vm.myTags" data-ng-click="vm.removeTag(tag)">{{tag.tag}}</button>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg tag-list">
+		<button type="button" class="btn btn-info" data-ng-click="vm.beAvailable()">Get matched with a student</button>
 	</div>
 </div>
 
 <div class="row">
-	<div class = "col-lg-8 col-lg-offset-2">Choose additional tags</div>
-	<div class = "col-lg-8 col-lg-offset-2 well well-lg">
-		<button class="btn btn-primary" data-ng-repeat="tag in vm.allTags" data-ng-click="vm.addTag(tag)">{{tag.tag}}</button>
+	<div class = "col-lg-8 col-lg-offset-2">Your current tags</div>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg tag-list">
+		<button type="button" class="btn btn-primary" data-ng-repeat="(tag,value) in vm.myTags" data-ng-click="vm.removeTag(tag)">{{tag}}</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class = "col-lg-8 col-lg-offset-2">Choose additional tags {{ test }}</div>
+	<div class = "col-lg-8 col-lg-offset-2 well well-lg tag-list">
+		<button type="button" class="btn btn-default" ng-repeat="(tag, description) in vm.suggestedTags" ng-click="vm.addTag(tag)">{{ tag }}</button>
 	</div>
 </div>
 

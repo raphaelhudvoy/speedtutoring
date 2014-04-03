@@ -441,6 +441,7 @@ socket.sockets.on('connection', function (clientSocket) {
   clientSocket.on('availability-on', function () {
 
     //check available questions
+    console.log('NEW TUTRO AVAILABLE');
 
   });
 

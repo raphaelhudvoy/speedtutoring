@@ -23,6 +23,10 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 
 	});
 
+	vm.beAvailable = function () {
+		WebSocketFactory.emit('availability-on', {});
+	}
+
 	vm.createTag = function(tag){
 		TagService.createTag(tag, function(err, newTag){
 			if(err){

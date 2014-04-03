@@ -13,23 +13,19 @@ var questionSchema = new Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-exports.askQuestion = function (q, req, res) {
+exports.askQuestion = function (q, req, res, cb) {
 
 	q.userId = req.user._doc._id;
 
 	var question = new Question(q);
 
-	var promise = new mongoose.Promise;
-
 	question.save(function (err) {
 	  	  if (err){
-		  	promise.resolve(err);
+		  	cb(err);
 		  }else{
-		  	promise.resolve(null, question);
+		  	cb(null, question);
 		  }
 	});
-
-	return promise;
 };
 
 

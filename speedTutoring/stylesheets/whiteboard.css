@@ -1,9 +1,85 @@
-/* line 1, ../sass/whiteboard.scss */
+/* line 6, ../sass/whiteboard.scss */
 .slider-selection {
   background: #BABABA;
 }
 
-/* line 5, ../sass/whiteboard.scss */
+/* line 10, ../sass/whiteboard.scss */
 .slider-container {
   margin: 0.55em 0 0 1em;
+}
+
+/* line 14, ../sass/whiteboard.scss */
+button.active {
+  border: 3px solid black;
+}
+
+/* line 18, ../sass/whiteboard.scss */
+div.chat {
+  top: 0px;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  padding-left: 0px;
+  border-right: 1px solid #e4d9d9;
+  z-index: -1;
+  position: absolute;
+  float: right;
+  width: 400px;
+  height: 100%;
+  background: transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 32, ../sass/whiteboard.scss */
+div.chat ul {
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  list-style-type: none;
+  padding-bottom: 40px;
+}
+/* line 40, ../sass/whiteboard.scss */
+div.chat ul div.msg-content {
+  word-wrap: break-word;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 0.4em;
+  padding: 0.2em;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: #f7f7f7;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+/* line 53, ../sass/whiteboard.scss */
+div.chat ul div.me {
+  background-color: #dbedfe;
+}
+
+/* line 62, ../sass/whiteboard.scss */
+div.chat-tools {
+  width: 100%;
+  position: absolute;
+  bottom: 50px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 68, ../sass/whiteboard.scss */
+div.chat-tools input.chat-input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-top: 1px solid #e4d9d9;
+  font-size: 1.1em;
+}
+
+/* line 78, ../sass/whiteboard.scss */
+canvas {
+  position: absolute;
+  left: 400px;
 }

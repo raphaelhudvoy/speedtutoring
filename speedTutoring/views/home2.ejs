@@ -1,0 +1,77 @@
+<div class = "container-fluid">
+	<div class = "row nohelp">
+		<div class = "col-lg-8 col-lg-offset-2">
+			<div ng-switch="vm.askStep">
+
+				<div data-ng-switch-when="1">
+
+					<div class="container-fluid  well well-lg">
+
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class = "text-center">What do you need help with? </h1>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<div class="tag-list">
+									<button type="button" class="btn btn-default" ng-repeat="(tag, description) in vm.suggestedTags" ng-click="vm.selectTag(tag)">{{ tag }}</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<h4 data-ng-hide="vm.totalTags==0">Selected:</h4>
+								<div class="tag-list">
+									<button type="button" class="btn btn-info" ng-repeat="(tag, value) in vm.selectedTags" ng-click="vm.unselectTag(tag)">{{ tag}}</button>
+									
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<div class="input-group">
+									<input type="text" class="form-control" ng-model="vm.tagSearchInput" placeholder="Search for other tags" ng-change="vm.searchTag()">              
+									<ul class="tag-search-result">
+										<li ng-show="vm.tagSearchInput">{{ vm.tagSearchInput}}</li>
+										<li ng-repeat="(key, value) in vm.tagSearchResults">{{key}}</li>
+									</ul>
+									<span class="input-group-btn">
+										<button class="btn btn-primary" ng-disabled="vm.totalTags==0" ng-click="vm.goToStep2()">Continue</button>
+									</span>
+								</div>
+								
+							</div>
+						</div>
+
+						<!-- /input-group -->               
+					</div>
+
+					<div class = "help">
+						<a class="btn btn-default btn-lg btn-block" href="#/tutor">Help someone else</a>
+					</div>
+						
+				</div>
+				<div data-ng-switch-when="2">
+					<div class="container-fluid  well well-lg">
+						<h4 data-ng-hide="vm.totalTags==0">Selected:</h4>
+						<div class="tag-list">
+							<button type="button" class="btn btn-info" ng-repeat="(tag, value) in vm.selectedTags">{{ tag}}</button>
+						</div>
+						<h1 class = "text-center">What is your question?</h1>
+						<div class="input-group">
+						  <input type="text" class="form-control" data-ng-model="vm.question.question" ng-keyup="vm.checkEnter($event)">
+						  <span class="input-group-btn">
+							<button class="btn btn-primary" type="button" ng-disabled="vm.totalTags==0" ng-click="vm.askQuestion(vm.question)">Ask</button>
+						  </span>
+						</div><!-- /input-group -->
+					  </div>
+				  </div>
+				<div ng-switch-default> </div>
+			</div>
+		</div>
+	</div>
+</div>

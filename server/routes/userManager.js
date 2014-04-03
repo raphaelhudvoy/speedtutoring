@@ -80,18 +80,15 @@ exports.createUser = function (req, res) {
 	return promise;
 };
 
-exports.updateTutor = function (tutor) {
-
-	var promise = new mongoose.Promise;
+exports.updateTutor = function (tutor, cb) {
 
 	User.update({_id : tutor.userId}, {tutorId : tutor._id}).exec(function (err) {
 		if (err){
-			promise.resolve(err);
+			cb(err);
 		}else{
-			promise.resolve(null, tutor);
+			cb(null, tutor);
 		}
 	});
-	return promise;
 };
 
 exports.isTutor = function(userId){

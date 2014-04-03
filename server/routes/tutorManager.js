@@ -9,9 +9,8 @@ var tutorSchema = new Schema({
 
 var Tutor = mongoose.model('Tutor', tutorSchema);
 
-exports.registerTutor = function(req){
+exports.registerTutor = function(req, cb){
 	var tutorObj = req.body;
-	var promise = new mongoose.Promise;
 
 	var tags = [];
 
@@ -27,14 +26,12 @@ exports.registerTutor = function(req){
 
 	tutor.save(function (err) {
 	  if (err){
-	  	promise.resolve(err);
+	  	cb(err);
 	  }else{
-	  	promise.resolve(null, tutor);
+	  	cb(null, tutor);
 	  }
 	  
 	});
-
-	return promise;
 }
 
 exports.getInfo = function(uId){
@@ -65,4 +62,45 @@ exports.getAllTutors = function(){
   });
 
 	return promise;
+}
+
+exports.updateTutor = function(req, cb){
+
+	var tutor = req.body;
+
+	var tags = [];
+
+	Tutor.findOne({_id : tutor.tutorId}, function (err, user) {
+		if (err) { cb(err) 
+
+		} else if (user == null) {
+			cb('no tutor find');
+
+		} else {
+
+			tutor.tags.forEach(function(tag){
+				tags.push(mongoose.Types.ObjectId(tag._id));
+			});
+
+			tutor.tags = tags;
+
+			user.save(function (err, user) {
+				if (err) { cb(err)}
+				else {
+					cb(null, user);
+				}
+			});
+		}
+	});
+}
+
+exports.getTutor = function(userId, cb){
+	Tutor.findOne({userId: mongoose.Types.ObjectId(userId)}, function(err, tutor){
+
+		if(err){
+			cb(err);
+		}else{
+			cb(null, tutor);
+		}
+	});
 }

@@ -4,13 +4,12 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
-<link rel="shortcut icon" href="images/logosymbol.ico">
+<link rel="shortcut icon" href="images/tutrlogo-logoonly.png">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>SpeedTutoring: Learn the quick way</title>
+	<title>tutr: learn the quick way</title>
 	
 	<link rel="stylesheet" href="css/colorpicker.css">
-	<link rel="stylesheet" href="stylesheets/app.css">
 	<link rel="stylesheet" href="stylesheets/home.css">
 	<link rel="stylesheet" href="css/slider.css">
 	<link rel="stylesheet" href="stylesheets/whiteboard.css">
@@ -44,20 +43,19 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<img src="images/logosymbol.png" class="logo-icon" data-ng-click="vm.askQuestion({})" > </a>
-			<img src="images/speedtutoringlogo.png" class="logo" > </a>
+			<a href="#main"><img src="images/tutrlogo-small.png" height="45"></a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-			<li class="username">
-				<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
-			</li>
+<!-- 	      <ul class="nav navbar-nav">
+    			<li class="username">
+    				<a href="#" data-ng-click="vm.setAvailabilityOn()"><%=user.firstName %></a>
+    			</li>
 	      </ul>
-	     
+	      -->
 	      <ul class="nav navbar-nav navbar-right">
-	        <li data-ng-hide="vm.isTutor">
+	    <!--     <li data-ng-hide="vm.isTutor">
 				<a href="#" data-ng-click="vm.askStep=0;">Become a tutor </a>
 			</li>
 			<li data-ng-show="vm.isAvailable">
@@ -65,7 +63,7 @@
 			</li>
 			<li data-ng-hide="vm.isAvailable">
 				<a href="#" data-ng-click="vm.setAvailabilityOn()">Unavailable</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="/logout"> Logout</a>
 			</li>
@@ -117,6 +115,9 @@
   </script>
 
     <script src="javascripts/vendor/angular.js"></script>
+    <script src="javascripts/vendor/angular-animate.js"></script>
+    <script src="javascripts/vendor/ui-bootstrap-tpls-0.10.0.min.js"></script>
+
     <script src="javascripts/vendor/ngRoute.js"></script>
     <script type="text/javascript" src="javascripts/vendor/paper.js"></script>
 
@@ -124,9 +125,16 @@
 
 	<script type="text/javascript" src="javascripts/vendor/bootstrap-colorpicker-module.js"></script>
 
+	<script type="text/javascript" src="javascripts/app.js"></script>
+
 
  <!-- Controllers -->
 	<script type="text/javascript" src="javascripts/controllers/homeController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/matchingController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/tutorController.js"></script>
+	<script type="text/javascript" src="javascripts/controllers/whiteboardController.js"></script>
+
+
 
 
  <!-- Services -->

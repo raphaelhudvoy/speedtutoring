@@ -77,4 +77,6 @@ Tuto.controller('matchingController', ['$scope', 'WebSocketFactory', '$modal', f
 	    $modalInstance.close($scope.response);
 	  };
 	};
+	
+	WebSocketFactory.emit('studentReady', vm.availableQuestion);
 }]);

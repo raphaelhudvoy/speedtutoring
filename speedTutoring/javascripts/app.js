@@ -8,7 +8,7 @@ App.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/main', {
-        templateUrl   : 'views/home2',
+        templateUrl   : 'views/main',
         controller    : 'HomeController'
       }).
       when('/whiteboard', {
@@ -17,8 +17,12 @@ App.config(['$routeProvider',
         controllerAs : 'wb'
       }).
       when('/question',{
-      	templateUrl   : 'views/matching',
-        controller    : 'matchingController'
+      	templateUrl   : 'views/studentMatching',
+        controller    : 'studentMatchingController'
+      }).
+      when('/tutorMatching',{
+        templateUrl   : 'views/tutorMatching',
+        controller    : 'tutorMatchingController'
       }).
       when('/tutor',{
       	templateUrl   : 'views/tutor',

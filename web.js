@@ -67,13 +67,13 @@ function ensureAuthenticated (req, res, next) {
     res.redirect('/login');
 }
 
-//mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
+mongoose.connect('mongodb://raph:jfadsoiqwohjf0984hjg940k23h2he0d@paulo.mongohq.com:10061/app19381734');
 
 
 //mongoose.connect('mongodb://raph:raph@paulo.mongohq.com:10061/app19381734');
 //mongoose.connect('mongodb://raph:sacha123@paulo.mongohq.com:10072/app19407881');
 
-mongoose.connect('mongodb://localhost/speed');
+//mongoose.connect('mongodb://localhost/speed');
 
 
 var db = mongoose.connection;
@@ -144,14 +144,13 @@ app.get('/api/v1/user/id/', function (req, res) {
 });
 
 app.post('/api/v1/user/', function (req, res) {
-  var p = userManager.createUser(req, res);
-
-  p.then(function(docs){
-      res.send(200, docs);
-    }, function (err){
-      res.send(500,err);
+  userManager.createUser(req, res, function(err, newUser){
+    if(err){
+      res.send(500, err);
+    }else{
+      res.send(200, newUser);
     }
-  );
+  });
 });
 
 app.post('/api/v1/tutor/', function(req, res){
@@ -217,22 +216,26 @@ app.post('/api/v1/question/', function (req, res) {
 
   console.log("Received a new question");
 
-  questionManager.askQuestion(req.body,req,res, function(err, savedQuestion){
-    if(err){
-      res.send(500, err);
-    }else{
-      res.send(200);
+  var questionToBeAsked = req.body;
+
+
+
+  // questionManager.askQuestion(questionToBeAsked,req,res, function(err, savedQuestion){
+  //   if(err){
+  //     res.send(500, err);
+  //   }else{
 
       var question = {};
 
-      question.question = savedQuestion._doc.question;
-      var studentId = savedQuestion._doc.userId;
+      question.question = questionToBeAsked;
+      var studentId = req.user._doc._id;
 
       question.studentId = studentId;
 
       var pendingQuestion = {'question': question, tutors: []};
 
-      var availableTutorsWithTags = getAllMatchedTutors(question.question);
+
+      var availableTutorsWithTags = getAllMatchedTutors(question);
 
       pendingQuestion.tutors = availableTutorsWithTags;
 
@@ -242,16 +245,16 @@ app.post('/api/v1/question/', function (req, res) {
 
       res.send(200);
       // TODO: pending questions,  emit from student that he is ready to move onto  available questions,
-    }
-  });
+    // }
+  // });
 });
 
 function getAllMatchedTutors(question){
   var matchedTutorList = [];
   for(var tutorId in availableTutorList){
-    var tutor = availableTutorList[tutorId];
+    var tutor = availableTutorList[tutorId].tutor;
 
-    if(matchTutor(question)){
+    if(matchTutor(tutor, question)){
       matchedTutorList.push(tutor);
     }
   }
@@ -260,7 +263,7 @@ function getAllMatchedTutors(question){
 
 function matchTutor (tutor, question){
   
-  var tags = question.tags;
+  var tags = question.question.tags;
 
   for(var i=0; i<tags.length;i++){
     for(var j=0; j<tutor.tags.length;j++){
@@ -453,29 +456,61 @@ socket.sockets.on('connection', function (clientSocket) {
     var user = people[clientSocket.id];
     user.isAvailable = true;
 
-    tutorManager.getTutor(user.userId, function(err, tutorModel){
+    tutorManager.getTutor(user.userId, function(err, data){
       if(err){
-
+        res.send(500, err);
       }else{
-        var tutorMatching = {tutor: tutorModel};
+        var tutor = {};
 
-        var questionList = [];
+        tutor.userId = user.userId;
 
-        for(var studentId in availableQuestions){
-          var question = availableQuestions[studentId].question;
-          if(matchTutor(question)){
-            questionList.push(question);
-            availableQuestions[studentId].tutors.push(user.userId);
+        var tags = [];
 
-            //if available qst tutor list empty -> contact tutor
-          }
+        for (var i = 0, tag; tag = data.tags[i]; i++) {
+          tags.push(tag);
         }
 
-        tutorMatching.questions = questionList;
+        tagManager.getTags(tags, function (err , tags) {
+          if (err) {
+            res.send(500);
+          } else {
 
-        availableTutorList[user.userId] = tutorMatching;
+            tutor.tags = [];
+
+            for (var i = 0, tag; tag = tags[i]; i++) {
+              tutor.tags.push(tag._doc.tag);
+            }
+
+            var tutorMatching = {tutor: tutor};
+            var questionList = [];
+
+            for(var studentId in availableQuestions){
+              var question = availableQuestions[studentId].question;
+              if(matchTutor(tutor, question)){
+                questionList.push(question);
+                availableQuestions[studentId].tutors.push(user.userId);
+
+                //if available qst tutor list empty -> contact tutor
+              }
+            }
+
+            tutorMatching.questions = questionList;
+
+            availableTutorList[user.userId] = tutorMatching;
+          }
+        })
       }
     });
+
+    // tutorManager.getTutor(user.userId, function(err, tutorModel){
+    //   if(err){
+
+    //   }else{
+    //     var tutorMatching = {tutor: tutorModel};
+
+
+    //   }
+    // });
 
     
   });
@@ -532,6 +567,9 @@ socket.sockets.on('connection', function (clientSocket) {
     if(response.response == 0){
 
       //join tutor room for whiteboard
+
+      socket.sockets.in(studentId).emit("wbReady", {});
+      socket.sockets.in(tutorId).emit("wbReady", {});
 
     } else if(response.response == 1){
 

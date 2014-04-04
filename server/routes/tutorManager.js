@@ -14,8 +14,9 @@ exports.registerTutor = function(req, cb){
 
 	var tags = [];
 
+	var tutorTags = tutorObj.tags;
 
-	tutorObj.tags.forEach(function(tag){
+	tutorTags.forEach(function(tag){
 		tags.push(mongoose.Types.ObjectId(tag._id));
 	});
 

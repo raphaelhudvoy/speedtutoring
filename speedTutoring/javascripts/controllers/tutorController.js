@@ -1,4 +1,4 @@
-Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', 'UserService', 'TutorService' , function ($scope, WebSocketFactory, TagService, UserService, TutorService) {
+Tuto.controller('tutorController', ['$scope','$location', 'WebSocketFactory', 'TagService', 'UserService', 'TutorService' , function ($scope,$location, WebSocketFactory, TagService, UserService, TutorService) {
 
 	var vm = {};
 	$scope.vm = vm;
@@ -25,6 +25,7 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 
 	vm.beAvailable = function () {
 		WebSocketFactory.emit('availability-on', {});
+		$location.path("/tutorMatching");
 	}
 
 	vm.createTag = function(tag){

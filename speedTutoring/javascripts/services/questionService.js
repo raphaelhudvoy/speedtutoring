@@ -13,20 +13,14 @@ Tuto.factory('QuestionService', function ($http, $q) {
 	}
 
 
-	Service.askQuestion = function (question) {
-
-		question = new Question(question);
-
-		var deferred = $q.defer();
+	Service.askQuestion = function (question, cb) {
 
 		var url = "/api/v1/question/";
 
 		$http.post(url, question).success(function(res){
 			console.log("POST OF QUESTION COMPLETE", res);
-			deferred.resolve(res);
+			cb();
 		});
-
-		return deferred.promise;
 	};
 
 	Service.viewQuestions = function(){

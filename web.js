@@ -352,14 +352,19 @@ app.get('/api/v1/user/questions', function (req, res) {
 
 app.get('/api/v1/user/isTutor', function (req, res) {
 
-  var p = userManager.isTutor(req.user._doc._id);
-
-  p.then(function(isTutor){
-    if(isTutor){
+  userManager.isTutor(req.user._doc._id, function(err, tutorId){
+    if(err){
+      res.send(500, err);
+    }else{
+      if(isTutor){
       res.send(200, true);
     }else{
       res.send(200, false);
-    }    
+    }
+    
+  });
+
+  p.then(    
   }, function(err){
     res.send(500, err);
   })

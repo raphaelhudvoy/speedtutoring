@@ -16,9 +16,12 @@ exports.registerTutor = function(req, cb){
 
 	var tutorTags = tutorObj.tags;
 
-	tutorTags.forEach(function(tag){
-		tags.push(mongoose.Types.ObjectId(tag._id));
-	});
+	if (tags.length > 0) {
+			tutorTags.forEach(function(tag){
+				tags.push(mongoose.Types.ObjectId(tag._id));
+			});
+	}
+
 
 	tutorObj.userId = req.user._doc._id;
 	tutorObj.tags = tags;

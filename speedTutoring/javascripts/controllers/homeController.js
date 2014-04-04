@@ -57,6 +57,22 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		}
 	}
 
+	vm.tutor = function () {
+		UserService.isCurrentUserATutor().then(function (isTutor) {
+			if (isTutor) {
+				$location.path('/tutor')
+			} else {
+				TutorService.registerTutor().then(function () {
+					$location.path('/tutor');
+				}, function (err) {
+					console.log(err);
+				})
+			}
+		}, function (err) {
+			console.log(err);
+		});
+	}
+
 	vm.goToStep2 = function () {
 		vm.askStep = 2;
 	}

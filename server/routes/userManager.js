@@ -95,9 +95,9 @@ exports.isTutor = function(userId, cb){
 
 	User.findById(userId, function(err, user){
 		if(err){
-			cb(null, false);
+			cb(err);
 		}else{
-			cb(null, true);
+			cb(null, user.tutorId);
 		}
 	});
 }

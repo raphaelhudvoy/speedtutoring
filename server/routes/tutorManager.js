@@ -82,7 +82,7 @@ exports.updateTutor = function(req, cb){
 				tags.push(mongoose.Types.ObjectId(tag._id));
 			});
 
-			tutor.tags = tags;
+			user.tags = tags;
 
 			user.save(function (err, user) {
 				if (err) { cb(err)}

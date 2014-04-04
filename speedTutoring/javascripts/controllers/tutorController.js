@@ -33,10 +33,9 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 				
 			}else{
 				vm.newTag="";
-				vm.myTags.push(newTag);
-				TagService.getAllTags().then(function(tags){
-					vm.allTags = tags;
-				});
+				vm.myTags[newTag.tag] = newTag._id;
+				vm.saveSettings();
+				
 			}
 		});
 	}
@@ -44,11 +43,16 @@ Tuto.controller('tutorController', ['$scope','WebSocketFactory', 'TagService', '
 	vm.addTag = function(tag){
 		vm.myTags[tag] = vm.suggestedTags[tag]
 		delete vm.suggestedTags[tag];
+
+		vm.saveSettings();
 	}
 
 	vm.removeTag = function(tag){
 		vm.suggestedTags[tag] = vm.myTags[tag]
 		delete vm.myTags[tag];
+
+		vm.saveSettings();
+
 	}
 
 	vm.saveSettings = function(){

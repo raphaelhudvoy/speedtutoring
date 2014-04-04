@@ -51,15 +51,29 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		}
 	}
 
+	vm.checkEnter = function(event){
+		if(event.keyCode == 13){
+			vm.askQuestion();
+		}
+	}
+
 	vm.goToStep2 = function () {
 		vm.askStep = 2;
 	}
 
-	vm.askQuestion = function (question) {
+	vm.askQuestion = function () {
+		var question  = vm.question;
+
+		var tags = [];
+
+		for(tag in vm.selectedTags){
+			tags.push(tag);
+		}
+
+		vm.question.tags = tags;
 
 		if(!question)
-			question = {"question":"Why????", tags:[{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}]};
-
+			return;
 
 		// if(!question.tags || question.tags.length==0){
 		// 	question.tags = [{tag:"math", type:"misc"}, {tag:"physics", type:"misc"}];
@@ -68,10 +82,9 @@ Tuto.controller('HomeController', ['$scope', 'UserService', 'TutorService', 'Que
 		vm.displayTagsSearch = false;
 		vm.askedQuestion = true;
 
-		QuestionService.askQuestion(question);
-
-		$location.path("/question");
-
+		QuestionService.askQuestion(question, function(){
+			$location.path("/question");
+		});
 	}
 
 }]);
